@@ -1,0 +1,22 @@
+ion-content.loginPage {
+    --background: url('../../assets/aerial.jpg') no-repeat center center / cover !important;
+}
+.pardonTop{
+    margin-top: 40%;
+}
+/* 
+ion-item{
+    --background: #3880ff !important;
+    --color: #fff;
+}
+ion-button{
+    --background: #062f77;
+} */
+.button-disabled{
+    --opacity: .95 !important;
+    --background: var(--ion-color-medium) !important;
+}
+h3.loginTitle{
+    --color: white;
+    color: white;
+}
