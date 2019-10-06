@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
-import { PropertyImagesPageModule } from '../property-images/property-images.module';
 import { properties } from '../../assets/js/sampledata/properties.json';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-map-card',

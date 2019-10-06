@@ -1,12 +1,44 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="/tabs/tabs3" text="Properties"></ion-back-button>
+      <ion-back-button type="button" defaultHref="/tabs/tab3" text="Properties"></ion-back-button>
     </ion-buttons>
     <ion-title>Property Images</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
-  <h1>{{propertyInfo.street}}</h1>
+<ion-content class="card-background-page">
+
+    <div ion-fixed class="ion-padding-horizontal ion-fixed add-white pseudo-title">
+        <h1 ion-fixed class="street-title ion-fixed" >{{propertyInfo.street}}</h1>
+      </div>
+  <ion-card>
+    <div class="glossy"></div>
+    <img src="../../assets/img/stockphotos/bedroom.jpeg"/>
+    <div class="card-title">Bedroom</div>
+    <div class="card-subtitle">0 Photos</div>
+  </ion-card>
+
+  <ion-card>
+    <div class="glossy"></div>
+    <img src="../../assets/img/stockphotos/livingroom.jpg"/>
+    <div class="card-title">Living Room</div>
+    <div class="card-subtitle">3 Photos</div>
+  </ion-card>
+
+  <ion-card>
+    <div class="glossy"></div>
+    <img src="../../assets/img/stockphotos/kitchen.jpg"/>
+    <div class="card-title">Kitchen</div>
+    <div class="card-subtitle">2 Photos</div>
+  </ion-card>
+
+  <ion-card>
+    <div class="glossy"></div>
+    <img src="../../assets/img/stockphotos/masterbedroom.jpg"/>
+    <div class="card-title">Master Bedroom</div>
+    <div class="card-subtitle">1 Photo</div>
+  </ion-card>
+  
 </ion-content>
+
