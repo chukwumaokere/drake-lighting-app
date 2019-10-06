@@ -1,0 +1,104 @@
+{
+    "properties":[
+        {
+            "recordid": 244787,
+            "contact_name": "Chuck Okere",
+            "street": "5749 N. Sacramento Ave",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": 60659,
+            "travel_time_m": 18,
+            "miles": 2.6
+        },
+        {
+            "recordid": 345879,
+            "contact_name": "Patricia Skiba",
+            "street": "371 6th Ave",
+            "city": "New York",
+            "state": "NY",
+            "zip": 10014,
+            "travel_time_m": 734,
+            "miles": 789
+        },
+        {
+            "recordid": 144848,
+            "contact_name": "John Bellion",
+            "street": "73 W Monroe St",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": 60603,
+            "travel_time_m": 42,
+            "miles": 6.0
+        },
+        {
+            "recordid": 255654,
+            "contact_name": "Harry Butchers",
+            "street": "5700 Walnut Ave",
+            "city": "Downers Grove",
+            "state": "IL",
+            "zip": 60516,
+            "travel_time_m": 50,
+            "miles": 7.1
+        },
+        {
+            "recordid": 149598,
+            "contact_name": "Katie Smith",
+            "street": "2323 W Arthur Ave",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": 60645,
+            "travel_time_m": 20,
+            "miles": 1.8
+        },
+        {   
+            "recordid": 254879,
+            "contact_name": "Cindy Peralta",
+            "street": "10200 S Pulaski Rd",
+            "city": "Chicago",
+            "state": "IL",
+            "zip": 60453,
+            "travel_time_m": 44,
+            "miles": 3.6
+        },
+        {
+            "recordid": 154888,
+            "contact_name": "Elon Musk",
+            "street": "3500 Deer Creek Rd",
+            "city": "Palo Alto",
+            "state": "CA",
+            "zip": 94020,
+            "travel_time_m": 85,
+            "miles": 18
+        },
+        {
+            "recordid": 111254,
+            "contact_name": "Steve Jobs",
+            "street": "1 Infinite Loop",
+            "city": "Cupertino",
+            "state": "CA",
+            "zip": 95014,
+            "travel_time_m": 10,
+            "miles": 1.0
+        },
+        {
+            "recordid": 345487,
+            "contact_name": "Bill Gates",
+            "street": "1 Microsoft Way",
+            "city": "Redmond",
+            "state": "WA",
+            "zip": 98052,
+            "travel_time_m": 5,
+            "miles": 0.5
+        },
+        {
+            "recordid": 554678,
+            "contact_name": "Tim Cook",
+            "street": "701 Seale Ave",
+            "city": "Palo Alto",
+            "state": "CA",
+            "zip": 94303,
+            "travel_time_m": 25,
+            "miles": 2.0
+        }
+    ]
+}
