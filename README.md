@@ -2,7 +2,7 @@
 ## TODO:   
 
 - Finish dashboard page    
-- launchCamera should prompt 
+- launchCamera should prompt actionsheet    
 - Inifnite scroll or add refreshers to properties list view   
 - Add refresher to Rooms Group View   
 - Add delete function to edit button   
@@ -11,3 +11,4 @@
 - Add darkmode switch and palette   
 - Export as native app   
 - Get other todos   
+- Add text when no image on gallery page   
