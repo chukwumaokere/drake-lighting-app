@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NavParams } from '@ionic/angular';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-property-images',
@@ -9,9 +9,12 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class PropertyImagesPage implements OnInit {
   propertyInfo: any;
-  constructor(private activatedRoute: ActivatedRoute) { 
-  }
 
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) { 
+  }
+  goToGallery(recordid: any, galleryview: any){
+    //this.router.navigate(['gallery-view', ]);
+  }
   ngOnInit() {
     this.activatedRoute.params.subscribe((propertyData)=>{
       console.log(propertyData);

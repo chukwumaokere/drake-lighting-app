@@ -5,7 +5,7 @@
 </ion-header> -->
 
 <ion-content class="loginPage"> 
-  <form #form="ngForm" (ngSubmit)="login(form)" class="pardonTop">
+  <form #form="ngForm" (ngSubmit)="login(form)" class="pardonTop" validate >
     <ion-grid style="height: 100%">
       <ion-row class="ion-align-items-center ion-justify-content-center justify-content-center" color="primary" style="height: 100%">
         <ion-col class="align-self-center" size-md="6" size-lg="5" size-xs="12">
@@ -14,7 +14,7 @@
           </div>
           <div class="ion-padding">
             <ion-item>
-              <ion-input name="email" type="email" placeholder="admin" ngModel required></ion-input>
+              <ion-input name="email" type="email" placeholder="Email/User" ngModel required></ion-input>
             </ion-item>
             <ion-item>
               <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>

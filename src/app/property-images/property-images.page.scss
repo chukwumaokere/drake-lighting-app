@@ -60,3 +60,7 @@
     --padding-bottom: var(--ion-padding, 8px);
     padding-bottom: var(--ion-padding, 8px);
 }
+
+.co-drop-shadow{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
+}
