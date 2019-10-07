@@ -1,15 +1,15 @@
-<ion-card *ngFor="let property of properties" (click)="detailView(property)">
-  <img src="../../assets/img/advance-card-map-madison.png">
+<ion-card *ngFor="let property of properties" >
+  <img (click)="detailView(property)" src="../../assets/img/advance-card-map-madison.png">
   <ion-fab vertical="top" horizontal="end">
-    <ion-fab-button>
+    <ion-fab-button href="https://maps.apple.com/?address={{property.street}}">
       <ion-icon name="pin"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
-  <ion-item>
+  <ion-item (click)="detailView(property)">
     <ion-icon name="home" item-start large></ion-icon>
-    <ion-card-header>
-      <ion-card-title>{{property.contact_name}}</ion-card-title>
+    <ion-card-header >
+      <ion-card-title >{{property.contact_name}}</ion-card-title>
       <ion-card-subtitle>{{property.street}}, {{property.city}}, {{property.state}} {{property.zip}}</ion-card-subtitle>
     </ion-card-header>
   </ion-item>
@@ -18,7 +18,7 @@
     <span item-start>{{property.travel_time_m}} min&nbsp;</span>
     <span item-start>({{property.miles}} mi)</span>
     <ion-fab horizontal="end">
-      <ion-button ion-button icon-start clear item-end>
+      <ion-button href="https://maps.apple.com/?daddr={{property.street}}" ion-button icon-start clear item-end>
         <ion-icon name="navigate"></ion-icon>
         Start
       </ion-button>
