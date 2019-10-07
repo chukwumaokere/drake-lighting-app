@@ -3,7 +3,7 @@
     <ion-buttons slot="start">
       <ion-back-button type="button" defaultHref="/tabs/tab3" text="Properties"></ion-back-button>
     </ion-buttons>
-    <ion-title>Property Images</ion-title>
+    <ion-title>Rooms</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -14,32 +14,32 @@
   </div>
 
   <div class="rooms ion-margin-top ion-padding-vertical">
-    <ion-card>
+    <ion-card (click)="goToGallery(propertyInfo.recordid, 'bedroom', propertyInfo)">
       <div class="glossy"></div>
       <img src="../../assets/img/stockphotos/bedroom.jpeg"/>
       <div class="card-title">Bedroom</div>
-      <div class="card-subtitle">0 Photos</div>
+      <div class="card-subtitle">{{imagecounts.bedroom.images.length}} Photos</div>
     </ion-card>
 
-    <ion-card>
+    <ion-card (click)="goToGallery(propertyInfo.recordid, 'living room', propertyInfo)">
       <div class="glossy"></div>
       <img src="../../assets/img/stockphotos/livingroom.jpg"/>
       <div class="card-title">Living Room</div>
-      <div class="card-subtitle">3 Photos</div>
+      <div class="card-subtitle">{{imagecounts.livingroom.images.length}} Photos</div>
     </ion-card>
 
-    <ion-card>
+    <ion-card (click)="goToGallery(propertyInfo.recordid, 'kitchen', propertyInfo)">
       <div class="glossy"></div>
       <img src="../../assets/img/stockphotos/kitchen.jpg"/>
       <div class="card-title">Kitchen</div>
-      <div class="card-subtitle">2 Photos</div>
+      <div class="card-subtitle">{{imagecounts.kitchen.images.length}} Photos</div>
     </ion-card>
 
-    <ion-card>
+    <ion-card (click)="goToGallery(propertyInfo.recordid, 'master bedroom', propertyInfo)">
       <div class="glossy"></div>
       <img src="../../assets/img/stockphotos/masterbedroom.jpg"/>
       <div class="card-title">Master Bedroom</div>
-      <div class="card-subtitle">1 Photo</div>
+      <div class="card-subtitle">{{imagecounts.masterbedroom.images.length}} Photo</div>
     </ion-card>
   </div>
 

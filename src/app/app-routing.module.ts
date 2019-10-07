@@ -7,7 +7,9 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'property-images', loadChildren: './property-images/property-images.module#PropertyImagesPageModule' }
+  { path: 'property-images', loadChildren: './property-images/property-images.module#PropertyImagesPageModule' },
+  { path: 'gallery/:id/:room', loadChildren: './gallery/gallery.module#GalleryPageModule' }
+
 ];
 @NgModule({
   imports: [

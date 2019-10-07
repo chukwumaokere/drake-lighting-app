@@ -1,0 +1,23 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-back-button type="button" defaultHref="/tabs/tab3" text="Rooms"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button type="button" text="Edit Photos">
+        <ion-text>Edit Photos</ion-text>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{roomdata.room | titlecase}}</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="gallery">    
+    <span *ngFor="let image of images">
+      <img src="{{image}}" width="150px">
+    </span>
+  </div>
+</ion-content>
