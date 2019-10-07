@@ -25,7 +25,6 @@ export class PropertyImagesPage implements OnInit {
     }); 
     console.log(images[0].rooms);
     this.imagecounts = images[0].rooms;
-    //console.log(this.imagecounts.kitchen.images.length);
   }
   ngOnInit() {
     this.activatedRoute.params.subscribe((propertyData)=>{

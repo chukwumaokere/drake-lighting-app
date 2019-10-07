@@ -15,9 +15,11 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+  <ion-button (click)="launchCamera()" text="Add Photos"><ion-icon name="add"></ion-icon><ion-text>Add Photos</ion-text></ion-button>
   <div class="gallery">    
-    <span *ngFor="let image of images">
-      <img src="{{image}}" width="150px">
+    <span class="galleryimage" *ngFor="let image of propertypics">
+      <ion-img *ngIf="image" [src]="image" width="150px"></ion-img>
+      <ion-text #elseBlock> There are currently no images for this room</ion-text>
     </span>
   </div>
 </ion-content>
