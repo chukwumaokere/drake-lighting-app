@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { IonicStorageModule } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 
 
 @NgModule({
@@ -22,7 +23,8 @@ import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx'
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Camera,
-    ActionSheet
+    ActionSheet,
+    PhotoLibrary
   ],
   bootstrap: [AppComponent]
 })

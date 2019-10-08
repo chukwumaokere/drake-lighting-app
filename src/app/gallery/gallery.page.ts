@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
 import * as pi from '../../assets/js/sampledata/properties-images.json';
 
@@ -26,10 +27,10 @@ export class GalleryPage implements OnInit {
     title: 'Which would you like to do?',
     buttonLabels: this.buttonLabels,
     addCancelButtonWithLabel: 'Cancel',
-    androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
+    androidTheme: 1 //this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera, private actionSheet: ActionSheet) { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera, private actionSheet: ActionSheet, private photoLibrary: PhotoLibrary) { }
   
   
 
@@ -61,13 +62,30 @@ export class GalleryPage implements OnInit {
           console.error(err);
         }); 
       }else if(buttonIndex == 2){
-
+         this.photoLibrary.requestAuthorization().then(() => {
+          this.photoLibrary.getLibrary().subscribe({
+            next: library => {
+              library.forEach(function(libraryItem){
+                console.log(libraryItem.id);          // ID of the photo
+                console.log(libraryItem.photoURL);    // Cross-platform access to photo
+                console.log(libraryItem.thumbnailURL);// Cross-platform access to thumbnail
+                console.log(libraryItem.fileName);
+                console.log(libraryItem.width);
+                console.log(libraryItem.height);
+                console.log(libraryItem.creationDate);
+                console.log(libraryItem.latitude);
+                console.log(libraryItem.longitude);
+                console.log(libraryItem.albumIds);    // array of ids of appropriate Alb
+              });
+            },
+            error: err => {console.log('could not get photos'); },
+            complete: () => { console.log('done getting photos'); }
+          });
+        }).catch(err => console.log(err));
       }
     }).catch((err) => {
       console.log(err);
     });
-
-   /*  */
   }
 
  

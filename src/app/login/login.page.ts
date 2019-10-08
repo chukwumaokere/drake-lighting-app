@@ -20,19 +20,19 @@ export class LoginPage implements OnInit {
   
   login(form: any){
     //TODO: Wrap storage setting and data setting to API call return
-    console.log('login clicked');
-    var data = form.value;
-    /* needs to be wrapped in a Vtiger API call */
-      this.storage.set('user', data.email);
-      this.storage.set('name', data.email);
-      this.storage.set('loggedin', true);
-      this.userdata = {
-        "user": data.email,
-        "name": data.email
-      };
-      this.isLogged = true;
-      console.log(this.isLogged);
-      console.log(this.userdata);
+    // console.log('login clicked');
+     var data = form.value;
+    // /* needs to be wrapped in a Vtiger API call */
+    //   this.storage.set('user', data.email);
+    //   this.storage.set('name', data.email);
+    //   this.storage.set('loggedin', true);
+       this.userdata = {
+         "user": data.email,
+         "name": data.email
+       };
+    //   this.isLogged = true;
+    //   console.log(this.isLogged);
+    //   console.log(this.userdata);
     /* needs to be wrapped in a Vtiger API call */
 
     //this.router.navigateByUrl("/tabs/tab2"); -- deprecated --
@@ -54,10 +54,10 @@ export class LoginPage implements OnInit {
   }
   ngOnInit() {
     //TODO: On init, check for if currently logged in to auto-log in
-    console.log('logged status', this.getLoggedStatus());
+    /* console.log('logged status', this.getLoggedStatus());
     console.log('isloggedin', this.isLoggedIn());
     console.log('are you logged', this.isLogged);
-    console.log('userdata', this.userdata)
+    console.log('userdata', this.userdata) */
   }
 
 }
