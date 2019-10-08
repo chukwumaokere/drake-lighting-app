@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
 import * as pi from '../../assets/js/sampledata/properties-images.json';
 
 @Component({
@@ -12,6 +13,7 @@ export class GalleryPage implements OnInit {
   roomdata: any;
   propertyimages: any;
   propertypics: any;
+  buttonLabels = ['Take Photo', 'Upload from Library'];
 
   options: CameraOptions = {
     quality: 100,
@@ -20,7 +22,16 @@ export class GalleryPage implements OnInit {
     mediaType: this.camera.MediaType.PICTURE
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera) { }
+  actionOptions: ActionSheetOptions = {
+    title: 'Which would you like to do?',
+    buttonLabels: this.buttonLabels,
+    addCancelButtonWithLabel: 'Cancel',
+    androidTheme: this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
+  }
+
+  constructor(private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera, private actionSheet: ActionSheet) { }
+  
+  
 
   loadImages(recordid, room: any){
     this.propertyimages = pi.propertiesimages;
@@ -32,16 +43,31 @@ export class GalleryPage implements OnInit {
     var pics = images[0].rooms[room].images;
     this.propertypics = pics;
   }
+
   launchCamera(){
-    console.log('launching camera');
-    this.camera.getPicture(this.options).then((imageData) => {
-      // imageData is either a base64 encoded string or a file URI
-      // If it's base64 (DATA_URL):
-      let base64Image = 'data:image/jpeg;base64,' + imageData;
-      // TODO: need code to upload to server here.
-     }, (err) => {
-      // Handle error
-     });
+    console.log('launching actionsheet');
+    this.actionSheet.show(this.actionOptions).then((buttonIndex: number) => {
+      console.log('Option pressed', buttonIndex);
+      if(buttonIndex == 1){
+        console.log('launching camera');
+        this.camera.getPicture(this.options).then((imageData) => {
+          // imageData is either a base64 encoded string or a file URI
+          // If it's base64 (DATA_URL):
+          let base64Image = 'data:image/jpeg;base64,' + imageData;
+          console.log(base64Image);
+          // TODO: need code to upload to server here.
+        }, (err) => {
+          // Handle error
+          console.error(err);
+        }); 
+      }else if(buttonIndex == 2){
+
+      }
+    }).catch((err) => {
+      console.log(err);
+    });
+
+   /*  */
   }
 
  
