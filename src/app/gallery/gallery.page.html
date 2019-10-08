@@ -16,10 +16,12 @@
 
 <ion-content class="ion-padding">
   <ion-button (click)="launchCamera()" text="Add Photos"><ion-icon name="add"></ion-icon><ion-text>Add Photos</ion-text></ion-button>
-  <div class="gallery">    
+  <div class="gallery" *ngIf="propertypics?.length > 0">    
     <span class="galleryimage" *ngFor="let image of propertypics">
-      <ion-img *ngIf="image" [src]="image" width="150px"></ion-img>
-      <ion-text #elseBlock> There are currently no images for this room</ion-text>
+      <ion-img [src]="image" width="150px"></ion-img>
     </span>
+  </div>
+  <div class="not-available" *ngIf="propertypics?.length == 0">
+      <ion-text>There are currently no images for this room</ion-text>
   </div>
 </ion-content>

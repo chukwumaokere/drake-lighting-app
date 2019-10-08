@@ -5,7 +5,7 @@
             "rooms": {
                 "bedroom": {
                     "images": [                        
-
+                        "assets/img/roomphotos/bedroom/pic1.jpg"
                     ]
                 },
                 "kitchen": {
@@ -47,12 +47,14 @@
                 },
                 "livingroom": {
                     "images": [
-
+                        "assets/img/roomphotos/livingroom/pic4.jpg",
+                        "assets/img/roomphotos/livingroom/pic2.jpg",
+                        "assets/img/roomphotos/livingroom/pic4.jpg"
                     ]
                 },
                 "masterbedroom": {
                     "images": [
-
+                        "assets/img/roomphotos/masterbedroom/pic4.jpg"
                     ]
                 }
             }
@@ -63,7 +65,8 @@
                 "bedroom": {
                     "images": [
                         "assets/img/roomphotos/bedroom/pic1.jpg",
-                        "assets/img/roomphotos/bedroom/pic2.jpg"
+                        "assets/img/roomphotos/bedroom/pic2.jpg",
+                        "assets/img/roomphotos/bedroom/pic3.jpg"
                     ]
                 },
                 "kitchen": {
@@ -74,12 +77,15 @@
                 },
                 "livingroom": {
                     "images": [ 
-
+                        "assets/img/roomphotos/livingroom/pic3.jpg",
+                        "assets/img/roomphotos/livingroom/pic1.png",
+                        "assets/img/roomphotos/livingroom/pic6.jpg"
                     ]
                 },
                 "masterbedroom": {
                     "images": [
-
+                        "assets/img/roomphotos/masterbedroom/pic3.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic1.jpg"
                     ]
                 }
             }
@@ -89,7 +95,8 @@
             "rooms": {
                 "bedroom": {
                     "images": [
-                        "assets/img/roomphotos/bedroom/pic1.jpg"
+                        "assets/img/roomphotos/bedroom/pic1.jpg",
+                        "assets/img/roomphotos/bedroom/pic4.jpg"
                     ]
                 },
                 "kitchen": {
@@ -101,12 +108,16 @@
                 },
                 "livingroom": {
                     "images": [
-                        
+                        "assets/img/roomphotos/livingroom/pic5.jpg",
+                        "assets/img/roomphotos/livingroom/pic7.jpg",
+                        "assets/img/roomphotos/livingroom/pic2.jpg",
+                        "assets/img/roomphotos/livingroom/pic3.jpg"
                     ]
                 },
                 "masterbedroom": {
                     "images": [
-                        
+                        "assets/img/roomphotos/masterbedroom/pic2.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic1.jpg"
                     ]
                 }
             }
@@ -132,7 +143,8 @@
                 },
                 "livingroom": {
                     "images": [
-                        
+                        "assets/img/roomphotos/livingroom/pic2.jpg",
+                        "assets/img/roomphotos/livingroom/pic3.jpg"
                     ]
                 },
                 "masterbedroom": {
@@ -160,7 +172,9 @@
                 },
                 "livingroom": {
                     "images": [
-                        
+                        "assets/img/roomphotos/livingroom/pic1.png",
+                        "assets/img/roomphotos/livingroom/pic3.jpg"
+
                     ]
                 },
                 "masterbedroom": {
@@ -188,7 +202,8 @@
                 },
                 "livingroom": {
                     "images": [
-                        
+                        "assets/img/roomphotos/livingroom/pic1.png",
+                        "assets/img/roomphotos/livingroom/pic2.jpg"
                     ]
                 },
                 "masterbedroom": {
@@ -272,12 +287,17 @@
                 },
                 "livingroom": {
                     "images": [
-                        
+                        "assets/img/roomphotos/livingroom/pic1.png",
+                        "assets/img/roomphotos/livingroom/pic6.jpg",
+                        "assets/img/roomphotos/livingroom/pic3.jpg"
                     ]
                 },
                 "masterbedroom": {
                     "images": [
-                        
+                        "assets/img/roomphotos/masterbedroom/pic2.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic4.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic3.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic1.jpg"
                     ]
                 }
             }
