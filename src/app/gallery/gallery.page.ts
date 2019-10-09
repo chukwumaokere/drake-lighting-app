@@ -41,7 +41,6 @@ export class GalleryPage implements OnInit {
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera, private actionSheet: ActionSheet, private photoLibrary: PhotoLibrary) { }
   
-  
 
   loadImages(recordid, room: any){
     this.propertyimages = pi.propertiesimages;
@@ -72,7 +71,6 @@ export class GalleryPage implements OnInit {
         }); 
       }else if(buttonIndex == 2){
         console.log('launching gallery');
-        //var lib = this.camera.PictureSourceType.PHOTOLIBRARY;
         this.camera.getPicture(this.libraryOptions).then((imageData) => {
           // imageData is either a base64 encoded string or a file URI
           // If it's base64 (DATA_URL):
@@ -83,36 +81,12 @@ export class GalleryPage implements OnInit {
           // Handle error
           console.error(err);
         }); 
-         /* this.photoLibrary.requestAuthorization().then(() => {
-          this.photoLibrary.getLibrary().subscribe({
-            next: library => {
-              library.forEach(function(libraryItem){
-                console.log(libraryItem.id);          // ID of the photo
-                console.log(libraryItem.photoURL);    // Cross-platform access to photo
-                console.log(libraryItem.thumbnailURL);// Cross-platform access to thumbnail
-                console.log(libraryItem.fileName);
-                console.log(libraryItem.width);
-                console.log(libraryItem.height);
-                console.log(libraryItem.creationDate);
-                console.log(libraryItem.latitude);
-                console.log(libraryItem.longitude);
-                console.log(libraryItem.albumIds);    // array of ids of appropriate Alb
-              });
-            },
-            error: err => {console.log('could not get photos'); },
-            complete: () => { console.log('done getting photos'); }
-          });
-        }) */
-        //.catch(err => console.log(err));
       }
     }).catch((err) => {
       console.log(err);
     });
   }
-
- 
-  
-  
+   
   ngOnInit() {
     this.activatedRoute.params.subscribe((params)=>{
       console.log(params);

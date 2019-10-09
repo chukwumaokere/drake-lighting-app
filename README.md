@@ -27,7 +27,7 @@
 - ~~Add text when no image on gallery page~~    
 - Fix login auth and persistent login   
 - TODO: need code to upload image to server   
-- TODO: Fix code for PhotoLibrary
+- ~~TODO: Fix code for PhotoLibrary~~   
 - TODO: login function: Wrap storage setting and data setting to API call return   
 - TODO: login: On init, check for if currently logged in to auto-log in   
 - TODO: tab2: have userinfo feed from storage on init.   
