@@ -20,7 +20,16 @@ export class GalleryPage implements OnInit {
     quality: 100,
     destinationType: this.camera.DestinationType.FILE_URI,
     encodingType: this.camera.EncodingType.JPEG,
-    mediaType: this.camera.MediaType.PICTURE
+    mediaType: this.camera.MediaType.PICTURE,
+    saveToPhotoAlbum: true
+  }
+
+  libraryOptions: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
   }
 
   actionOptions: ActionSheetOptions = {
@@ -62,7 +71,19 @@ export class GalleryPage implements OnInit {
           console.error(err);
         }); 
       }else if(buttonIndex == 2){
-         this.photoLibrary.requestAuthorization().then(() => {
+        console.log('launching gallery');
+        //var lib = this.camera.PictureSourceType.PHOTOLIBRARY;
+        this.camera.getPicture(this.libraryOptions).then((imageData) => {
+          // imageData is either a base64 encoded string or a file URI
+          // If it's base64 (DATA_URL):
+          let base64Image = 'data:image/jpeg;base64,' + imageData;
+          console.log(base64Image);
+          // TODO: need code to upload to server here.
+        }, (err) => {
+          // Handle error
+          console.error(err);
+        }); 
+         /* this.photoLibrary.requestAuthorization().then(() => {
           this.photoLibrary.getLibrary().subscribe({
             next: library => {
               library.forEach(function(libraryItem){
@@ -81,7 +102,8 @@ export class GalleryPage implements OnInit {
             error: err => {console.log('could not get photos'); },
             complete: () => { console.log('done getting photos'); }
           });
-        }).catch(err => console.log(err));
+        }) */
+        //.catch(err => console.log(err));
       }
     }).catch((err) => {
       console.log(err);
