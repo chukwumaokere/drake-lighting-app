@@ -18,6 +18,10 @@ export class Tab2Page implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
+  switchTheme(){
+    console.log('switching theme');
+  }
+
   ngOnInit(){
     this.activatedRoute.params.subscribe((userData)=>{
       this.userinfo = userData;

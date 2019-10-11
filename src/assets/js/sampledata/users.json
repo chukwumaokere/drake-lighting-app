@@ -8,7 +8,8 @@
             "organization": "Boru, Inc.",
             "theme": "Dark",
             "phone": "1 (773) 307-2548",
-            "pic": "/assets/img/profilephotos/chuck.jpg"
+            "pic": "/assets/img/profilephotos/chuck.jpg",
+            "notes": "Remember to upload photos from Skiba house. Remove 2 photos from Cook residence"
         },
         "test": {
             "username": "test",
@@ -18,7 +19,19 @@
             "organization": "Testersoft",
             "theme": "Light",
             "phone": "1 (555) 555-5555",
-            "pic": "/assets/img/profilephotos/chuck2.jpg"
+            "pic": "/assets/img/profilephotos/chuck2.jpg",
+            "notes": "Upload all kitchen screenshots"
+        },
+        "pinot": {
+            "username": "pinot",
+            "password": "test",
+            "firstname": "Pinot",
+            "lastname": "Admin",
+            "organization": "Adminware",
+            "theme": "Dark",
+            "phone": "1 (222) 555-2255",
+            "pic": "/assets/img/profilephotos/1.png",
+            "notes": ""
         },
         "admin": {
             "username": "admin",
@@ -28,7 +41,8 @@
             "organization": "Adminware",
             "theme": "Dark",
             "phone": "1 (222) 555-2255",
-            "pic": ""
+            "pic": "",
+            "notes": ""
         }
     }
 }

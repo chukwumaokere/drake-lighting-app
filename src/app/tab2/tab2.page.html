@@ -1,13 +1,48 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Dashboard
+      Profile
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-text>Hello there {{userinfo.firstname}}!</ion-text>
-  <br>
-  <ion-button (click)="logout()" color="danger" router-direction="back">Logout</ion-button>
+
+  <ion-item lines="none">
+    <ion-avatar item-start>
+      <img *ngIf="userinfo?.pic !== '' " src="{{userinfo.pic}}">
+      <ion-icon name="contact" size="large" *ngIf="userinfo?.pic == ''"></ion-icon>
+    </ion-avatar>
+    <p>&nbsp; Hello there, {{userinfo.firstname}}!</p>
+  </ion-item>
+
+  <ion-list>
+
+    <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-text>{{userinfo.firstname}} {{userinfo.lastname}}</ion-text>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label position="stacked">Organization</ion-label>
+      <ion-text>{{userinfo.organization}}</ion-text>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label position="stacked">Mobile</ion-label>
+      <ion-text>{{userinfo.phone}}</ion-text>
+    </ion-item>
+    <br>
+    <ion-item lines="none">
+      <ion-label position="stacked">Theme &nbsp; <ion-button type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button></ion-label> 
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label position="stacked">Notes</ion-label>
+      <ion-textarea *ngIf="userinfo?.notes !== ''" value="{{userinfo.notes}}" name="usernotes"></ion-textarea>
+      <ion-textarea *ngIf="userinfo?.notes == ''" placeholder="Jot something down" name="usernotes"></ion-textarea>
+    </ion-item>
+
+  </ion-list>
+  <ion-button (click)="logout()" color="danger" router-direction="back"><ion-icon name="log-out"></ion-icon> &nbsp; Logout</ion-button>
 </ion-content>
