@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { Storage } from '@ionic/storage';
+import { ToastController } from '@ionic/angular';
+import * as userjson from '../../assets/js/sampledata/users.json'; 
 
 @Component({
   selector: 'app-login',
@@ -8,56 +10,76 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  constructor(private  router:  Router, private storage: Storage) { }
-  
-  isLogged: boolean;
+
+  constructor(private  router:  Router, public storage: Storage, public toastController: ToastController) { }
 
   userdata: Object;
 
-  malformedUriErrorHandler(error){
+  malformedUriErrorHandler(error: any){
     console.log(error);
   }
   
-  login(form: any){
-    //TODO: Wrap storage setting and data setting to API call return
-    // console.log('login clicked');
-     var data = form.value;
-    // /* needs to be wrapped in a Vtiger API call */
-    //   this.storage.set('user', data.email);
-    //   this.storage.set('name', data.email);
-    //   this.storage.set('loggedin', true);
-       this.userdata = {
-         "user": data.email,
-         "name": data.email
-       };
-    //   this.isLogged = true;
-    //   console.log(this.isLogged);
-    //   console.log(this.userdata);
-    /* needs to be wrapped in a Vtiger API call */
-
-    //this.router.navigateByUrl("/tabs/tab2"); -- deprecated --
-    this.router.navigate(["/tabs/tab2", this.userdata]);
-  }
-  async isLoggedIn(){
-    var log_status = await this.storage.get('loggedin').then((result) => {
-      if (result == true){
-        this.isLogged = true;
-        return result;
-      }else{
-        this.isLogged = false;
-        return result;
-      }
+  async presentToast(message: string) {
+    var toast = await this.toastController.create({
+      message: message,
+      duration: 3500,
+      position: "top",
+      color: "danger"
     });
-  }
-  getLoggedStatus(){
-    return this.isLogged;
-  }
-  ngOnInit() {
-    //TODO: On init, check for if currently logged in to auto-log in
-    /* console.log('logged status', this.getLoggedStatus());
-    console.log('isloggedin', this.isLoggedIn());
-    console.log('are you logged', this.isLogged);
-    console.log('userdata', this.userdata) */
+    toast.present();
   }
 
+  login(form: any, origin: any){
+    //TODO: Wrap storage setting and data setting to API call return
+     console.log('login function accessed');
+    
+     if(origin == 'manual'){
+      console.log('login clicked');
+      var data = form.value;
+    /* Verify user login */
+      if (userjson.users[data.email]){
+        if(userjson.users[data.email].password == data.password){
+          this.userdata = userjson.users[data.email];
+          this.storage.ready().then(() => {
+            this.storage.set('userdata', this.userdata);
+            return this.router.navigate(["/tabs/tab2", this.userdata]);
+          })
+        }else{
+          console.log('login failed');
+          this.presentToast('Login failed. Please try again');
+        }
+      }else{
+        console.log('login failed');
+        this.presentToast('Login failed. Please try again');
+      }
+    /* Verify user login */
+    }else if (origin == 'auto'){
+      console.log('auto login from session');
+      return this.router.navigate(["/tabs/tab2", form]);
+    }
+
+    return false;
+  }
+
+  async isLogged(){
+   var log_status = this.storage.get('userdata').then((userdata) => {
+      if(userdata && userdata.length !== 0){
+        return userdata;
+      }else{
+        return false;
+      }
+    })
+    return log_status;
+  }
+
+  ngOnInit() {
+    this.isLogged().then(result => {
+      if (!(result == false)){
+        console.log('loading storage data', result);
+        this.login(result, "auto");
+      }else{
+        console.log('init login failed');
+      }
+    })
+  }
 }

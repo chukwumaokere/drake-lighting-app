@@ -1,0 +1,34 @@
+{
+    "users":{
+        "Chuck": {
+            "username": "Chuck",
+            "password": "test",
+            "firstname": "Chuck",
+            "lastname": "Okere",
+            "organization": "Boru, Inc.",
+            "theme": "Dark",
+            "phone": "1 (773) 307-2548",
+            "pic": "/assets/img/profilephotos/chuck.jpg"
+        },
+        "test": {
+            "username": "test",
+            "password": "test",
+            "firstname": "Tester",
+            "lastname": "Testerson",
+            "organization": "Testersoft",
+            "theme": "Light",
+            "phone": "1 (555) 555-5555",
+            "pic": "/assets/img/profilephotos/chuck2.jpg"
+        },
+        "admin": {
+            "username": "admin",
+            "password": "admin",
+            "firstname": "Admin",
+            "lastname": "Admin",
+            "organization": "Adminware",
+            "theme": "Dark",
+            "phone": "1 (222) 555-2255",
+            "pic": ""
+        }
+    }
+}

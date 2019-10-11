@@ -14,7 +14,7 @@ export class Tab2Page implements OnInit {
  
   logout(){
     console.log('logout clicked');
-    this.storage.set('loggedin', 0);
+    this.storage.set("userdata", '');
     this.router.navigateByUrl('/login');
   }
 
