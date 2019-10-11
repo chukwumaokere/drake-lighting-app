@@ -34,15 +34,6 @@ export class Tab2Page implements OnInit {
    }
 
   ngOnInit(){
-     /* this.isLogged().then(result => {
-      if (!(result == false)){
-        console.log('loading storage data', result);
-        this.userinfo = result;
-      }else{
-        console.log('nothing in storage, going back to login');
-        this.logout();
-      }
-    });  */
      this.activatedRoute.params.subscribe((userData)=>{
       if(userData.length !== 0){
         this.userinfo = userData;
