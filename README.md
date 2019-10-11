@@ -14,7 +14,7 @@
 - Users can pull to refresh property views and room views and gallery view    
   
 ## TODO:   
-- Finish dashboard page    
+- ~~Finish dashboard page~~    
 - ~~launchCamera should prompt actionsheet~~    
 - Inifnite scroll or add refreshers to properties list view   
 - Add refresher to Rooms Group View   
