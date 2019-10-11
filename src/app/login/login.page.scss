@@ -1,6 +1,11 @@
 ion-content.loginPage {
     --background: url('../../assets/aerial.jpg') no-repeat center center / cover !important;
+    /* --background: url('../../assets/aerial.jpg');
+    --background-repeat: no-repeat;
+    --background-size: cover; */
+    --keyboard-offset: 0;
 }
+
 .pardonTop{
     margin-top: 40%;
 }
@@ -20,3 +25,11 @@ h3.loginTitle{
     --color: white;
     color: white;
 }
+.item-native {
+    background-color: rgba(101, 101, 101, 0.51) !important;
+    color: white !important;
+}
+/* 
+.transparent{
+    background: rgba(101, 101, 101, 0.51) !important;
+} */
