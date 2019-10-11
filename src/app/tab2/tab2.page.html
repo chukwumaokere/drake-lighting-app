@@ -10,8 +10,8 @@
 
   <ion-item lines="none">
     <ion-avatar item-start>
-      <img *ngIf="userinfo?.pic !== '' " src="{{userinfo.pic}}">
-      <ion-icon name="contact" size="large" *ngIf="userinfo?.pic == ''"></ion-icon>
+      <img *ngIf="userinfo?.pic !== ''" src="{{userinfo.pic}}">
+      <ion-icon *ngIf="userinfo?.pic == ''" name="contact" size="large" ></ion-icon>
     </ion-avatar>
     <p>&nbsp; Hello there, {{userinfo.firstname}}!</p>
   </ion-item>
