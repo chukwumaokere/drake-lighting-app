@@ -21,7 +21,7 @@
 - Add delete function to edit button   
 - Add Toast when uploading with percentage   
 - Add Toast when upload complete and refresh page   
-- Add darkmode switch and palette   
+- ~~Add darkmode switch and palette~~    
 - Export as native app   
 - ~~Get other todos~~   
 - ~~Add text when no image on gallery page~~    

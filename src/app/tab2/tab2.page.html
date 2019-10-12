@@ -34,9 +34,9 @@
     </ion-item>
     <br>
     <ion-item lines="none">
-      <ion-label position="stacked">Theme &nbsp; 
-        <ion-button *ngIf="userinfo?.theme=='Dark'" type="button" size="default" color="light" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
-        <ion-button *ngIf="userinfo?.theme=='Light'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+      <ion-label position="stacked">Current Theme &nbsp; 
+        <ion-button id="themecolor" *ngIf="userinfo?.theme=='Dark'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+        <ion-button id="themecolor" *ngIf="userinfo?.theme=='Light'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
       </ion-label> 
     </ion-item>
     <br>

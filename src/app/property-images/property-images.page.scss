@@ -40,7 +40,8 @@
 
 .street-title, .pseudo-title{
     display:block;
-    background: white;
+    background: var(--ion-color-dark-contrast);
+    color: var(--ion-color-dark);
 }
 .street-title{
     font-size: 1.5em;
