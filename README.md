@@ -5,7 +5,7 @@
 - Dashboard can view user info   
 - Can switch themes between light/dark   
 - Shows a list of Properties with their addresses   
-- User can search for property by Tax ID   
+- User can search for property by Tax ID or other parameters like name, address, city, zip, etc.  
 - Gives navigation to those locations   
 - Lists the rooms in each property    
 - Lists all the photos in each room   
