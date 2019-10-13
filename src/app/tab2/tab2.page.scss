@@ -3,3 +3,11 @@ ion-textarea{
     --font-size: .9rem !important;
     --ion-font-size: .9rem !important;
 }
+.profile-top{
+    border-top-right-radius: 25px;
+    border-top-left-radius: 25px;
+}
+.profile-bottom{
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}

@@ -8,7 +8,7 @@
 
 <ion-content class="ion-padding">
 
-  <ion-item lines="none">
+  <ion-item lines="none" class="profile-top">
     <ion-avatar item-start>
       <img *ngIf="userinfo?.pic !== ''" src="{{userinfo.pic}}">
       <ion-icon *ngIf="userinfo?.pic == ''" name="contact" size="large" ></ion-icon>
@@ -16,7 +16,7 @@
     <p>&nbsp; Hello there, {{userinfo.firstname}}!</p>
   </ion-item>
 
-  <ion-list>
+  <ion-list class="profile-bottom">
 
     <ion-item>
       <ion-label position="stacked">Name</ion-label>
@@ -40,12 +40,12 @@
       </ion-label> 
     </ion-item>
     <br>
-    <ion-item>
+    <ion-item class="profile-bottom">
       <ion-label position="stacked">Notes</ion-label>
       <ion-textarea *ngIf="userinfo?.notes !== ''" value="{{userinfo.notes}}" name="usernotes"></ion-textarea>
       <ion-textarea *ngIf="userinfo?.notes == ''" placeholder="Jot something down" name="usernotes"></ion-textarea>
     </ion-item>
 
   </ion-list>
-  <ion-button (click)="logout()" color="danger" router-direction="back"><ion-icon name="log-out"></ion-icon> &nbsp; Logout</ion-button>
+  <ion-button (click)="logout()" color="danger" routerDirection="root"><ion-icon name="log-out"></ion-icon> &nbsp; Logout</ion-button>
 </ion-content>

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from  "@angular/router";
+import { NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { stringify } from 'querystring';
+
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
@@ -11,7 +12,7 @@ export class Tab2Page implements OnInit {
   //TODO: have userinfo feed from storage on init.
   userinfo: any;
 
-  constructor(private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute) { }
+  constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute) { }
  
   logout(){
     console.log('logout clicked');
