@@ -7,8 +7,6 @@
 </ion-header>
 
 <ion-content>
-  <!-- TODO: Decide if searchbar should be static or scrollable -->
-  <ion-searchbar show-cancel-button="focus" placeholder="Tax ID"></ion-searchbar>
-  <!-- TODO: Searchbar should filter down -->
+  <ion-searchbar show-cancel-button="focus" placeholder="Tax ID" (input)="filter($event)" (ionClear)="resetFilter($event)"></ion-searchbar>
   <app-map-card></app-map-card> 
 </ion-content>

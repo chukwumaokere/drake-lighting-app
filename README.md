@@ -31,6 +31,7 @@
 - ~~TODO: login function: Wrap storage setting and data setting to API call return~~   
 - ~~TODO: login: On init, check for if currently logged in to auto-log in~~   
 - ~~TODO: tab2: have userinfo feed from storage on init.~~   
-- TODO: tab3: Decide if searchbar should be static or scrollable   
-- TODO: tab2: Searchbar should filter down cards   
+- ~~TODO: tab3: Decide if searchbar should be static or scrollable~~      
+- ~~TODO: tab2: Searchbar should filter down cards~~    
+- ~~TODO: tab3: clear search should restore all cards~~   
 - TODO: Add loadTheme on every view so when resuming app, the theme persists   

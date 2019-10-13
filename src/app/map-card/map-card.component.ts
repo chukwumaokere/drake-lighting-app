@@ -10,15 +10,16 @@ import { properties } from '../../assets/js/sampledata/properties.json';
 export class MapCardComponent implements OnInit {
   properties: Object;
 
-  constructor(private  router:  Router) { 
-   
-  }
+  constructor(private  router:  Router) { }
   getProperties() {
+    console.log('loading up properties');
     this.properties = properties;
   }
   detailView(property: any){
+    console.log('going to detail view', property)
     this.router.navigate(['property-images', property]);
   }
+
   ngOnInit() {
     this.getProperties();
   }
