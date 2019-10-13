@@ -3,7 +3,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
+import { AlertController, ToastController } from '@ionic/angular';
 import * as pi from '../../assets/js/sampledata/properties-images.json';
+import { present } from '@ionic/core/dist/types/utils/overlays';
 
 @Component({
   selector: 'app-gallery',
@@ -14,6 +16,8 @@ export class GalleryPage implements OnInit {
   roomdata: any;
   propertyimages: any;
   propertypics: any;
+  current_mode: any = "view";
+
   buttonLabels = ['Take Photo', 'Upload from Library'];
 
   options: CameraOptions = {
@@ -39,7 +43,7 @@ export class GalleryPage implements OnInit {
     androidTheme: 1 //this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
   }
 
-  constructor(private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera, private actionSheet: ActionSheet, private photoLibrary: PhotoLibrary) { }
+  constructor(public toastController: ToastController, public alertController: AlertController, private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera, private actionSheet: ActionSheet, private photoLibrary: PhotoLibrary) { }
   
 
   loadImages(recordid, room: any){
@@ -86,7 +90,61 @@ export class GalleryPage implements OnInit {
       console.log(err);
     });
   }
-   
+
+  editPhotos(){
+    if(this.current_mode == 'view'){
+      console.log('entering photo edit mode');
+      this.current_mode = 'edit';
+      //display X icon top right of each photo div
+    }else{
+      console.log('returning to view mode');
+      this.current_mode = 'view'; //safety for mode
+    }
+    
+  }
+
+  async deletePhoto(recordid){
+      const alert = await this.alertController.create({
+        header: 'Deleting Photo',
+        message: 'Are you sure you want to delete this photo?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            cssClass: 'secondary',
+            handler: () => {
+              console.log('user cancelled request to delete', recordid);
+            }
+          }, {
+            text: 'Delete',
+            handler: () => {
+              console.log('deleting photo');
+              document.getElementById(recordid).style.display = "none";
+              //some js to deletephoto function
+              //on delete success: 
+              console.log('photo deleted', recordid);
+              this.presentToast(`Photo deleted!`);
+              //this.presentToast(`Photo deleted! ${recordid}`); //If we want to show asset link
+              //on fail:
+              //console.log('Photo delete failed with error', err);
+              //this.presentToast(`Photo delete failed with error ${err}`);
+            }
+          }
+        ]
+      });
+      await alert.present();
+  }
+
+  async presentToast(message: string) {
+    var toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: "bottom",
+      color: "danger"
+    });
+    toast.present();
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe((params)=>{
       console.log(params);

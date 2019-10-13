@@ -18,7 +18,7 @@
 - ~~launchCamera should prompt actionsheet~~    
 - Inifnite scroll or add refreshers to properties list view   
 - Add refresher to Rooms Group View   
-- Add delete function to edit button   
+- ~~Add delete function to edit button~~   
 - Add Toast when uploading with percentage   
 - Add Toast when upload complete and refresh page   
 - ~~Add darkmode switch and palette~~    
@@ -33,3 +33,4 @@
 - ~~TODO: tab2: have userinfo feed from storage on init.~~   
 - TODO: tab3: Decide if searchbar should be static or scrollable   
 - TODO: tab2: Searchbar should filter down cards   
+- TODO: Add loadTheme on every view so when resuming app, the theme persists   
