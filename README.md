@@ -11,7 +11,7 @@
 - Lists all the photos in each room   
 - Users can edit to delete photos from property   
 - Users can take photos or upload from library to link to property record  
-- Users can pull to refresh property views and room views and gallery view    
+- Users can pull/scroll to refresh property views and room views   
   
 ## TODO:   
 - ~~Finish dashboard page~~    
