@@ -72,6 +72,21 @@ export class LoginPage implements OnInit {
     return log_status;
   }
 
+  movefocus(e, ref){
+     if(e.key=="Enter"){
+      console.log(e.key);
+      ref.setFocus();
+    } 
+  }
+
+  submit(e, ref){
+    if(e.key=="Enter"){
+     console.log('submitting');
+     let el: HTMLElement = document.getElementById('submit-button') as HTMLElement;
+     el.click()
+    }
+  }
+
   ngOnInit() {
     this.isLogged().then(result => {
       if (!(result == false)){
