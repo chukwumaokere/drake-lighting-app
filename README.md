@@ -13,7 +13,10 @@
 - Users can take photos or upload from library to link to property record  
 - Users can pull/scroll to refresh property views and room views   
   
-## TODO:   
+## TODO:    
+- TODO: need code to upload image to server    
+- TODO: add splash screen    
+- Export as native app    
 - ~~Finish dashboard page~~    
 - ~~launchCamera should prompt actionsheet~~    
 - ~~Inifnite scroll or add refreshers to properties list view~~   
@@ -22,11 +25,9 @@
 - ~~Add Toast when uploading with percentage~~   
 - ~~Add Toast when upload complete and refresh page~~   
 - ~~Add darkmode switch and palette~~    
-- Export as native app   
 - ~~Get other todos~~   
 - ~~Add text when no image on gallery page~~    
-- ~~Fix login auth and persistent login~~   
-- TODO: need code to upload image to server   
+- ~~Fix login auth and persistent login~~     
 - ~~TODO: Fix code for PhotoLibrary~~   
 - ~~TODO: login function: Wrap storage setting and data setting to API call return~~   
 - ~~TODO: login: On init, check for if currently logged in to auto-log in~~   
