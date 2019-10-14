@@ -34,4 +34,4 @@
 - ~~TODO: tab3: Decide if searchbar should be static or scrollable~~      
 - ~~TODO: tab2: Searchbar should filter down cards~~    
 - ~~TODO: tab3: clear search should restore all cards~~   
-- TODO: Add loadTheme on every view so when resuming app, the theme persists   
+- ~~TODO: Add loadTheme on every view so when resuming app, the theme persists~~   

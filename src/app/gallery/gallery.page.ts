@@ -5,6 +5,7 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
 import { AlertController, ToastController } from '@ionic/angular';
 import * as pi from '../../assets/js/sampledata/properties-images.json';
+import { Storage } from '@ionic/storage';
 import { present } from '@ionic/core/dist/types/utils/overlays';
 
 @Component({
@@ -17,6 +18,7 @@ export class GalleryPage implements OnInit {
   propertyimages: any;
   propertypics: any;
   current_mode: any = "view";
+  userinfo: any;
 
   buttonLabels = ['Take Photo', 'Upload from Library'];
 
@@ -43,8 +45,42 @@ export class GalleryPage implements OnInit {
     androidTheme: 1 //this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
   }
 
-  constructor(public toastController: ToastController, public alertController: AlertController, private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera, private actionSheet: ActionSheet, private photoLibrary: PhotoLibrary) { }
-  
+  constructor(public storage: Storage, public toastController: ToastController, public alertController: AlertController, private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera, private actionSheet: ActionSheet, private photoLibrary: PhotoLibrary) { }
+  /* Default Auth Guard and Theme Loader */
+  logout(){
+    console.log('logging out, no user data found');
+    this.storage.set("userdata", null);
+    this.router.navigateByUrl('/login');
+  }
+
+  async getCurrentTheme(){
+    var current_theme = this.storage.get('userdata').then((userdata) => {
+      if(userdata && userdata.length !== 0){
+        //current_theme = userdata.theme.toLowerCase();
+        return userdata.theme.toLowerCase();
+      }else{
+        return false;
+      }
+    })
+    return current_theme;
+  }
+
+  async isLogged(){
+    var log_status = this.storage.get('userdata').then((userdata) => {
+       if(userdata && userdata.length !== 0){
+         return userdata;
+       }else{
+         return false;
+       }
+     })
+     return log_status;
+   }
+
+   loadTheme(theme){
+    document.body.classList.toggle(theme, true);
+   }
+
+  /* Default Auth Guard and Theme Loader */
 
   loadImages(recordid, room: any){
     this.propertyimages = pi.propertiesimages;
@@ -170,6 +206,31 @@ export class GalleryPage implements OnInit {
       this.roomdata = params;
       this.loadImages(params.id, params.room.replace(' ', ''));
     })
+    this.activatedRoute.params.subscribe((userData)=>{
+      if(userData.length !== 0){
+        this.userinfo = userData;
+        console.log('param user data:', userData);
+        try{ 
+          this.loadTheme(userData.theme.toLowerCase());
+        }catch{
+          console.log('couldnt load theme');
+        }
+        console.log('param user data length:', userData.length);
+        if(userData.length == undefined){
+          console.log ('nothing in params, so loading from storage');
+          this.isLogged().then(result => {
+            if (!(result == false)){
+              console.log('loading storage data (within param route function)', result);
+              this.userinfo = result;
+              this.loadTheme(result.theme.toLowerCase());
+            }else{
+              console.log('nothing in storage, going back to login');
+              this.logout();
+            }
+          }); 
+        }
+      }
+    });
   }
 
 }
