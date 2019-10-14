@@ -14,8 +14,8 @@
 - Users can pull/scroll to refresh property views and room views   
   
 ## TODO:    
-- TODO: need code to upload image to server    
-- TODO: add splash screen    
+- TODO: need code to upload image to server - Will have to do in production    
+- TODO: add splash screen https://www.youtube.com/watch?v=dPUmskG_-y0    
 - Export as native app    
 - ~~Finish dashboard page~~    
 - ~~launchCamera should prompt actionsheet~~    
