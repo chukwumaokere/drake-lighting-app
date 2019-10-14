@@ -25,7 +25,7 @@ export class GalleryPage implements OnInit {
     destinationType: this.camera.DestinationType.FILE_URI,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
-    saveToPhotoAlbum: true
+    saveToPhotoAlbum: false //true causes crash probably due to permissions to access library.
   }
 
   libraryOptions: CameraOptions = {
@@ -69,9 +69,13 @@ export class GalleryPage implements OnInit {
           let base64Image = 'data:image/jpeg;base64,' + imageData;
           console.log(base64Image);
           // TODO: need code to upload to server here.
+          // On success: show toast
+          this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
         }, (err) => {
           // Handle error
           console.error(err);
+          // On Fail: show toast
+          this.presentToast(`Upload failed! Please try again \n` + err);
         }); 
       }else if(buttonIndex == 2){
         console.log('launching gallery');
@@ -81,13 +85,18 @@ export class GalleryPage implements OnInit {
           let base64Image = 'data:image/jpeg;base64,' + imageData;
           console.log(base64Image);
           // TODO: need code to upload to server here.
+          // On success: show toast
+          this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
         }, (err) => {
           // Handle error
           console.error(err);
+          // On Fail: show toast
+          this.presentToast(`Upload failed! Please try again \n` + err);
         }); 
       }
     }).catch((err) => {
       console.log(err);
+      this.presentToast(`Operation failed! \n` + err);
     });
   }
 
@@ -141,6 +150,16 @@ export class GalleryPage implements OnInit {
       duration: 2000,
       position: "bottom",
       color: "danger"
+    });
+    toast.present();
+  }
+
+  async presentToastPrimary(message: string) {
+    var toast = await this.toastController.create({
+      message: message,
+      duration: 2000,
+      position: "bottom",
+      color: "primary"
     });
     toast.present();
   }
