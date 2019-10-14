@@ -78,7 +78,14 @@ export class Tab2Page implements OnInit {
    }
 
    loadTheme(theme){
+    console.log('loading theme', theme);
     document.body.classList.toggle(theme, true);
+    var theme_switcher = {
+      "dark": "light", 
+      "light": "dark"
+    };
+    document.body.classList.toggle(theme_switcher[theme], false); //switch off previous theme if there was one and prefer the loaded theme.
+    console.log('turning off previous theme', theme_switcher[theme]);
    }
 
   ngOnInit(){
