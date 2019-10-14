@@ -65,3 +65,13 @@
 .co-drop-shadow{
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.09), 0 6px 20px 0 rgba(0, 0, 0, 0.09);
 }
+
+.ion-margin-top-extra{
+    --margin-top: var(--ion-margin, 48px);
+    margin-top: var(--ion-margin, 48px);
+}
+
+.ion-margin-bottom-extra{
+    --margin-bottom: var(--ion-margin, 48px);
+    margin-bottom: var(--ion-margin, 48px);
+}

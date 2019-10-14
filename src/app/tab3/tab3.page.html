@@ -6,7 +6,21 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-searchbar show-cancel-button="focus" placeholder="Filter Properties" (input)="filter($event)" (ionClear)="resetFilter($event)"></ion-searchbar>
+
 <ion-content>
-  <ion-searchbar show-cancel-button="focus" placeholder="Tax ID" (input)="filter($event)" (ionClear)="resetFilter($event)"></ion-searchbar>
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="getMore($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Loading more properties...">
+    </ion-refresher-content>
+  </ion-refresher> Using infinite scroll instead -->
+  
+
   <app-map-card></app-map-card> 
+
+  <ion-infinite-scroll threshold="25px" (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="Loading more Properties...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>

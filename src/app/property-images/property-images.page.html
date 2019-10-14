@@ -13,6 +13,11 @@
     <ion-text class="street-title" >{{propertyInfo.street}}</ion-text>
   </div>
 
+  <ion-refresher class="ion-margin-top-extra ion-margin-bottom-extra" slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent" refreshingText="Updating images">
+    </ion-refresher-content>
+  </ion-refresher>
+
   <div class="rooms ion-margin-top ion-padding-vertical">
     <ion-card (click)="goToGallery(propertyInfo.recordid, 'bedroom', propertyInfo)">
       <div class="glossy"></div>

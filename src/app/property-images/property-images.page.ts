@@ -57,6 +57,7 @@ export class PropertyImagesPage implements OnInit {
     //this.router.navigate(['gallery', {recordid: recordid, gallery: galleryview, property: property}]); --deprecated--
     this.router.navigateByUrl(`/gallery/${recordid}/${galleryview}`, {state: {property: property}});
   }
+
   getImageCounts(recordid: any){
     console.log('getting image counts for', recordid);
     var images = this.propertyimages.filter(object => {
@@ -65,6 +66,16 @@ export class PropertyImagesPage implements OnInit {
     console.log(images[0].rooms);
     this.imagecounts = images[0].rooms;
   }
+
+  refresh(e){
+    console.log('Refreshing counts');
+
+    setTimeout(() => {
+      e.target.complete();
+      console.log('New counts retrieved');
+    }, 2000);
+  }
+
   ngOnInit() {
     this.activatedRoute.params.subscribe((userData)=>{
       if(userData.length !== 0){

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from  "@angular/router";
 import { Storage } from '@ionic/storage';
+import { IonInfiniteScroll } from '@ionic/angular';
 
 @Component({
   selector: 'app-tab3',
@@ -71,6 +72,29 @@ export class Tab3Page implements OnInit {
     Array.from(nodelist).filter(function(cards){
       cards.toggleAttribute('hidden', false);
     });
+  }
+
+  getMore(e){
+    console.log('Retrieving more properties');
+
+    setTimeout(() => {
+      e.target.complete();
+      console.log('New properties retrieved');
+    }, 2000);
+  }
+
+  loadMore(e){
+    setTimeout(() => {
+      e.target.complete();
+      console.log('New properties retrieved');
+      // App logic to determine if all data is loaded
+      // and disable the infinite scroll
+      /*
+      if (data.length == 1000) {
+        e.target.disabled = true;
+      }
+      */
+    }, 1500);
   }
 
   ngOnInit(){
