@@ -14,6 +14,7 @@
 - Users can pull/scroll to refresh property views and room views   
   
 ## TODO:    
+- TODO: Code time and mile distance from users current position (need to request location)    
 - TODO: need code to upload image to server - Will have to do in production    
 - TODO: add splash screen https://www.youtube.com/watch?v=dPUmskG_-y0    
 - Export as native app    
