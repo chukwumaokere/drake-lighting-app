@@ -15,13 +15,13 @@
 
 ## Demo:   
 - Failed login and dyanmic theming    
-![](./feature_demos/login_fail_and_dynamic_dark_mode.mp4)   
+[![](http://img.youtube.com/vi/ZOqezijjp6Q/0.jpg)](http://www.youtube.com/watch?v=ZOqezijjp6Q)
 - Click to pinpoint and Click to navigate    
-![](./feature_demos/navigation.mp4)    
+[![](http://img.youtube.com/vi/ekl2z9gSGLo/0.jpg)](http://www.youtube.com/watch?v=ekl2z9gSGLo)    
 - Scroll to refresh and pull to reload     
-![](./feature_demos/pull_to_reload.mp4)    
+[![](http://img.youtube.com/vi/lKdOAUxiVLs/0.jpg)](http://www.youtube.com/watch?v=lKdOAUxiVLs)   
 - Search on every field     
-![](./feature_demos/search_on_every_field.mp4)    
+[![](http://img.youtube.com/vi/BAscJwnGfjg/0.jpg)](http://www.youtube.com/watch?v=BAscJwnGfjg)   
 
 More coming soon...
   
