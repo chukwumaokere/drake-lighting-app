@@ -11,7 +11,19 @@
 - Lists all the photos in each room   
 - Users can edit to delete photos from property   
 - Users can take photos or upload from library to link to property record  
-- Users can pull/scroll to refresh property views and room views   
+- Users can pull/scroll to refresh property views and room views    
+
+## Demo:   
+- Failed login and dyanmic theming    
+![](./feature_demos/login_fail_and_dynamic_dark_mode)   
+- Click to pinpoint and Click to navigate    
+![](./feature_demos/navigation)    
+- Scroll to refresh and pull to reload     
+![](./feature_demos/pull_to_reload)    
+- Search on every field     
+![](./feature_demos/search_on_every_field)    
+
+More coming soon...
   
 ## TODO:    
 - TODO: Code time and mile distance from users current position (need to request location)    
