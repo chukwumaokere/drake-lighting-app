@@ -62,14 +62,17 @@
 
   <ion-row>
     <!-- Change the displayed calendar mode -->
-    <ion-col size="4">
+    <ion-col size="3">
       <ion-button expand="block" [color]="calendar.mode == 'month' ? 'primary' : 'secondary'" (click)="changeMode('month')">Month</ion-button>
     </ion-col>
-    <ion-col size="4">
+    <ion-col size="3">
       <ion-button expand="block" [color]="calendar.mode == 'week' ? 'primary' : 'secondary'" (click)="changeMode('week')">Week</ion-button>
     </ion-col>
-    <ion-col size="4">
+    <ion-col size="3">
       <ion-button expand="block" [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" (click)="changeMode('day')">Day</ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button [color]="calendar.mode == 'today' ? 'primary': 'secondary'" (click)="today()">Today</ion-button>
     </ion-col>
  
     <!-- Move back one screen of the slides -->
@@ -105,6 +108,11 @@
   </calendar>
 
   <ion-button (click)="logout()" color="danger" routerDirection="root"><ion-icon name="log-out"></ion-icon> &nbsp; Logout</ion-button>
+  <br><br><br><br>
+  <ion-text>OPTIONS BELOW ARE FOR HSH DEMO PURPOSES</ion-text>
+  <br><br>
+  <ion-button color="secondary" (click)="loadEvents()">Load Random Events</ion-button>
+  
 
   <!-- FOR DEV PURPOSES -->
   <!-- Card for adding a new event -->

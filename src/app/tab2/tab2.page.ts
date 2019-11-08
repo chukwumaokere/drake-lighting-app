@@ -34,6 +34,47 @@ export class Tab2Page implements OnInit {
 
   constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string ) { }
 
+  loadEvents() {
+    this.eventSource = this.createRandomEvents();
+  }
+
+  createRandomEvents() {
+    var events = [];
+    for (var i = 0; i < 50; i += 1) {
+        var date = new Date();
+        var eventType = Math.floor(Math.random() * 2);
+        var startDay = Math.floor(Math.random() * 90) - 45;
+        var endDay = Math.floor(Math.random() * 2) + startDay;
+        var startTime;
+        var endTime;
+        if (eventType === 0) {
+            startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
+            if (endDay === startDay) {
+                endDay += 1;
+            }
+            endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
+            events.push({
+                title: 'Quick Start - ' + i,
+                startTime: startTime,
+                endTime: endTime,
+                allDay: true
+            });
+        } else {
+            var startMinute = Math.floor(Math.random() * 24 * 60);
+            var endMinute = Math.floor(Math.random() * 180) + startMinute;
+            startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
+            endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
+            events.push({
+                title: 'Discard and Donate - ' + i,
+                startTime: startTime,
+                endTime: endTime,
+                allDay: false
+            });
+        }
+    }
+    return events;
+  }
+
   resetEvent() {
     this.event = {
       title: '',
@@ -85,6 +126,7 @@ export class Tab2Page implements OnInit {
   
   // Focus today
   today() {
+    this.changeMode('month');
     this.calendar.currentDate = new Date();
   }
   
