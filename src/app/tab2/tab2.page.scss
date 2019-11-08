@@ -17,3 +17,16 @@ ion-textarea{
 .padding-left-none{
     padding-left: 0;
 }
+
+.date-title{
+    padding-top: 23px;
+}
+
+.monthview-current{
+    color: var(--ion-color-light-contrast);
+}
+
+.monthview-selected{
+    background-color: var(--ion-color-primary) !important;
+    --background-color: var(--ion-color-primary) !important;
+}
