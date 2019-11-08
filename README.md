@@ -29,6 +29,8 @@ More coming soon...
 - TODO: Code time and mile distance from users current position (need to request location)    
 - TODO: need code to upload image to server - Will have to do in production    
 - TODO: add splash screen https://www.youtube.com/watch?v=dPUmskG_-y0    
+- TODO: Fix CSS Coloring    
+- TODO: fix depcrated CSS on homepage html    
 - Export as native app    
 - ~~Finish dashboard page~~    
 - ~~launchCamera should prompt actionsheet~~    

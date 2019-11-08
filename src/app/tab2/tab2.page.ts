@@ -37,16 +37,21 @@ export class Tab2Page implements OnInit {
   loadEvents() {
     this.eventSource = this.createRandomEvents();
   }
-
+  randomCompany = ['NuCompass - Veritiv', 'Graebel | Amazon', 'BGRS - Abbvie', 'AIReS - Shire', 'Sirva Move Mgmt - Amgen', 'Graebel - Pet Smart', 'NEI - CVS', 'Aires - ADM', 'Cartus - TJX', 'Cartus - Caterpillar', 'Weichert - Regeneron', 'Graebel - ECOLAB', 'CapRelo - Walrmart', 'Cartus - Nike', 'Plus - Google', 'Graebel - Schwab'];
   createRandomEvents() {
     var events = [];
     for (var i = 0; i < 50; i += 1) {
+        var randomC = i+1;
+        if (randomC > 16){
+          randomC = i % 16;
+        }
         var date = new Date();
         var eventType = Math.floor(Math.random() * 2);
         var startDay = Math.floor(Math.random() * 90) - 45;
         var endDay = Math.floor(Math.random() * 2) + startDay;
         var startTime;
         var endTime;
+        var desc = 'Just a random Description for this service ' + ' - ' + i;
         if (eventType === 0) {
             startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
             if (endDay === startDay) {
@@ -54,7 +59,8 @@ export class Tab2Page implements OnInit {
             }
             endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
             events.push({
-                title: 'Quick Start - ' + i,
+                title: 'QS - ' + this.randomCompany[randomC],
+                desc: desc,
                 startTime: startTime,
                 endTime: endTime,
                 allDay: true
@@ -65,7 +71,8 @@ export class Tab2Page implements OnInit {
             startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
             endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
             events.push({
-                title: 'Discard and Donate - ' + i,
+                title: 'D&D - ' + this.randomCompany[randomC],
+                desc: desc,
                 startTime: startTime,
                 endTime: endTime,
                 allDay: false
@@ -144,7 +151,7 @@ export class Tab2Page implements OnInit {
       header: event.title,
       subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: ['OK']
+      buttons: [{text:'Close', role:'cancel'}, {text:'Open Service', handler: () => { console.log('Going to service record'); } }]
     });
     alert.present();
   }
