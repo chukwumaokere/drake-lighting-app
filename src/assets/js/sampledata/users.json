@@ -43,6 +43,17 @@
             "phone": "1 (222) 555-2255",
             "pic": "",
             "notes": ""
+        },
+        "iman": {
+            "username": "iman",
+            "password": "test",
+            "firstname": "Iman",
+            "lastname": "Carter-Cowans",
+            "organization": "Boru, Inc",
+            "theme": "Light",
+            "phone": "1 (404) 555-2255",
+            "pic": "/assets/img/profilephotos/iman.jpg",
+            "notes": "Demo the app for the HSH Team!"
         }
     }
 }

@@ -8,7 +8,9 @@ const routes: Routes = [
   },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'property-images', loadChildren: './property-images/property-images.module#PropertyImagesPageModule' },
-  { path: 'gallery/:id/:room', loadChildren: './gallery/gallery.module#GalleryPageModule' }
+  { path: 'gallery/:id/:room', loadChildren: './gallery/gallery.module#GalleryPageModule' },  { path: 'services', loadChildren: './services/services.module#ServicesPageModule' },
+  { path: 'ratings', loadChildren: './ratings/ratings.module#RatingsPageModule' }
+
 
 ];
 @NgModule({

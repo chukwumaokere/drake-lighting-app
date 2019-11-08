@@ -18,7 +18,7 @@
 
   <ion-list class="profile-bottom">
 
-    <ion-item>
+    <!-- <ion-item>
       <ion-label position="stacked">Name</ion-label>
       <ion-text>{{userinfo.firstname}} {{userinfo.lastname}}</ion-text>
     </ion-item>
@@ -31,7 +31,8 @@
     <ion-item>
       <ion-label position="stacked">Mobile</ion-label>
       <ion-text>{{userinfo.phone}}</ion-text>
-    </ion-item>
+    </ion-item> -->
+
     <br>
     <ion-item lines="none">
       <ion-grid class="ion-no-padding">
@@ -49,8 +50,8 @@
 
     <ion-item class="profile-bottom">
       <ion-label position="stacked">Notes</ion-label>
-      <ion-textarea *ngIf="userinfo?.notes !== ''" value="{{userinfo.notes}}" name="usernotes"></ion-textarea>
-      <ion-textarea *ngIf="userinfo?.notes == ''" placeholder="Jot something down" name="usernotes"></ion-textarea>
+      <ion-textarea auto-grow="true" *ngIf="userinfo?.notes !== ''" value="{{userinfo.notes}}" name="usernotes"></ion-textarea>
+      <ion-textarea auto-grow="true" *ngIf="userinfo?.notes == ''" placeholder="Jot something down" name="usernotes"></ion-textarea>
     </ion-item>
 
   </ion-list>

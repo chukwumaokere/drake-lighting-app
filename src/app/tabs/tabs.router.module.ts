@@ -38,6 +38,26 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'services',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../services/services.module').then(m => m.ServicesPageModule)
+          }
+        ]
+      },
+      {
+        path: 'ratings',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../ratings/ratings.module').then(m => m.RatingsPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'
