@@ -5,5 +5,110 @@
 </ion-header>
 
 <ion-content>
+  <ion-list lines="full">
 
+      <ion-item-divider>
+        <ion-label>
+          Open Services
+        </ion-label>
+      </ion-item-divider>
+
+    <ion-list-header>
+      <ion-label>Today's Open Services</ion-label>
+    </ion-list-header>
+
+    <ion-item href="/services/detail/{{service.id}}" detail *ngFor="let service of todayServices">
+      <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
+      <ion-label>
+        <h2>{{service.title}}</h2>
+        <div class="service-details-div">
+          <ion-grid class="service-details-grid">
+            <ion-row>
+              <ion-col><p class="st">Start Time</p></ion-col>
+              <ion-col><p class="et">End Time</p></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col><p>{{service.startTime}}</p></ion-col>
+              <ion-col><p>{{service.endTime}}</p></ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-label>
+      <ion-note slot="end" color="success">{{service.status}}</ion-note>
+    </ion-item>
+
+    <!-- template <ion-item href="/services/detail/8" detail>
+      <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
+      <ion-label>
+        <h2>Ojomo : Discard and Donate</h2>
+        <div class="service-details-div">
+          <ion-grid class="service-details-grid">
+            <ion-row>
+              <ion-col><p class="st">Start Time</p></ion-col>
+              <ion-col><p class="et">End Time</p></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col><p>08:00 AM</p></ion-col>
+              <ion-col><p>09:30 AM</p></ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-label>
+      <ion-note slot="end" color="success">1 In-Process</ion-note>
+    </ion-item> -->
+
+    <ion-list-header sticky="true" lines="none">
+      <ion-label>Future Services</ion-label>
+    </ion-list-header>
+
+      <ion-item href="/services/detail/{{service.id}}" detail *ngFor="let service of futureServices">
+        <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
+        <ion-label>
+          <h2>{{service.title}}</h2>
+          <div class="service-details-div">
+            <ion-grid class="service-details-grid">
+              <ion-row>
+                <ion-col><p class="st">Start Time</p></ion-col>
+                <ion-col><p class="et">End Time</p></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col><p>{{service.startTime}}</p></ion-col>
+                <ion-col><p>{{service.endTime}}</p></ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-label>
+        <ion-note slot="end" color="success">{{service.status}}</ion-note>
+      </ion-item>
+
+    <ion-item-divider>
+      <ion-label>
+        Completed Services
+      </ion-label>
+    </ion-item-divider>
+
+    <ion-list-header>
+      <ion-label>All Completed Services</ion-label>
+    </ion-list-header>
+
+    <ion-item href="/services/detail/{{service.id}}" detail *ngFor="let service of completedServices">
+      <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
+      <ion-label>
+        <h2>{{service.title}}</h2>
+        <div class="service-details-div">
+          <ion-grid class="service-details-grid">
+            <ion-row>
+              <ion-col><p class="st">Start Time</p></ion-col>
+              <ion-col><p class="et">End Time</p></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col><p>{{service.startTime}}</p></ion-col>
+              <ion-col><p>{{service.endTime}}</p></ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-label>
+      <ion-note slot="end" color="success">{{service.status}}</ion-note>
+    </ion-item>
+  </ion-list>
 </ion-content>
