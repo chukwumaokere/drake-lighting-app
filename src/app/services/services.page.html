@@ -17,7 +17,7 @@
       <ion-label>Today's Open Services</ion-label>
     </ion-list-header> -->
 
-    <ion-item href="/services/detail/{{service.id}}" detail *ngFor="let service of todayServices">
+    <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of todayServices">
       <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
       <ion-label>
         <h2>{{service.title}}</h2>
@@ -47,7 +47,7 @@
       <ion-label>Future Services</ion-label>
     </ion-list-header> -->
 
-      <ion-item href="/services/detail/{{service.id}}" detail *ngFor="let service of futureServices">
+      <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of futureServices">
         <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
         <ion-label>
           <h2>{{service.title}}</h2>
@@ -78,7 +78,7 @@
       <ion-label>All Completed Services</ion-label>
     </ion-list-header> -->
 
-    <ion-item href="/services/detail/{{service.id}}" detail *ngFor="let service of completedServices">
+    <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of completedServices">
       <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
       <ion-label>
         <h2>{{service.title}}</h2>

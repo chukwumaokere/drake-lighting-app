@@ -24,8 +24,8 @@ export class ServicesPage implements OnInit {
     status: '',
   };
 
-  randomPeople = ['Malik','Charisse','Mitsue','Lilia','Lynelle','Lavette','Kerry','Beckie','Nathan','Kristle','Nickie','Coretta','Randy','Carmon','Bev','Maude','Cleora','Tracy','Casimira','Lowell','Particia','Bennie','Angelena','Elden','Marcel','Elene','Young','Rheba','Paulene','Latia','Shantay','Lavon','Dane','Darla','Joselyn','Zelda','Kasha','Kaitlin','Pasty','Essie','Delfina','Arla','Amy','Xavier','Jin','Ashlee','Millicent','Jeanetta','Willy','Rolf',];
-  typesOfServices= ['Quick Start', 'Discard and Donate', 'Move IN Clean', 'Quick Start Exec', 'Move OUT Clean'];
+  randomPeople = ['Ojomo','Charisse','Mitsue','Lilia','Lynelle','Lavette','Kerry','Beckie','Nathan','Kristle','Nickie','Coretta','Randy','Carmon','Bev','Maude','Cleora','Tracy','Casimira','Lowell','Particia','Bennie','Angelena','Elden','Marcel','Elene','Young','Rheba','Paulene','Latia','Shantay','Lavon','Dane','Darla','Joselyn','Zelda','Kasha','Kaitlin','Pasty','Essie','Delfina','Arla','Amy','Xavier','Jin','Ashlee','Millicent','Jeanetta','Willy','Rolf',];
+  typesOfServices= ['Discard and Donate', 'Quick Start', 'Move IN Clean', 'Quick Start Exec', 'Move OUT Clean'];
   statuses= ['1 In-Process', 'Declined', 'Complete', 'Cancelled', 'Closed', 'Approved'];
 
   constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, @Inject(LOCALE_ID) private locale: string) { }
@@ -81,6 +81,10 @@ export class ServicesPage implements OnInit {
       }); 
     }
     return services;
+  }
+
+  goToDetail(serviceid){
+    this.router.navigateByUrl(`/services/detail/${serviceid}`, {state: {}});
   }
   
   logout(){
