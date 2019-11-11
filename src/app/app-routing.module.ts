@@ -10,8 +10,9 @@ const routes: Routes = [
   { path: 'property-images', loadChildren: './property-images/property-images.module#PropertyImagesPageModule' },
   { path: 'gallery/:id/:room', loadChildren: './gallery/gallery.module#GalleryPageModule' },
   { path: 'services', loadChildren: './services/services.module#ServicesPageModule' },
-  { path: 'services/:id/detail', loadChildren: './services/services.module#ServicesPageModule' },
-  { path: 'ratings', loadChildren: './ratings/ratings.module#RatingsPageModule' }
+  { path: 'ratings', loadChildren: './ratings/ratings.module#RatingsPageModule' },
+  { path: 'services/detail/:id', loadChildren: './services/detail/detail.module#DetailPageModule' }
+
 
 
 ];
