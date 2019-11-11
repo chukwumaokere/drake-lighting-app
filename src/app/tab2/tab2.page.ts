@@ -13,7 +13,9 @@ import { CalendarComponent } from 'ionic2-calendar/calendar';
 export class Tab2Page implements OnInit {
   //TODO: have userinfo feed from storage on init.
   userinfo: any;
+  nextId: any = 51;
   event = {
+    id: this.nextId,
     title: '',
     desc: '',
     startTime: '',
@@ -21,7 +23,6 @@ export class Tab2Page implements OnInit {
     allDay: false
   };
   minDate = new Date().toISOString();
- 
   eventSource = [];
   viewTitle: any;
 
@@ -59,6 +60,7 @@ export class Tab2Page implements OnInit {
             }
             endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
             events.push({
+                id: i,
                 title: 'QS - ' + this.randomCompany[randomC],
                 desc: desc,
                 startTime: startTime,
@@ -71,6 +73,7 @@ export class Tab2Page implements OnInit {
             startTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + startDay, 0, date.getMinutes() + startMinute);
             endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
             events.push({
+                id: i,
                 title: 'D&D - ' + this.randomCompany[randomC],
                 desc: desc,
                 startTime: startTime,
@@ -83,7 +86,9 @@ export class Tab2Page implements OnInit {
   }
 
   resetEvent() {
+    var nextId = this.nextId;
     this.event = {
+      id: nextId,
       title: '',
       desc: '',
       startTime: new Date().toISOString(),
@@ -95,6 +100,7 @@ export class Tab2Page implements OnInit {
   // Create the right event format and reload source
   addEvent(events: object) {
     let eventCopy = {
+      id: this.event.id,
       title: this.event.title,
       startTime:  new Date(this.event.startTime),
       endTime: new Date(this.event.endTime),
@@ -112,6 +118,8 @@ export class Tab2Page implements OnInit {
  
     this.eventSource.push(eventCopy);
     this.myCal.loadEvents();
+    this.nextId = this.nextId+1;
+    //console.log('incrementing id to', this.nextId);
     this.resetEvent();
   }
 
@@ -151,7 +159,7 @@ export class Tab2Page implements OnInit {
       header: event.title,
       subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: [{text:'Close', role:'cancel'}, {text:'Open Service', handler: () => { console.log('Going to service record'); } }]
+      buttons: [{text:'Close', role:'cancel'}, {text:'Open Service', handler: () => { console.log('Going to service record ID: ', event.id); this.router.navigateByUrl(`/services/${event.id}/detail`, {state: {}}); } }]
     });
     alert.present();
   }

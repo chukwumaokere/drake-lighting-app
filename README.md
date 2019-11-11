@@ -31,6 +31,7 @@ More coming soon...
 - TODO: add splash screen https://www.youtube.com/watch?v=dPUmskG_-y0    
 - TODO: Fix CSS Coloring    
 - TODO: fix depcrated CSS on homepage html    
+- TODO: Add ratings and service contracts list and detail view     
 - Export as native app    
 - ~~Finish dashboard page~~    
 - ~~launchCamera should prompt actionsheet~~    
