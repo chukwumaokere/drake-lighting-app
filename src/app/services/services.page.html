@@ -7,7 +7,7 @@
 <ion-content>
   <ion-list lines="full">
 
-      <ion-item-divider>
+      <ion-item-divider sticky="true">
         <ion-label>
           Open Services
         </ion-label>
@@ -65,6 +65,7 @@
         <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
         <ion-label>
           <h2>{{service.title}}</h2>
+          <p>{{service.longdate}}</p>
           <div class="service-details-div">
             <ion-grid class="service-details-grid">
               <ion-row>
@@ -81,7 +82,7 @@
         <ion-note slot="end" color="success">{{service.status}}</ion-note>
       </ion-item>
 
-    <ion-item-divider>
+    <ion-item-divider sticky="true">
       <ion-label>
         Completed Services
       </ion-label>
@@ -95,6 +96,7 @@
       <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
       <ion-label>
         <h2>{{service.title}}</h2>
+        <p>{{service.longdate}}</p>
         <div class="service-details-div">
           <ion-grid class="service-details-grid">
             <ion-row>

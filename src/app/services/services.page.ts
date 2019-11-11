@@ -18,6 +18,7 @@ export class ServicesPage implements OnInit {
     id: '',
     title: '', //Will be the Transferee + type of service
     desc: '', //Will be address here
+    longdate: '',
     startTime: '', //Will be time as 00:00 A/PM
     endTime: '', //Will be time as 00:00 A/PM
     status: '',
@@ -52,6 +53,7 @@ export class ServicesPage implements OnInit {
       var randomStatus = i % this.statuses.length;
       let start = formatDate(startTime, 'shortTime', this.locale);
       let end = formatDate(endTime, 'shortTime', this.locale);
+      let longdate = formatDate(startTime, 'medium', this.locale);
       var availableStatuses = this.statuses;
       var status = this.statuses[randomStatus];
       if (type=='today'){
@@ -68,6 +70,7 @@ export class ServicesPage implements OnInit {
         id: i,
         title: this.randomPeople[i] + ': ' + this.typesOfServices[randomTOS],
         desc: '',
+        longdate: longdate,
         startTime: start,
         endTime: end,
         status: status,
