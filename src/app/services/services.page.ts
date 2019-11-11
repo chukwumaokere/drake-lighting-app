@@ -32,13 +32,17 @@ export class ServicesPage implements OnInit {
 
   async loadRandomServices(type){
     var limit = 50;
+    var init = 0;
     if(type == 'today'){
       var limit = 5;
     }else if (type == 'future'){
       var limit = 10;
+      init = 5;
+    }else if (type == 'completed'){
+      init = 15;
     }
     var services = [];
-    for (var i = 0; i < limit; i += 1){
+    for (var i = init; i < limit; i += 1){
       var date = new Date();
       var startDay = Math.floor(Math.random() * 90) - 45;
       var endDay = Math.floor(Math.random() * 2) + startDay;
