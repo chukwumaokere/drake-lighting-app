@@ -36,7 +36,7 @@
       </ion-label>
       <ion-note slot="end" class="status" color="white"
       data-color="{{(service?.status == 'Cancelled' || service?.status == 'Declined') ? 'danger' : 'success'}}"
-      [ngStyle]="{'background-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : 'var(--ion-color-success)' }"
+      [ngStyle]="{'background-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
       >{{service.status}}</ion-note>
     </ion-item>
 
