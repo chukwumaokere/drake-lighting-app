@@ -32,6 +32,7 @@ More coming soon...
 - TODO: Fix CSS Coloring    
 - TODO: fix depcrated CSS on homepage html    
 - TODO: Add ratings and service contracts list and detail view     
+- TODO: Find way to calculate and display stars on ratings based on rating.stars    
 - Export as native app    
 - ~~Finish dashboard page~~    
 - ~~launchCamera should prompt actionsheet~~    
