@@ -46,7 +46,16 @@
       <ion-text>{{servicedetail.desc}}</ion-text>
     </ion-item>
   </ion-list>
-
-  <ion-button expand="block" color="secondary"  [disabled]="servicedetail?.starttime == '' ? null : 'disabled'" >{{(servicedetail?.starttime !== '') ? 'Started' : 'Start' }}</ion-button>
-  <ion-button expand="block" color="success" [disabled]="servicedetail?.complete_date == '' ? null : 'disabled'">{{(servicedetail?.complete_date !== '') ? 'Completed' : 'Complete' }} </ion-button>
+<div class="button-grouping ion-padding">
+  <ion-button size="large" expand="block" color="warning"  [disabled]="servicedetail?.starttime == '' ? null : 'disabled'" >
+    <ion-text color="dark">
+      {{(servicedetail?.starttime !== '') ? 'Started' : 'Start' }}
+    </ion-text>
+  </ion-button>
+  <ion-button size="large" expand="block" color="success" [disabled]="servicedetail?.complete_date == '' ? null : 'disabled'">
+    <ion-text color="dark">
+      {{(servicedetail?.complete_date !== '') ? 'Completed' : 'Complete' }}       
+    </ion-text>
+  </ion-button>
+</div>
 </ion-content>
