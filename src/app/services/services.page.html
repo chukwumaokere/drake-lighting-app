@@ -34,10 +34,12 @@
           </ion-grid>
         </div>
       </ion-label>
-      <ion-note slot="end" class="status" color="white"
+      <ion-badge slot="end" class="status" color="white"
       data-color="{{(service?.status == 'Cancelled' || service?.status == 'Declined') ? 'danger' : 'success'}}"
       [ngStyle]="{'background-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
-      >{{service.status}}</ion-note>
+      >
+        <ion-text class="status-text">{{service.status}}</ion-text>
+      </ion-badge>
     </ion-item>
 
     <ion-item-divider sticky="true">
@@ -68,10 +70,12 @@
             </ion-grid>
           </div>
         </ion-label>
-        <ion-note slot="end" class="status" color="medium"
+        <ion-badge slot="end" class="status" color="medium"
         data-color="{{(service?.status == 'Cancelled' || service?.status == 'Declined') ? 'danger' : 'success'}}"
         [ngStyle]="{'background-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : 'var(--ion-color-success)' }"
-        >{{service.status}}</ion-note>
+        >
+          <ion-text class="status-text">{{service.status}}</ion-text>
+        </ion-badge>
       </ion-item>
 
     <ion-item-divider sticky="true">
@@ -102,9 +106,11 @@
           </ion-grid>
         </div>
       </ion-label>
-      <ion-note slot="end" color="white" data-color="medium" class="status"
+      <ion-badge size="large" slot="end" color="white" data-color="medium" class="status"
       [ngStyle]="{'background-color':service?.status == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-medium)', 'border-color':service?.status == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-medium)' }"
-      >{{service.status}}</ion-note>
+      >
+        <ion-text class="status-text">{{service.status}}</ion-text>
+      </ion-badge>
     </ion-item>
   </ion-list>
 </ion-content>

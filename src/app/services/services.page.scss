@@ -10,6 +10,18 @@ ion-col > p.st, ion-col > p.et {
 ion-note.status{
     border: 1px solid;
     border-radius: 50px;
-    padding: 4px;
+    padding: 10px;
     color: white;
+    --padding: 10px;
+    --padding-bottom: 10px;
+    padding-bottom: 10px;
+}
+
+ion-badge.status{
+    padding: 10px;
+    border-radius: 50px;
+}
+
+ion-text.status-text{
+    color: white !important;
 }
