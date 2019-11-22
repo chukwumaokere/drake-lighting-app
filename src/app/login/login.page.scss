@@ -1,9 +1,14 @@
+:host {
+    background-color: red !important;
+    background: url('../../assets/aerial.jpg') no-repeat center center / cover ;
+}
 ion-content.loginPage {
-    --background: url('../../assets/aerial.jpg') no-repeat center center / cover !important;
+    /* --background: url('../../assets/aerial.jpg') no-repeat center center / cover !important; */
     /* --background: url('../../assets/aerial.jpg');
     --background-repeat: no-repeat;
     --background-size: cover; */
     --keyboard-offset: 0;
+    --background: transparent;
 }
 
 .pardonTop{
