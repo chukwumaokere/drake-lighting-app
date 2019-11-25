@@ -11,7 +11,8 @@ const routes: Routes = [
   { path: 'gallery/:id/:room', loadChildren: './gallery/gallery.module#GalleryPageModule' },
   { path: 'services', loadChildren: './services/services.module#ServicesPageModule' },
   { path: 'ratings', loadChildren: './ratings/ratings.module#RatingsPageModule' },
-  { path: 'services/detail/:serviceid', loadChildren: './services/detail/detail.module#DetailPageModule' }
+  { path: 'services/detail/:serviceid', loadChildren: './services/detail/detail.module#DetailPageModule' },  { path: 'detail', loadChildren: './towers/detail/detail.module#DetailPageModule' }
+
 
 
 
