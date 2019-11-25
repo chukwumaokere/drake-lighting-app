@@ -58,6 +58,16 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'underreview',
+        children: [
+          {
+            path: '',
+            loadChildren: () =>
+              import('../underreview/underreview.module').then(m => m.UnderreviewPageModule)
+          }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/login',
         pathMatch: 'full'
