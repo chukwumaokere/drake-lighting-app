@@ -9,7 +9,7 @@
 
       <ion-item-divider sticky="true">
         <ion-label>
-          Today's Open Services
+          Weekly Open Services
         </ion-label>
       </ion-item-divider>
 
@@ -18,7 +18,7 @@
     </ion-list-header> -->
 
     <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of todayServices">
-      <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
+      <ion-avatar><ion-icon size="large" name="flash"></ion-icon></ion-avatar>
       <ion-label>
         <h2>{{service.tower}}</h2>
         <h2>{{service.tos}}</h2>
@@ -54,7 +54,7 @@
     </ion-list-header> -->
 
       <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of futureServices">
-        <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
+        <ion-avatar><ion-icon size="large" name="flash"></ion-icon></ion-avatar>
         <ion-label>
           <h2>{{service.tower}}</h2>
           <h2>{{service.tos}}</h2>
