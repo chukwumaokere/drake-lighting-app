@@ -1,3 +1,12 @@
 ion-label{
     color: grey !important;
 }
+
+ion-badge.status{
+    padding: 10px;
+    border-radius: 50px;
+}
+
+ion-text.status-text{
+    color: white !important;
+}
