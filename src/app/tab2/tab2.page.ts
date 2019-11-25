@@ -38,7 +38,7 @@ export class Tab2Page implements OnInit {
   loadEvents() {
     this.eventSource = this.createRandomEvents();
   }
-  randomCompany = ['NuCompass - Veritiv', 'Graebel | Amazon', 'BGRS - Abbvie', 'AIReS - Shire', 'Sirva Move Mgmt - Amgen', 'Graebel - Pet Smart', 'NEI - CVS', 'Aires - ADM', 'Cartus - TJX', 'Cartus - Caterpillar', 'Weichert - Regeneron', 'Graebel - ECOLAB', 'CapRelo - Walrmart', 'Cartus - Nike', 'Plus - Google', 'Graebel - Schwab'];
+  randomCompany = ['Simmons - MOSPG2014', 'Marysville - ARLIT2062', 'Coldspring - TXHOU2041', 'Yellow Rock - KYLEX2020', 'Medora - ILSPG2027', 'Lawtell - LALWL2000', 'HWY 584 (FTCA) LAMON2002', 'HWY 120 (FTCA) - LASRV2006', 'York - ALBRH2003', 'Jorge Auto Sales - TXLAR2007', 'Sawmill - ARLIT2065', 'Saxton - PAPIT2008', 'Rockwood - PAPIT2006', 'Mellen - WIWAU2029', 'Calvin - LAMON2113', 'Funston - LARSV2021'];
   createRandomEvents() {
     var events = [];
     for (var i = 0; i < 50; i += 1) {
@@ -52,7 +52,7 @@ export class Tab2Page implements OnInit {
         var endDay = Math.floor(Math.random() * 2) + startDay;
         var startTime;
         var endTime;
-        var desc = 'Just a random Description for this service ' + ' - ' + i;
+        var desc = 'Just a random Description for this work order ' + ' - ' + i;
         if (eventType === 0) {
             startTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + startDay));
             if (endDay === startDay) {
@@ -61,7 +61,7 @@ export class Tab2Page implements OnInit {
             endTime = new Date(Date.UTC(date.getUTCFullYear(), date.getUTCMonth(), date.getUTCDate() + endDay));
             events.push({
                 id: i,
-                title: 'QS - ' + this.randomCompany[randomC],
+                title: '' + this.randomCompany[randomC],
                 desc: desc,
                 startTime: startTime,
                 endTime: endTime,
@@ -74,7 +74,7 @@ export class Tab2Page implements OnInit {
             endTime = new Date(date.getFullYear(), date.getMonth(), date.getDate() + endDay, 0, date.getMinutes() + endMinute);
             events.push({
                 id: i,
-                title: 'D&D - ' + this.randomCompany[randomC],
+                title: '' + this.randomCompany[randomC],
                 desc: desc,
                 startTime: startTime,
                 endTime: endTime,
@@ -159,7 +159,7 @@ export class Tab2Page implements OnInit {
       header: event.title,
       subHeader: event.desc,
       message: 'From: ' + start + '<br><br>To: ' + end,
-      buttons: [{text:'Close', role:'cancel'}, {text:'Open Service', handler: () => { console.log('Going to service record ID: ', event.id); this.router.navigateByUrl(`/services/detail/${event.id}`, {state: {}}); } }]
+      buttons: [{text:'Close', role:'cancel'}, {text:'Open Work Order', handler: () => { console.log('Going to service record ID: ', event.id); this.router.navigateByUrl(`/services/detail/${event.id}`, {state: {}}); } }]
     });
     alert.present();
   }
