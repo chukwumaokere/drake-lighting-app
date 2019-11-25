@@ -42,7 +42,7 @@ export class LoginPage implements OnInit {
           this.userdata = userjson.users[data.email];
           this.storage.ready().then(() => {
             this.storage.set('userdata', this.userdata);
-            return this.router.navigate(["/tabs/tab2", this.userdata]);
+            return this.router.navigate(["/tabs/services", this.userdata]);
           })
         }else{
           console.log('login failed');
