@@ -1,12 +1,12 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Properties
+      Sites
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-searchbar show-cancel-button="focus" placeholder="Filter Properties" (input)="filter($event)" (ionClear)="resetFilter($event)"></ion-searchbar>
+<ion-searchbar show-cancel-button="focus" placeholder="Filter Towers" (input)="filter($event)" (ionClear)="resetFilter($event)"></ion-searchbar>
 
 <ion-content>
   <!-- <ion-refresher slot="fixed" (ionRefresh)="getMore($event)">
@@ -20,7 +20,7 @@
   <ion-infinite-scroll threshold="25px" (ionInfinite)="loadMore($event)">
       <ion-infinite-scroll-content
         loadingSpinner="crescent"
-        loadingText="Loading more Properties...">
+        loadingText="Loading more Sites...">
       </ion-infinite-scroll-content>
     </ion-infinite-scroll>
 </ion-content>

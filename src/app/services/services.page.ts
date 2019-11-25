@@ -16,7 +16,8 @@ export class ServicesPage implements OnInit {
   completedServices: object;
   service = {
     id: '',
-    title: '', //Will be the Transferee + type of service
+    tower: '', //Will be the Transferee + type of service
+    tos: '',
     desc: '', //Will be address here
     longdate: '',
     startTime: '', //Will be time as 00:00 A/PM
@@ -24,14 +25,14 @@ export class ServicesPage implements OnInit {
     status: '',
   };
 
-  randomPeople = ['Ojomo','Charisse','Mitsue','Lilia','Lynelle','Lavette','Kerry','Beckie','Nathan','Kristle','Nickie','Coretta','Randy','Carmon','Bev','Maude','Cleora','Tracy','Casimira','Lowell','Particia','Bennie','Angelena','Elden','Marcel','Elene','Young','Rheba','Paulene','Latia','Shantay','Lavon','Dane','Darla','Joselyn','Zelda','Kasha','Kaitlin','Pasty','Essie','Delfina','Arla','Amy','Xavier','Jin','Ashlee','Millicent','Jeanetta','Willy','Rolf',];
-  typesOfServices= ['Discard and Donate', 'Quick Start', 'Move IN Clean', 'Quick Start Exec', 'Move OUT Clean'];
-  statuses= ['1 In-Process', 'Declined', 'Complete', 'Cancelled', 'Closed', 'Approved'];
+  randomPeople = ['Simmons - MOSPG2014', 'Marysville - ARLIT2062', 'Coldspring - TXHOU2041', 'Yellow Rock - KYLEX2020', 'Medora - ILSPG2027', 'Lawtell - LALWL2000', 'HWY 584 (FTCA) - LAMON2002', 'HWY 120 (FTCA) - LASRV2006', 'York - ALBRH2003', 'Jorge Auto Sales - TXLAR2007', 'Sawmill - ARLIT2065', 'Saxton - PAPIT2008', 'Rockwood - PAPIT2006', 'Mellen - WIWAU2029', 'Calvin - LAMON2113', 'Funston - LARSV2021'];
+  typesOfServices= ['Radio Implementation Services', 'Labor', 'Mount Installation', 'Power Installation', 'Structural Analysis'];
+  statuses= ['In-Process', 'Declined', 'Complete', 'Cancelled', 'Closed', 'Open'];
 
   constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, @Inject(LOCALE_ID) private locale: string) { }
 
   async loadRandomServices(type){
-    var limit = 50;
+    var limit = 16;
     var init = 0;
     if(type == 'today'){
       var limit = 5;
@@ -39,7 +40,7 @@ export class ServicesPage implements OnInit {
       var limit = 10;
       init = 5;
     }else if (type == 'completed'){
-      init = 15;
+      init = 0;
     }
     var services = [];
     for (var i = init; i < limit; i += 1){
@@ -61,10 +62,10 @@ export class ServicesPage implements OnInit {
       var availableStatuses = this.statuses;
       var status = this.statuses[randomStatus];
       if (type=='today'){
-        var availableStatuses= ['1 In-Process', 'Cancelled', 'Approved'];
+        var availableStatuses= ['Open', 'Cancelled', 'In-Process'];
       }
       if (type == 'future'){
-        var availableStatuses= ['Cancelled', 'Approved', 'Declined',];
+        var availableStatuses= ['Cancelled', 'Open', 'Declined',];
       }
       var status=availableStatuses[i%availableStatuses.length];
       if(type=='completed'){
@@ -72,7 +73,8 @@ export class ServicesPage implements OnInit {
       }
       services.push({
         id: i,
-        title: this.randomPeople[i] + ': ' + this.typesOfServices[randomTOS],
+        tower: this.randomPeople[i],
+        tos: this.typesOfServices[randomTOS],
         desc: '',
         longdate: longdate,
         startTime: start,

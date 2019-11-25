@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>Service Contracts</ion-title>
+    <ion-title>Work Orders</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -20,7 +20,8 @@
     <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of todayServices">
       <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
       <ion-label>
-        <h2>{{service.title}}</h2>
+        <h2>{{service.tower}}</h2>
+        <h2>{{service.tos}}</h2>
         <div class="service-details-div">
           <ion-grid class="service-details-grid">
             <ion-row>
@@ -36,7 +37,7 @@
       </ion-label>
       <ion-badge slot="end" class="status" color="white"
       data-color="{{(service?.status == 'Cancelled' || service?.status == 'Declined') ? 'danger' : 'success'}}"
-      [ngStyle]="{'background-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
+      [ngStyle]="{'background-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == 'In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == 'In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
       >
         <ion-text class="status-text">{{service.status}}</ion-text>
       </ion-badge>
@@ -55,7 +56,8 @@
       <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of futureServices">
         <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
         <ion-label>
-          <h2>{{service.title}}</h2>
+          <h2>{{service.tower}}</h2>
+          <h2>{{service.tos}}</h2>
           <p>{{service.longdate}}</p>
           <div class="service-details-div">
             <ion-grid class="service-details-grid">
@@ -91,7 +93,8 @@
     <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of completedServices">
       <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
       <ion-label>
-        <h2>{{service.title}}</h2>
+        <h2>{{service.tower}}</h2>
+        <h2>{{service.tos}}</h2>
         <p>{{service.longdate}}</p>
         <div class="service-details-div">
           <ion-grid class="service-details-grid">
