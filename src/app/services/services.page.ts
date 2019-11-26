@@ -27,7 +27,7 @@ export class ServicesPage implements OnInit {
 
   randomPeople = ['Simmons - MOSPG2014', 'Marysville - ARLIT2062', 'Coldspring - TXHOU2041', 'Yellow Rock - KYLEX2020', 'Medora - ILSPG2027', 'Lawtell - LALWL2000', 'HWY 584 (FTCA) - LAMON2002', 'HWY 120 (FTCA) - LASRV2006', 'York - ALBRH2003', 'Jorge Auto Sales - TXLAR2007', 'Sawmill - ARLIT2065', 'Saxton - PAPIT2008', 'Rockwood - PAPIT2006', 'Mellen - WIWAU2029', 'Calvin - LAMON2113', 'Funston - LARSV2021'];
   typesOfServices= ['Radio Implementation Services', 'Labor', 'Mount Installation', 'Power Installation', 'Structural Analysis'];
-  statuses= ['In-Process', 'Declined', 'Complete', 'Cancelled', 'Closed', 'Open'];
+  statuses= ['Attention Required', 'Declined', 'Complete', 'Cancelled', 'Closed', 'Open'];
 
   constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, @Inject(LOCALE_ID) private locale: string) { }
 
@@ -62,7 +62,7 @@ export class ServicesPage implements OnInit {
       var availableStatuses = this.statuses;
       var status = this.statuses[randomStatus];
       if (type=='today'){
-        var availableStatuses= ['Open', 'Cancelled', 'In-Process'];
+        var availableStatuses= ['Open', 'Cancelled', 'Attention Required'];
       }
       if (type == 'future'){
         var availableStatuses= ['Cancelled', 'Open', 'Declined',];
