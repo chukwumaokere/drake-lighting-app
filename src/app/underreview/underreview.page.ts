@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./underreview.page.scss'],
 })
 export class UnderreviewPage implements OnInit {
-
+  underreview: object;
   constructor() { }
 
   ngOnInit() {
