@@ -55,7 +55,7 @@ export class LoginPage implements OnInit {
     /* Verify user login */
     }else if (origin == 'auto'){
       console.log('auto login from session');
-      return this.router.navigate(["/tabs/tab2", form]);
+      return this.router.navigate(["/tabs/services", form]);
     }
 
     return false;
