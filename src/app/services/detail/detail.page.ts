@@ -1,6 +1,6 @@
 import { Component, OnInit, LOCALE_ID, Inject, } from '@angular/core';
 import { ActivatedRoute, Router } from  "@angular/router";
-import { NavController } from '@ionic/angular';
+import { NavController, ActionSheetController  } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { Storage } from '@ionic/storage';
 
@@ -40,7 +40,8 @@ export class DetailPage implements OnInit {
     enddate: '',
     endtime: ''
   }
-  constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, @Inject(LOCALE_ID) private locale: string) { }
+    actionSheet:any;
+  constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute,public actionSheetController: ActionSheetController, @Inject(LOCALE_ID) private locale: string) { }
 
   loadDetails(serviceid){
     console.log('loading details for service id:', serviceid)
@@ -178,5 +179,30 @@ export class DetailPage implements OnInit {
       }
     });
   }
+    openActionSheet() {
+        this.actionSheet = this.actionSheetController.create({
+            header: 'What would you like to do?',
+            buttons: [{
+                text: 'Take Photo',
+                role: 'destructive',
+                handler: () => {
+                    console.log('Take Photo clicked');
+                }
+            }, {
+                text: 'Upload from Library',
+                handler: () => {
+                    console.log('upload clicked');
+                }
+            }, {
+                text: 'Cancel',
+                role: 'cancel',
+                handler: () => {
+                    console.log('Cancel clicked');
+                }
+            }]
+        }).then(actionsheet => {
+            actionsheet.present();
+        });
+    }
 
 }
