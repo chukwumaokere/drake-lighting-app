@@ -1,0 +1,306 @@
+{
+    "propertiesimages":[
+        {
+            "recordid": 244787,
+            "rooms": {
+                "bedroom": {
+                    "images": [                        
+                        "assets/img/roomphotos/bedroom/pic1.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        "assets/img/roomphotos/kitchen/pic1.jpg",
+                        "assets/img/roomphotos/kitchen/pic2.jpg"
+                    ]
+                },
+                "livingroom": {
+                    "images": [
+                        "assets/img/roomphotos/livingroom/pic1.png",
+                        "assets/img/roomphotos/livingroom/pic2.jpg",
+                        "assets/img/roomphotos/livingroom/pic3.jpg"
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        "assets/img/roomphotos/masterbedroom/pic1.jpg"
+                    ]
+                }
+            }
+        },
+        {
+            "recordid": 345879,
+            "rooms": {
+                "bedroom": {
+                    "images": [
+                        "assets/img/roomphotos/bedroom/pic3.jpg",
+                        "assets/img/roomphotos/bedroom/pic4.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        "assets/img/roomphotos/kitchen/pic1.jpg",
+                        "assets/img/roomphotos/kitchen/pic2.jpg",
+                        "assets/img/roomphotos/kitchen/pic3.jpg",
+                        "assets/img/roomphotos/kitchen/pic4.jpg"
+                    ]
+                },
+                "livingroom": {
+                    "images": [
+                        "assets/img/roomphotos/livingroom/pic4.jpg",
+                        "assets/img/roomphotos/livingroom/pic2.jpg",
+                        "assets/img/roomphotos/livingroom/pic4.jpg"
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        "assets/img/roomphotos/masterbedroom/pic4.jpg"
+                    ]
+                }
+            }
+        },
+        {
+            "recordid": 144848,
+            "rooms": {
+                "bedroom": {
+                    "images": [
+                        "assets/img/roomphotos/bedroom/pic1.jpg",
+                        "assets/img/roomphotos/bedroom/pic2.jpg",
+                        "assets/img/roomphotos/bedroom/pic3.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        "assets/img/roomphotos/kitchen/pic1.jpg",
+                        "assets/img/roomphotos/kitchen/pic4.jpg"
+                    ]
+                },
+                "livingroom": {
+                    "images": [ 
+                        "assets/img/roomphotos/livingroom/pic3.jpg",
+                        "assets/img/roomphotos/livingroom/pic1.png",
+                        "assets/img/roomphotos/livingroom/pic6.jpg"
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        "assets/img/roomphotos/masterbedroom/pic3.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic1.jpg"
+                    ]
+                }
+            }
+        },
+        {
+            "recordid": 255654,
+            "rooms": {
+                "bedroom": {
+                    "images": [
+                        "assets/img/roomphotos/bedroom/pic1.jpg",
+                        "assets/img/roomphotos/bedroom/pic4.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        "assets/img/roomphotos/kitchen/pic7.jpg",
+                        "assets/img/roomphotos/kitchen/pic5.jpg",
+                        "assets/img/roomphotos/kitchen/pic6.jpg"
+                    ]
+                },
+                "livingroom": {
+                    "images": [
+                        "assets/img/roomphotos/livingroom/pic5.jpg",
+                        "assets/img/roomphotos/livingroom/pic7.jpg",
+                        "assets/img/roomphotos/livingroom/pic2.jpg",
+                        "assets/img/roomphotos/livingroom/pic3.jpg"
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        "assets/img/roomphotos/masterbedroom/pic2.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic1.jpg"
+                    ]
+                }
+            }
+        },
+        {
+            "recordid": 149598,
+            "rooms": {
+                "bedroom": {
+                    "images": [
+                        "assets/img/roomphotos/bedroom/pic2.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        "assets/img/roomphotos/kitchen/pic4.jpg",
+                        "assets/img/roomphotos/kitchen/pic1.jpg",
+                        "assets/img/roomphotos/kitchen/pic6.jpg",
+                        "assets/img/roomphotos/kitchen/pic3.jpg",
+                        "assets/img/roomphotos/kitchen/pic2.jpg",
+                        "assets/img/roomphotos/kitchen/pic7.jpg",
+                        "assets/img/roomphotos/kitchen/pic5.jpg"
+                    ]
+                },
+                "livingroom": {
+                    "images": [
+                        "assets/img/roomphotos/livingroom/pic2.jpg",
+                        "assets/img/roomphotos/livingroom/pic3.jpg"
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        
+                    ]
+                }
+            }
+        },
+        {
+            "recordid": 254879,
+            "rooms": {
+                "bedroom": {
+                    "images": [
+                        "assets/img/roomphotos/bedroom/pic4.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        "assets/img/roomphotos/kitchen/pic4.jpg",
+                        "assets/img/roomphotos/kitchen/pic2.jpg",
+                        "assets/img/roomphotos/kitchen/pic7.jpg",
+                        "assets/img/roomphotos/kitchen/pic5.jpg"
+                    ]
+                },
+                "livingroom": {
+                    "images": [
+                        "assets/img/roomphotos/livingroom/pic1.png",
+                        "assets/img/roomphotos/livingroom/pic3.jpg"
+
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        
+                    ]
+                }
+            }
+        },
+        {
+            "recordid": 154888,
+            "rooms": {
+                "bedroom": {
+                    "images": [
+                        "assets/img/roomphotos/bedroom/pic3.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        "assets/img/roomphotos/kitchen/pic1.jpg",
+                        "assets/img/roomphotos/kitchen/pic6.jpg",
+                        "assets/img/roomphotos/kitchen/pic2.jpg",
+                        "assets/img/roomphotos/kitchen/pic5.jpg"
+                    ]
+                },
+                "livingroom": {
+                    "images": [
+                        "assets/img/roomphotos/livingroom/pic1.png",
+                        "assets/img/roomphotos/livingroom/pic2.jpg"
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        
+                    ]
+                }
+            }
+        },
+        {
+            "recordid": 111254,
+            "rooms": {
+                "bedroom": {
+                    "images": [
+                        "assets/img/roomphotos/bedroom/pic3.jpg",
+                        "assets/img/roomphotos/bedroom/pic1.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        
+                    ]
+                },
+                "livingroom": {
+                    "images": [
+                        
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        
+                    ]
+                }
+            }
+        },
+        {
+            "recordid": 345487,
+            "rooms": {
+                "bedroom": {
+                    "images": [
+                        "assets/img/roomphotos/bedroom/pic4.jpg",
+                        "assets/img/roomphotos/bedroom/pic3.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        "assets/img/roomphotos/kitchen/pic1.jpg",
+                        "assets/img/roomphotos/kitchen/pic3.jpg",
+                        "assets/img/roomphotos/kitchen/pic7.jpg",
+                        "assets/img/roomphotos/kitchen/pic5.jpg"
+                    ]
+                },
+                "livingroom": {
+                    "images": [
+                        
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        
+                    ]
+                }
+            }
+        },
+        {
+            "recordid": 554678,
+            "rooms": {
+                "bedroom": {
+                    "images": [
+                        "assets/img/roomphotos/bedroom/pic2.jpg"
+                    ]
+                },
+                "kitchen": {
+                    "images": [
+                        "assets/img/roomphotos/kitchen/pic4.jpg",
+                        "assets/img/roomphotos/kitchen/pic6.jpg",
+                        "assets/img/roomphotos/kitchen/pic3.jpg",
+                        "assets/img/roomphotos/kitchen/pic2.jpg",
+                        "assets/img/roomphotos/kitchen/pic5.jpg"
+                    ]
+                },
+                "livingroom": {
+                    "images": [
+                        "assets/img/roomphotos/livingroom/pic1.png",
+                        "assets/img/roomphotos/livingroom/pic6.jpg",
+                        "assets/img/roomphotos/livingroom/pic3.jpg"
+                    ]
+                },
+                "masterbedroom": {
+                    "images": [
+                        "assets/img/roomphotos/masterbedroom/pic2.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic4.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic3.jpg",
+                        "assets/img/roomphotos/masterbedroom/pic1.jpg"
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,30 @@
+<!-- <ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header> -->
+
+<ion-content class="loginPage"> 
+  <form #form="ngForm" (ngSubmit)="login(form, 'manual')" class="pardonTop" validate >
+    <ion-grid style="height: 100%">
+      <ion-row class="ion-align-items-center ion-justify-content-center justify-content-center" color="primary" style="height: 100%">
+        <ion-col class="align-self-center" size-md="6" size-lg="5" size-xs="12">
+          <div class="ion-text-center">
+            <h3 class="loginTitle">Login - Drake Lighting</h3>
+          </div>
+          <div class="ion-padding">
+            <ion-item>
+              <ion-input #un class="transparent" name="email" type="email" placeholder="Email/Username" ngModel required autocomplete clear-input inputmode="email" (keyup)="movefocus($event, pw)"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-input #pw class="transparent" name="password" type="password" placeholder="Password" ngModel required clear-input (keyup)="submit($event, ln)"></ion-input>
+            </ion-item>
+          </div>
+          <div class="ion-padding">
+            <ion-button id="submit-button" #ln size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>

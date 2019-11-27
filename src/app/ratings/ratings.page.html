@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>My Ratings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let rating of ratings">
+        <ion-avatar><ion-icon size="large" name="star"></ion-icon></ion-avatar>
+        <ion-label>
+          <h2>{{rating.service}}</h2>
+          <p>{{rating.completedate}}</p>
+          <div class="rating-details-div">
+            <ion-grid class="rating-details-grid">
+              <ion-row>
+                <ion-col><p class="st">On-Site Rating</p></ion-col>
+                <ion-col><p class="et">Communication Rating</p></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col><p>{{rating.osr}}/10</p></ion-col>
+                <ion-col><p>{{rating.cr}}/10</p></ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-label>
+        <!-- <ion-note slot="end" class="status" color="medium"></ion-note> -->
+        <ion-badge slot="end" color="primary">
+          <ion-icon name="star" color="warning"></ion-icon>
+          <ion-icon name="star" color="warning"></ion-icon>
+          <ion-icon name="star" color="warning"></ion-icon>
+          <ion-icon name="star" color="warning"></ion-icon>
+          <ion-icon name="star" color="warning"></ion-icon>
+        </ion-badge>
+      </ion-item>
+    </ion-list>
+</ion-content>

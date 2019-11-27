@@ -1,0 +1,7 @@
+{
+  "name": "conveyor",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

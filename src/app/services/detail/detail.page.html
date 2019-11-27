@@ -1,0 +1,88 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button type="button" defaultHref="/tabs/services" text="Back"></ion-back-button>
+      </ion-buttons>
+    <ion-title>{{servicedetail.subject}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    
+    <ion-item>
+      <ion-label position="stacked">Tower</ion-label>
+      <ion-text>{{servicedetail.tower}}</ion-text>
+    </ion-item>
+
+    <div class="button-grouping ion-padding">
+      <ion-button size="large" expand="block" color="tertiary">
+          <ion-icon name="camera"></ion-icon>
+        <ion-text color="dark">
+          Add Photos
+        </ion-text>
+      </ion-button>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">Work Order Status</ion-label>
+     <!--  <ion-text>{{servicedetail.status}}</ion-text> -->
+      <ion-badge class="status" color="white"
+      data-color="{{(servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined') ? 'danger' : 'success'}}"
+      [ngStyle]="{'background-color':servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined' ? 'var(--ion-color-danger)' : servicedetail?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 
+      'border-color':servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined' ? 'var(--ion-color-danger)' : servicedetail?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
+      >
+        <ion-text class="status-text">{{servicedetail.status}}</ion-text>
+      </ion-badge>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Address Details</ion-label>
+      <ion-text>{{servicedetail.address_details}}</ion-text>
+      <ion-button target="_blank" color="primary" href="https://maps.apple.com/?daddr={{servicedetail.address_details}}" size="default" slot="end" type="button"><ion-icon name="navigate" size="large" ></ion-icon></ion-button>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Tech 1</ion-label>
+      <ion-text>{{servicedetail.tech1}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Tech 2</ion-label>
+      <ion-text>{{servicedetail.tech2}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Tech 3</ion-label>
+      <ion-text>{{servicedetail.tech3}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Tech 4</ion-label>
+      <ion-text>{{servicedetail.tech4}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Emergency Contact</ion-label>
+      <ion-text>{{servicedetail.econtact2}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Emergency Contact 2</ion-label>
+      <ion-text>{{servicedetail.econtact3}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Scheduled Start Time</ion-label>
+      <ion-text>{{servicedetail.startdate}} {{servicedetail.starttime}}</ion-text>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Service Description</ion-label>
+      <ion-text>{{servicedetail.desc}}</ion-text>
+    </ion-item>
+  </ion-list>
+<div class="button-grouping ion-padding">
+  <ion-button size="large" expand="block" color="warning"  [disabled]="servicedetail?.status == 'Open' ? null : 'disabled'" >
+    <ion-text color="dark">
+      {{(servicedetail?.status == 'Open') ? 'Start' : 'Started' }}
+    </ion-text>
+  </ion-button>
+  <ion-button size="large" expand="block" color="success" [disabled]="servicedetail?.status == 'Open' ? 'disabled' : null">
+    <ion-text color="dark">
+      {{(servicedetail?.status !== 'Open') ? 'Completed' : 'Complete' }}       
+    </ion-text>
+  </ion-button>
+</div>
+</ion-content>

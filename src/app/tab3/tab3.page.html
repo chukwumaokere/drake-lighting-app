@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Sites
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-searchbar show-cancel-button="focus" placeholder="Filter Towers" (input)="filter($event)" (ionClear)="resetFilter($event)"></ion-searchbar>
+
+<ion-content>
+  <!-- <ion-refresher slot="fixed" (ionRefresh)="getMore($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles" refreshingText="Loading more properties...">
+    </ion-refresher-content>
+  </ion-refresher> Using infinite scroll instead -->
+  
+
+  <app-map-card></app-map-card> 
+
+  <ion-infinite-scroll threshold="25px" (ionInfinite)="loadMore($event)">
+      <ion-infinite-scroll-content
+        loadingSpinner="crescent"
+        loadingText="Loading more Sites...">
+      </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
+</ion-content>

@@ -1,0 +1,28 @@
+<ion-card *ngFor="let property of properties" >
+  <img (click)="detailView(property)" src="../../assets/img/advance-card-map-madison.png">
+  <ion-fab vertical="top" horizontal="end">
+    <ion-fab-button target="_blank" href="https://maps.apple.com/?address={{property.coords}}">
+      <ion-icon name="pin"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-item (click)="detailView(property)">
+    <ion-icon name="flash" item-start large></ion-icon>
+    <ion-card-header >
+      <ion-card-title >{{property.site_name}}</ion-card-title>
+      <ion-card-subtitle>{{property.coords}}</ion-card-subtitle>
+    </ion-card-header>
+  </ion-item>
+
+  <ion-item>
+    <span item-start>{{property.travel_time_m}} min&nbsp;</span>
+    <span item-start>({{property.miles}} mi)</span>
+    <ion-fab horizontal="end">
+      <ion-button target="_blank"  href="https://maps.apple.com/?daddr={{property.coords}}" ion-button icon-start clear item-end>
+        <ion-icon name="navigate"></ion-icon>
+        Start
+      </ion-button>
+    </ion-fab>
+
+  </ion-item>
+</ion-card>

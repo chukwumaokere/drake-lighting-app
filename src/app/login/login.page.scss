@@ -1,0 +1,43 @@
+:host {
+   /* background-color: red !important;
+    background: url('../../assets/aerial.jpg') no-repeat center center / cover ;
+    */
+    background: #fff url('https://www.drakelighting.com/mt-content/uploads/2019/05/towerinthedark1024x768.jpg') no-repeat center center/cover;
+    background-position: left;
+}
+ion-content.loginPage {
+    /* --background: url('../../assets/aerial.jpg') no-repeat center center / cover !important; */
+    /* --background: url('../../assets/aerial.jpg');
+    --background-repeat: no-repeat;
+    --background-size: cover; */
+    --keyboard-offset: 0;
+    --background: transparent;
+}
+
+.pardonTop{
+    margin-top: 40%;
+}
+/* 
+ion-item{
+    --background: #3880ff !important;
+    --color: #fff;
+}
+ion-button{
+    --background: #062f77;
+} */
+.button-disabled{
+    --opacity: .95 !important;
+    --background: var(--ion-color-medium) !important;
+}
+h3.loginTitle{
+    --color: white;
+    color: white;
+}
+.item-native {
+    background-color: rgba(101, 101, 101, 0.51) !important;
+    color: white !important;
+}
+/* 
+.transparent{
+    background: rgba(101, 101, 101, 0.51) !important;
+} */

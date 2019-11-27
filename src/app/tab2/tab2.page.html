@@ -1,0 +1,177 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Dashboard
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+ <!--  <ion-item lines="none" class="profile-top">
+    <ion-avatar item-start>
+      <img *ngIf="userinfo?.pic !== ''" src="{{userinfo.pic}}">
+      <ion-icon *ngIf="userinfo?.pic == ''" name="contact" size="large" ></ion-icon>
+    </ion-avatar>
+    <p>&nbsp; Hello there, {{userinfo.firstname}}!</p>
+  </ion-item>
+
+  <ion-list class="profile-bottom"> -->
+
+    <!-- <ion-item>
+      <ion-label position="stacked">Name</ion-label>
+      <ion-text>{{userinfo.firstname}} {{userinfo.lastname}}</ion-text>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label position="stacked">Organization</ion-label>
+      <ion-text>{{userinfo.organization}}</ion-text>
+    </ion-item>
+    <br>
+    <ion-item>
+      <ion-label position="stacked">Mobile</ion-label>
+      <ion-text>{{userinfo.phone}}</ion-text>
+    </ion-item> -->
+
+<!--     <br>
+    <ion-item lines="none">
+      <ion-grid class="ion-no-padding">
+        <ion-row class="ion-align-items-center ion-justify-content-center" >
+          <ion-col class="padding-left-none">
+            <ion-label position="stacked">Current Theme <br/> (Tap to change)</ion-label> 
+          </ion-col>
+          <ion-col>
+            <ion-button id="themecolor" *ngIf="userinfo?.theme=='Dark'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+            <ion-button id="themecolor" *ngIf="userinfo?.theme=='Light'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+          </ion-col>          
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+
+    <ion-item class="profile-bottom">
+      <ion-label position="stacked">Notes</ion-label>
+      <ion-textarea auto-grow="true" *ngIf="userinfo?.notes !== ''" value="{{userinfo.notes}}" name="usernotes"></ion-textarea>
+      <ion-textarea auto-grow="true" *ngIf="userinfo?.notes == ''" placeholder="Jot something down" name="usernotes"></ion-textarea>
+    </ion-item>
+
+  </ion-list> -->
+
+  <ion-buttons slot="end">
+    <ion-button (click)="today()">Today</ion-button>
+  </ion-buttons>
+
+  <ion-row>
+    <!-- Change the displayed calendar mode -->
+    <ion-col size="3">
+      <ion-button expand="block" [color]="calendar.mode == 'month' ? 'primary' : 'secondary'" (click)="changeMode('month')">Month</ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button expand="block" [color]="calendar.mode == 'week' ? 'primary' : 'secondary'" (click)="changeMode('week')">Week</ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button expand="block" [color]="calendar.mode == 'day' ? 'primary' : 'secondary'" (click)="changeMode('day')">Day</ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button [color]="calendar.mode == 'today' ? 'primary': 'secondary'" (click)="today()">Today</ion-button>
+    </ion-col>
+ 
+    <!-- Move back one screen of the slides -->
+    <ion-col size="2" class="ion-text-left">
+      <ion-button fill="clear" (click)="back()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+
+    <ion-col size="8" class="ion-text-center" text-center class="date-title">
+      {{viewTitle}}
+    </ion-col>
+ 
+    <!-- Move forward one screen of the slides -->
+    <ion-col size="2" class="ion-text-right">
+      <ion-button fill="clear" (click)="next()">
+        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+ 
+  <calendar 
+  [eventSource]="eventSource" 
+  [calendarMode]="calendar.mode" 
+  [currentDate]="calendar.currentDate"
+  (onEventSelected)="onEventSelected($event)"
+  (onTitleChanged)="onViewTitleChanged($event)"
+  (onTimeSelected)="onTimeSelected($event)" 
+  startHour="6"
+  endHour="20"
+  step="30"
+  startingDayWeek="1">
+  </calendar>
+
+  <ion-item lines="none">
+    <ion-grid class="ion-no-padding">
+      <ion-row class="ion-align-items-center ion-justify-content-center" >
+        <ion-col class="padding-left-none" >
+          <ion-label position="stacked">Current Theme <br/> (Tap to change)</ion-label> 
+        </ion-col>
+        <ion-col>
+          <ion-button id="themecolor" *ngIf="userinfo?.theme=='Dark'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+          <ion-button id="themecolor" *ngIf="userinfo?.theme=='Light'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+        </ion-col>          
+      </ion-row>
+      <ion-row class="ion-align-items-center ion-justify-content-center">
+        <ion-col class="padding-left-none">
+           <!--  <ion-label position="stacked">Current Theme <br/> (Tap to change)</ion-label>  -->
+        </ion-col>
+        <ion-col>
+          <ion-button (click)="logout()" color="danger" routerDirection="root" size="default"><ion-icon name="log-out"></ion-icon> &nbsp; Logout</ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-item>
+
+  
+
+  
+  
+<!--   <br><br><br><br>
+  <ion-text>OPTIONS BELOW ARE FOR HSH DEMO PURPOSES AND WILL NOT APPEAR ON THE FINAL VERSION</ion-text>
+  <br><br>
+  <ion-button color="secondary" (click)="loadEvents()">Load Random Events</ion-button> -->
+  
+
+  <!-- FOR DEV PURPOSES -->
+  <!-- Card for adding a new event -->
+ <!--  <ion-card>
+    <ion-card-header tappable (click)="collapseCard = !collapseCard">
+      <ion-card-title>New Event</ion-card-title>
+    </ion-card-header>
+    <ion-card-content *ngIf="!collapseCard">
+
+      <ion-item>
+        <ion-label>ID: </ion-label>
+        <ion-input type="number" value="51" readonly [(ngModel)]="event.id" ></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-input type="text" placeholder="Title" [(ngModel)]="event.title"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-input type="text" placeholder="Description" [(ngModel)]="event.desc"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Start</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.startTime" [min]="minDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>End</ion-label>
+        <ion-datetime displayFormat="MM/DD/YYYY HH:mm" pickerFormat="MMM D:HH:mm" [(ngModel)]="event.endTime" [min]="minDate"></ion-datetime>
+      </ion-item>
+      <ion-item>
+        <ion-label>All Day?</ion-label>
+        <ion-checkbox [(ngModel)]="event.allDay"></ion-checkbox>
+      </ion-item>
+      <ion-button  expand="block" (click)="addEvent()" [disabled]="event.title == ''">Add Event</ion-button>
+ 
+    </ion-card-content>
+  </ion-card> -->
+</ion-content>

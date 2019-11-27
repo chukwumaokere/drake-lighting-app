@@ -1,0 +1,33 @@
+<ion-header>
+  
+  <ion-toolbar>
+    <ion-buttons slot="secondary">
+      <ion-back-button type="button" defaultHref="/tabs/tab3" text="Rooms"></ion-back-button>
+    </ion-buttons>
+    <ion-buttons slot="primary">
+      <ion-button type="button" text="Edit Photos" (click)="editPhotos()">
+        <ion-text id="editphotos-button" *ngIf="current_mode=='view'">Edit Photos</ion-text>
+        <ion-text id="editphotos-button" *ngIf="current_mode=='edit'">Done Editing</ion-text>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>{{roomdata.room | titlecase}}</ion-title>
+  </ion-toolbar>
+
+</ion-header>
+
+<ion-content class="ion-padding">
+  <ion-button (click)="launchCamera()" text="Add Photos"><ion-icon name="add"></ion-icon><ion-text>Add Photos</ion-text></ion-button>
+  <div class="gallery" *ngIf="propertypics?.length > 0">    
+    <ion-card class="galleryimage" *ngFor="let image of propertypics" [id]="image">
+      <ion-img [src]="image" width="150px"></ion-img>
+      <ion-fab vertical="top" horizontal="end" size="small" *ngIf="current_mode=='edit'">
+        <ion-fab-button type="button" size="small" color="danger" (click)="deletePhoto(image)" style="height: 30px; width: 30px;">
+          <ion-icon name="close-circle" role="img" aria-label="close"></ion-icon>
+        </ion-fab-button>
+      </ion-fab>
+    </ion-card>
+  </div>
+  <div class="not-available" *ngIf="propertypics?.length == 0">
+      <ion-title class="na">There are currently no images for this room</ion-title>
+  </div>
+</ion-content>

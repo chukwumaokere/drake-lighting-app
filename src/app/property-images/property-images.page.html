@@ -1,0 +1,52 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button type="button" defaultHref="/tabs/tab3" text="Properties"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Rooms</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="card-background-page">
+
+  <div slot="fixed" class="co-drop-shadow static ion-padding-horizontal ion-padding-top ion-padding-bottom pseudo-title">
+    <ion-text class="street-title" >{{propertyInfo.street}}</ion-text>
+  </div>
+
+  <ion-refresher class="ion-margin-top-extra ion-margin-bottom-extra" slot="fixed" (ionRefresh)="refresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="crescent" refreshingText="Updating images">
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <div class="rooms ion-margin-top ion-padding-vertical">
+    <ion-card (click)="goToGallery(propertyInfo.recordid, 'bedroom', propertyInfo)">
+      <div class="glossy"></div>
+      <img src="../../assets/img/stockphotos/bedroom.jpeg"/>
+      <div class="card-title">Bedroom</div>
+      <div class="card-subtitle">{{imagecounts.bedroom.images.length}} Photos</div>
+    </ion-card>
+
+    <ion-card (click)="goToGallery(propertyInfo.recordid, 'living room', propertyInfo)">
+      <div class="glossy"></div>
+      <img src="../../assets/img/stockphotos/livingroom.jpg"/>
+      <div class="card-title">Living Room</div>
+      <div class="card-subtitle">{{imagecounts.livingroom.images.length}} Photos</div>
+    </ion-card>
+
+    <ion-card (click)="goToGallery(propertyInfo.recordid, 'kitchen', propertyInfo)">
+      <div class="glossy"></div>
+      <img src="../../assets/img/stockphotos/kitchen.jpg"/>
+      <div class="card-title">Kitchen</div>
+      <div class="card-subtitle">{{imagecounts.kitchen.images.length}} Photos</div>
+    </ion-card>
+
+    <ion-card (click)="goToGallery(propertyInfo.recordid, 'master bedroom', propertyInfo)">
+      <div class="glossy"></div>
+      <img src="../../assets/img/stockphotos/masterbedroom.jpg"/>
+      <div class="card-title">Master Bedroom</div>
+      <div class="card-subtitle">{{imagecounts.masterbedroom.images.length}} Photo</div>
+    </ion-card>
+  </div>
+
+</ion-content>
+
