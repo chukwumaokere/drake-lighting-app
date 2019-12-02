@@ -231,7 +231,7 @@ async presentToastPrimary(message: string) {
   toast.present();
 }
 
-openActionSheet() {
+openActionSheet(serviceid) {
    console.log('launching actionsheet');
    
   this.actionSheet.show(this.actionOptions).then((buttonIndex: number) => {
@@ -243,7 +243,7 @@ openActionSheet() {
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
-           this.openModal();
+           this.openModal(serviceid);
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
@@ -261,7 +261,7 @@ openActionSheet() {
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
-          this.openModal();
+          this.openModal(serviceid);
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
@@ -309,12 +309,13 @@ openActionSheet() {
     });
   }
 
-    async openModal() {
+    async openModal(serviceid) {
         const modal = await this.modalController.create({
             component: ImageModalPage,
             componentProps: {
                 "paramID": 123,
-                "paramTitle": "Test Title"
+                "paramTitle": "Test Title",
+                "serviceid" : serviceid
             }
         });
 
