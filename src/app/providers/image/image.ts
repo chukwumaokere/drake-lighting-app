@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+//import { Observable } from 'rxjs';
 
 @Injectable()
 export class ImageProvider {
@@ -16,12 +16,12 @@ export class ImageProvider {
   getImage(){
     return this.base64img;
   }
-  uploadPic(){
+  /*uploadPic(){
     let data=this.http.post(this.url,{'img':this.base64img}).map(res=>res);
     data.subscribe(result=>{
       alert(result);
     },error=>{
       alert(error);
     })
-  }
+  }*/
 }
