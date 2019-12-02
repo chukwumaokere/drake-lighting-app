@@ -5,32 +5,20 @@
 </ion-header>
 
 <ion-content fullscreen>
-    <ion-grid>
-        <ion-row>
-            <ion-col text-center>
-                ID : {{modelId}}
-            </ion-col>
-        </ion-row>
-        <ion-row>
-            <ion-col text-center>
-                <ion-button (click)="closeModal()">Close Modal</ion-button>
-            </ion-col>
-        </ion-row>
-    </ion-grid>
     <ion-card>
-         <img src="./madison.jpg" />
+         <img src="{{base64Image}}" />
          <ion-card-header>
              <ion-card-subtitle>Title</ion-card-subtitle>
          </ion-card-header>
          <ion-card-content>
-             <ion-button size="small" color="primary">Antenna</ion-button>
-             <ion-button size="small" color="primary">Body</ion-button>
-             <ion-button size="small" color="primary">Before</ion-button>
-             <ion-button size="small" color="primary">After</ion-button>
+             <ion-button size="small" color="secondary">Antenna</ion-button>
+             <ion-button size="small" color="secondary">Body</ion-button>
+             <ion-button size="small" color="secondary">Before</ion-button>
+             <ion-button size="small" color="secondary">After</ion-button>
          </ion-card-content>
     </ion-card>
     <div class="button-grouping ion-padding">
-        <ion-button size="large" expand="block" color="primary">
+        <ion-button size="large" expand="block" color="secondary">
             <ion-text>Save</ion-text>
         </ion-button>
     </div>

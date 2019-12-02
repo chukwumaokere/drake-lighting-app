@@ -244,7 +244,7 @@ openActionSheet(serviceid) {
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
-           this.openModal(serviceid);
+           this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
@@ -262,7 +262,7 @@ openActionSheet(serviceid) {
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
-          this.openModal(serviceid);
+          this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
@@ -310,11 +310,13 @@ openActionSheet(serviceid) {
     });
   }
 
-    async openModal(serviceid) {
+    async openModal(serviceid,base64Image) {
+    console.log('aaaaaaaa');
+    console.log(serviceid);
         const modal = await this.modalCtrl.create({
             component: ImageModalPage,
             componentProps: {
-                "paramID": 123,
+                "base64Image": base64Image,
                 "paramTitle": "Edit Photo",
                 "serviceid" : serviceid
             }

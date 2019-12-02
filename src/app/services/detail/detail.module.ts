@@ -14,6 +14,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 // import { AppRoutingModule } from './app-routing.module';
 import { File } from '@ionic-native/file/ngx';
 import { Camera } from '@ionic-native/Camera/ngx';
+import { ImageModalPage } from '../image-modal/image-modal.page';
 
 const routes: Routes = [
   {
@@ -29,7 +30,8 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [DetailPage],
+  declarations: [DetailPage, ImageModalPage],
+    entryComponents: [ImageModalPage],
     providers: [
         StatusBar,
         SplashScreen,
