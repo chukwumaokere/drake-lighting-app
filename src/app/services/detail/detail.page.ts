@@ -116,6 +116,7 @@ export class DetailPage implements OnInit {
       duetime: '09:00AM',
       enddate: '',
       endtime:'',
+      serviceid: serviceid
     };
     this.servicedetail = result;
   }
@@ -231,7 +232,7 @@ async presentToastPrimary(message: string) {
   toast.present();
 }
 
-openActionSheet() {
+openActionSheet(serviceid) {
    console.log('launching actionsheet');
    
   this.actionSheet.show(this.actionOptions).then((buttonIndex: number) => {
@@ -244,7 +245,8 @@ openActionSheet() {
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
           this.imgpov.setImage(base64Image);
-          this.nav.push('IdentifyphotoPage');
+          this.router.navigateByUrl(`/services/identifyphoto/${serviceid}`, {state: {}});
+         // this.nav.push('IdentifyphotoPage');
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
@@ -263,7 +265,8 @@ openActionSheet() {
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
           this.imgpov.setImage(base64Image);
-          this.nav.push('IdentifyphotoPage');
+          this.router.navigateByUrl(`/services/identifyphoto/${serviceid}`, {state: {}});
+          //this.nav.push('IdentifyphotoPage');
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
