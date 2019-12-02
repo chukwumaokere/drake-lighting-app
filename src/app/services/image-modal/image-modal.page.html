@@ -1,25 +1,39 @@
 <ion-header>
     <ion-toolbar text-center>
         <ion-title>{{modalTitle}}</ion-title>
+        <ion-icon name="close" (click)="closeModal()"></ion-icon>
     </ion-toolbar>
 </ion-header>
 
 <ion-content fullscreen>
+    <form>
     <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>Image Preview</ion-card-subtitle>
+        </ion-card-header>
          <img src="{{base64Image}}" />
          <ion-card-header>
-             <ion-card-subtitle>Title</ion-card-subtitle>
+             <ion-card-subtitle>Image Title</ion-card-subtitle>
          </ion-card-header>
          <ion-card-content>
-             <ion-button size="small" color="tertiary">Antenna</ion-button>
-             <ion-button size="small" color="tertiary">Body</ion-button>
-             <ion-button size="small" color="tertiary">Before</ion-button>
-             <ion-button size="small" color="tertiary">After</ion-button>
+             <ion-button size="default" color="tertiary">Antenna</ion-button>
+             <ion-button size="default" color="tertiary">Body</ion-button>
+             <ion-button size="default" color="tertiary">Before</ion-button>
+             <ion-button size="default" color="tertiary">After</ion-button>
          </ion-card-content>
+        <ion-card-header>
+            <ion-card-subtitle>
+                <ion-label position="stacked">Override Title</ion-label>
+            </ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-input type="text" oninput="" size="100"></ion-input>
+        </ion-card-content>
     </ion-card>
     <div class="button-grouping ion-padding">
         <ion-button size="large" expand="block" color="primary" (click)="uploadImage()">
             <ion-text>Save</ion-text>
         </ion-button>
     </div>
+    </form>
 </ion-content>
