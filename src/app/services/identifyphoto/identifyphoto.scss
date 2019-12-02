@@ -1,0 +1,46 @@
+page-identifyphoto {
+  ion-icon {
+    color: #fff !important;
+    font-size: 30px;
+  }
+  .menu-btn,
+  .button-md.activated {
+    background-color: transparent;
+  }
+  .content-color {
+    background-image: url("../../assets/imgs/background_image_1.png");
+    background-repeat: none;
+    background-size: cover;
+    font-size: 17px !important;
+    text-align: center;
+
+    .menu-buttons {
+      background-color: rgba(0, 0, 0, 0.2);
+      color: #dfdfdf;
+      padding-bottom: 5px;
+      font-size: 17px !important;
+    }
+    ion-label {
+      font-size: 12px !important;
+    }
+    .submit-btn {
+      background-color: #fff;
+      border: none;
+      border-radius: 2%;
+      font-size: 20px;
+      color: #000;
+      text-align: center;
+      margin-top: 10%;
+      height: 4.2rem;
+      font-weight: 100;
+      box-shadow: none !important;
+      border-radius: 5px;
+    }
+    .circle{
+      height: 340px;
+      width: 340px;
+      border-radius:50%;
+      background-color: #FFF;
+    }
+  }
+}
