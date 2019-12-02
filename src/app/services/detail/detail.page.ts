@@ -1,10 +1,12 @@
 import { Component, OnInit, LOCALE_ID, Inject, } from '@angular/core';
 import { ActivatedRoute, Router } from  "@angular/router";
-import { NavController, ActionSheetController  } from '@ionic/angular';
-import { formatDate } from '@angular/common';
+import { NavController, ToastController, AlertController  } from '@ionic/angular';
+import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
+import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
+//import { formatDate } from '@angular/common';
 import { Storage } from '@ionic/storage';
-import { Camera, CameraOptions } from '@ionic-native/Camera/ngx';
-import { File } from '@ionic-native/file/ngx';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+//import { File } from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-detail',
@@ -12,6 +14,31 @@ import { File } from '@ionic-native/file/ngx';
   styleUrls: ['./detail.page.scss'],
 })
 export class DetailPage implements OnInit {
+
+  buttonLabels = ['Take Photo', 'Upload from Library'];
+
+  actionOptions: ActionSheetOptions = {
+    title: 'Which would you like to do?',
+    buttonLabels: this.buttonLabels,
+    addCancelButtonWithLabel: 'Cancel',
+    androidTheme: 1 //this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
+  }
+  options: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    saveToPhotoAlbum: false //true causes crash probably due to permissions to access library.
+  }
+
+  libraryOptions: CameraOptions = {
+    quality: 100,
+    destinationType: this.camera.DestinationType.FILE_URI,
+    encodingType: this.camera.EncodingType.JPEG,
+    mediaType: this.camera.MediaType.PICTURE,
+    sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
+  }
+
   userinfo: any;
   serviceid: any;
   servicedetails: object;
@@ -42,15 +69,21 @@ export class DetailPage implements OnInit {
     enddate: '',
     endtime: ''
   }
-    actionSheet:any;
+    //actionSheet:any;
+
   constructor(
       public navCtrl: NavController,
       private  router:  Router,
       public storage: Storage,
       private activatedRoute: ActivatedRoute,
-      public actionSheetController: ActionSheetController,
+      //public actionSheetController: ActionSheetController,
       private camera: Camera,
-      private file: File,
+      //private file: File,
+      public toastController: ToastController,
+      public alertController: AlertController,
+      private actionSheet: ActionSheet, 
+      private photoLibrary: PhotoLibrary,
+
       @Inject(LOCALE_ID) private locale: string) { }
 
   loadDetails(serviceid){
@@ -159,6 +192,88 @@ export class DetailPage implements OnInit {
     console.log('turning off previous theme', theme_switcher[theme]);
    }
 
+   pickImage(sourceType) {
+    const options: CameraOptions = {
+        quality: 100,
+        sourceType: sourceType,
+        destinationType: this.camera.DestinationType.FILE_URI,
+        encodingType: this.camera.EncodingType.JPEG,
+        mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64 (DATA_URL):
+        // let base64Image = 'data:image/jpeg;base64,' + imageData;
+    }, (err) => {
+        // Handle error
+    });
+}
+
+async presentToast(message: string) {
+  var toast = await this.toastController.create({
+    message: message,
+    duration: 2000,
+    position: "bottom",
+    color: "danger"
+  });
+  toast.present();
+}
+
+async presentToastPrimary(message: string) {
+  var toast = await this.toastController.create({
+    message: message,
+    duration: 2000,
+    position: "bottom",
+    color: "primary"
+  });
+  toast.present();
+}
+
+openActionSheet() {
+   console.log('launching actionsheet');
+   
+  this.actionSheet.show(this.actionOptions).then((buttonIndex: number) => {
+    console.log('Option pressed', buttonIndex);
+    if(buttonIndex == 1){
+      console.log('launching camera');
+      /* this.camera.getPicture(this.options).then((imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64 (DATA_URL):
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        console.log(base64Image);
+        // TODO: need code to upload to server here.
+        // On success: show toast
+        this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
+      }, (err) => {
+        // Handle error
+        console.error(err);
+        // On Fail: show toast
+        this.presentToast(`Upload failed! Please try again \n` + err);
+      });  */
+    }
+     else if(buttonIndex == 2){
+       console.log('launching gallery');
+      this.camera.getPicture(this.libraryOptions).then((imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64 (DATA_URL):
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        console.log(base64Image);
+        // TODO: need code to upload to server here.
+        // On success: show toast
+        this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
+      }, (err) => {
+        // Handle error
+        console.error(err);
+        // On Fail: show toast
+        this.presentToast(`Upload failed! Please try again \n` + err);
+      });  
+    } 
+  }).catch((err) => {
+    console.log(err);
+    this.presentToast(`Operation failed! \n` + err);
+  }); 
+}
+
   ngOnInit() {
     this.activatedRoute.params.subscribe((userData)=>{
       if(userData.length !== 0){
@@ -189,49 +304,6 @@ export class DetailPage implements OnInit {
       }
     });
   }
-    pickImage(sourceType) {
-        const options: CameraOptions = {
-            quality: 100,
-            sourceType: sourceType,
-            destinationType: this.camera.DestinationType.FILE_URI,
-            encodingType: this.camera.EncodingType.JPEG,
-            mediaType: this.camera.MediaType.PICTURE
-        }
-        this.camera.getPicture(options).then((imageData) => {
-            // imageData is either a base64 encoded string or a file URI
-            // If it's base64 (DATA_URL):
-            // let base64Image = 'data:image/jpeg;base64,' + imageData;
-        }, (err) => {
-            // Handle error
-        });
-    }
-
-    openActionSheet() {
-        this.actionSheet = this.actionSheetController.create({
-            header: 'What would you like to do?',
-            buttons: [{
-                text: 'Take Photo',
-                role: 'destructive',
-                handler: () => {
-                    console.log('Take Photo clicked');
-                    this.pickImage(this.camera.PictureSourceType.CAMERA);
-                }
-            }, {
-                text: 'Upload from Library',
-                handler: () => {
-                    console.log('upload clicked');
-                    this.pickImage(this.camera.PictureSourceType.PHOTOLIBRARY);
-                }
-            }, {
-                text: 'Cancel',
-                role: 'cancel',
-                handler: () => {
-                    console.log('Cancel clicked');
-                }
-            }]
-        }).then(actionsheet => {
-            actionsheet.present();
-        });
-    }
+    
 
 }
