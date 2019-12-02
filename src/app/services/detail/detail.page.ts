@@ -26,7 +26,7 @@ export class DetailPage implements OnInit {
   }
   options: CameraOptions = {
     quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
+    destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     saveToPhotoAlbum: false //true causes crash probably due to permissions to access library.
@@ -34,7 +34,7 @@ export class DetailPage implements OnInit {
 
   libraryOptions: CameraOptions = {
     quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
+    destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
@@ -242,9 +242,9 @@ openActionSheet(serviceid) {
        this.camera.getPicture(this.options).then((imageData) => {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
-        let base64Image =  imageData;
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
-           this.openModal(serviceid,imageData);
+           this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
@@ -260,9 +260,9 @@ openActionSheet(serviceid) {
       this.camera.getPicture(this.libraryOptions).then((imageData) => {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
-        let base64Image =  imageData;
+        let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
-          this.openModal(serviceid,imageData);
+          this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
