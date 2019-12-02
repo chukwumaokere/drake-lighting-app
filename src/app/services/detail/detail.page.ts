@@ -1,11 +1,12 @@
 import { Component, OnInit, LOCALE_ID, Inject, } from '@angular/core';
 import { ActivatedRoute, Router } from  "@angular/router";
-import { NavController, ToastController, AlertController  } from '@ionic/angular';
+import { NavController, ToastController, AlertController  } from 'ionic-angular';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 //import { formatDate } from '@angular/common';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
+import { ImageProvider } from '../../providers/image/image';
 //import { File } from '@ionic-native/file/ngx';
 
 @Component({
@@ -72,7 +73,8 @@ export class DetailPage implements OnInit {
     //actionSheet:any;
 
   constructor(
-      public navCtrl: NavController,
+      public imgpov:ImageProvider,
+      public nav: NavController,
       private  router:  Router,
       public storage: Storage,
       private activatedRoute: ActivatedRoute,
@@ -236,11 +238,13 @@ openActionSheet() {
     console.log('Option pressed', buttonIndex);
     if(buttonIndex == 1){
       console.log('launching camera');
-      /* this.camera.getPicture(this.options).then((imageData) => {
+      this.camera.getPicture(this.options).then((imageData) => {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
+          this.imgpov.setImage(base64Image);
+          this.nav.push('IdentifyphotoPage');
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
@@ -249,7 +253,7 @@ openActionSheet() {
         console.error(err);
         // On Fail: show toast
         this.presentToast(`Upload failed! Please try again \n` + err);
-      });  */
+      });
     }
      else if(buttonIndex == 2){
        console.log('launching gallery');
@@ -258,6 +262,8 @@ openActionSheet() {
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
+          this.imgpov.setImage(base64Image);
+          this.nav.push('IdentifyphotoPage');
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
