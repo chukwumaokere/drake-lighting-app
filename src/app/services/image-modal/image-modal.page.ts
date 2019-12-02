@@ -26,4 +26,8 @@ private navParams: NavParams
     const onClosedData: string = "Wrapped Up!";
     await this.modalController.dismiss(onClosedData);
   }
+
+  async  uploadImage(){
+    this.closeModal();
+  }
 }
