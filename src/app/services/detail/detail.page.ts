@@ -314,7 +314,7 @@ openActionSheet(serviceid) {
             component: ImageModalPage,
             componentProps: {
                 "paramID": 123,
-                "paramTitle": "Test Title",
+                "paramTitle": "Edit Photo",
                 "serviceid" : serviceid
             }
         });
