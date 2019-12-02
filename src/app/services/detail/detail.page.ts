@@ -242,7 +242,7 @@ openActionSheet(serviceid) {
        this.camera.getPicture(this.options).then((imageData) => {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
-        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        let base64Image =  imageData;
         console.log(base64Image);
            this.openModal(serviceid,imageData);
         // TODO: need code to upload to server here.
@@ -260,7 +260,7 @@ openActionSheet(serviceid) {
       this.camera.getPicture(this.libraryOptions).then((imageData) => {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
-        let base64Image = 'data:image/jpeg;base64,' + imageData;
+        let base64Image =  imageData;
         console.log(base64Image);
           this.openModal(serviceid,imageData);
         // TODO: need code to upload to server here.
