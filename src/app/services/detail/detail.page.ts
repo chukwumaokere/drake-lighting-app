@@ -40,6 +40,7 @@ export class DetailPage implements OnInit {
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
   }
 
+  dataReturned : any;
   userinfo: any;
   serviceid: any;
   servicedetails: object;
@@ -71,7 +72,6 @@ export class DetailPage implements OnInit {
     endtime: ''
   }
     //actionSheet:any;
-
   constructor(
       public navCtrl: NavController,
       private  router:  Router,
@@ -310,7 +310,7 @@ openActionSheet(serviceid) {
   }
 
     async openModal(serviceid) {
-        const modal = await this.modalController.create({
+        const modal = await this.modalCtrl.create({
             component: ImageModalPage,
             componentProps: {
                 "paramID": 123,
