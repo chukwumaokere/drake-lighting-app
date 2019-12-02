@@ -1,13 +1,13 @@
 import { Component, OnInit, LOCALE_ID, Inject, } from '@angular/core';
 import { ActivatedRoute, Router } from  "@angular/router";
-import { NavController, ToastController, AlertController  } from 'ionic-angular';
+import { NavController, ToastController, AlertController, ModalController  } from '@ionic/angular';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 //import { formatDate } from '@angular/common';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
-import { ImageProvider } from '../../providers/image/image';
 //import { File } from '@ionic-native/file/ngx';
+import { ImageModalPage } from '../image-modal/image-modal.page'
 
 @Component({
   selector: 'app-detail',
@@ -73,8 +73,7 @@ export class DetailPage implements OnInit {
     //actionSheet:any;
 
   constructor(
-      public imgpov:ImageProvider,
-      public nav: NavController,
+      public navCtrl: NavController,
       private  router:  Router,
       public storage: Storage,
       private activatedRoute: ActivatedRoute,
@@ -85,6 +84,7 @@ export class DetailPage implements OnInit {
       public alertController: AlertController,
       private actionSheet: ActionSheet, 
       private photoLibrary: PhotoLibrary,
+      public modalCtrl : ModalController,
 
       @Inject(LOCALE_ID) private locale: string) { }
 
@@ -116,7 +116,6 @@ export class DetailPage implements OnInit {
       duetime: '09:00AM',
       enddate: '',
       endtime:'',
-      serviceid: serviceid
     };
     this.servicedetail = result;
   }
@@ -232,21 +231,19 @@ async presentToastPrimary(message: string) {
   toast.present();
 }
 
-openActionSheet(serviceid) {
+openActionSheet() {
    console.log('launching actionsheet');
    
   this.actionSheet.show(this.actionOptions).then((buttonIndex: number) => {
     console.log('Option pressed', buttonIndex);
     if(buttonIndex == 1){
       console.log('launching camera');
-      this.camera.getPicture(this.options).then((imageData) => {
+       this.camera.getPicture(this.options).then((imageData) => {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
-          this.imgpov.setImage(base64Image);
-          this.router.navigateByUrl(`/services/identifyphoto/${serviceid}`, {state: {}});
-         // this.nav.push('IdentifyphotoPage');
+           this.openModal();
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
@@ -264,9 +261,7 @@ openActionSheet(serviceid) {
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
         console.log(base64Image);
-          this.imgpov.setImage(base64Image);
-          this.router.navigateByUrl(`/services/identifyphoto/${serviceid}`, {state: {}});
-          //this.nav.push('IdentifyphotoPage');
+          this.openModal();
         // TODO: need code to upload to server here.
         // On success: show toast
         this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
@@ -313,6 +308,25 @@ openActionSheet(serviceid) {
       }
     });
   }
+
+    async openModal() {
+        const modal = await this.modalController.create({
+            component: ImageModalPage,
+            componentProps: {
+                "paramID": 123,
+                "paramTitle": "Test Title"
+            }
+        });
+
+        modal.onDidDismiss().then((dataReturned) => {
+            if (dataReturned !== null) {
+                this.dataReturned = dataReturned.data;
+                //alert('Modal Sent Data :'+ dataReturned);
+            }
+        });
+
+        return await modal.present();
+    }
     
 
 }
