@@ -116,6 +116,7 @@ export class DetailPage implements OnInit {
       duetime: '09:00AM',
       enddate: '',
       endtime:'',
+      serviceid:serviceid,
     };
     this.servicedetail = result;
   }
