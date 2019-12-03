@@ -243,7 +243,7 @@ openActionSheet(serviceid) {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
-        console.log(base64Image);
+        //console.log(base64Image);
            this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
@@ -261,7 +261,7 @@ openActionSheet(serviceid) {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
-        console.log(base64Image);
+        //console.log(base64Image);
           this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
