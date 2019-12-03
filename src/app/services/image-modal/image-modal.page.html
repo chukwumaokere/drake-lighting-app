@@ -5,9 +5,9 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content fullscreen>
+<ion-content>
     <form #form="ngForm"  (ngSubmit)="uploadImage(form)">
-        <ion-input type="text"  ng-show="false" [(ngModel)]="photo.serviceid" name="serviceid" value="{{serviceid}}"></ion-input>
+        <ion-input type="text" hidden ng-show="false" [(ngModel)]="photo.serviceid" name="serviceid" value="{{serviceid}}"></ion-input>
     <ion-card>
         <ion-card-header>
             <ion-card-subtitle>Image Preview</ion-card-subtitle>
@@ -25,11 +25,11 @@
          </ion-card-content>
         <ion-card-header>
             <ion-card-subtitle>
-                <ion-label position="stacked">Override Title</ion-label>
+                <ion-label position="stacked">Title Preview</ion-label>
             </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-            <ion-input type="text" oninput="" size="100" required="" [(ngModel)]="photo.title" name="title"></ion-input>
+            <ion-input type="text" oninput="" size="100" required="" [(ngModel)]="photo.title" name="title" class="title-input" placeholder="Enter a name..."></ion-input>
         </ion-card-content>
     </ion-card>
     <div class="button-grouping ion-padding">

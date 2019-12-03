@@ -71,14 +71,15 @@ public toastController: ToastController,
           })
       };
 
-      this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php", form.value, requestOptions)
+      this.httpClient.post("https://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php", form.value, requestOptions)
           .subscribe(data => {
               console.log(data['_body']);
               this.presentToastPrimary('Photo uploaded and added to Service \n');
           }, error => {
               console.log(error);
               console.log(error.message);
-              this.presentToast('Upload failed! Please try again' + error.message);
+              console.error(error.message);
+              this.presentToast("Upload failed! Please try again \n" + error.message);
           });
 
 
@@ -92,7 +93,7 @@ public toastController: ToastController,
     async presentToast(message: string) {
         var toast = await this.toastController.create({
             message: message,
-            duration: 2000,
+            duration: 5500,
             position: "bottom",
             color: "danger"
         });
