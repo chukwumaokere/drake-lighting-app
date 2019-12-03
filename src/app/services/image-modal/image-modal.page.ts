@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file';
+/*import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file';*/
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
@@ -24,7 +24,7 @@ constructor(
 private modalController: ModalController,
 private navParams: NavParams,
 public httpClient: HttpClient,
-private transfer: FileTransfer,
+/*private transfer: FileTransfer,*/
 private formBuilder: FormBuilder,
 public toastController: ToastController,
 ) {
