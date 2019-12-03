@@ -61,21 +61,24 @@ public toastController: ToastController,
           alert("error");
           alert("error" + JSON.stringify(error));
       });*/
+
       const requestOptions = {
           headers: new HttpHeaders({
+              'Access-Control-Allow-Methods': "GET, POST",
+              'Access-Control-Allow-Origin': '*',
+              'Access-Control-Allow-Headers':'Content-Type',
               'Content-Type':  'application/json',
-              'Accept': 'application/json',
-              'Access-Control-Allow-Origin': '*'
           })
       };
 
-      this.httpClient.post("https://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php", form.value, requestOptions)
+      this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php", form.value, requestOptions)
           .subscribe(data => {
               console.log(data['_body']);
               this.presentToastPrimary('Photo uploaded and added to Service \n');
           }, error => {
               console.log(error);
-              this.presentToast('Upload failed! Please try again');
+              console.log(error.message);
+              this.presentToast('Upload failed! Please try again' + error.message);
           });
 
 
