@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams, ToastController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file';
@@ -25,7 +25,8 @@ private modalController: ModalController,
 private navParams: NavParams,
 public httpClient: HttpClient,
 private transfer: FileTransfer,
-private formBuilder: FormBuilder
+private formBuilder: FormBuilder,
+public toastController: ToastController,
 ) {
     /*this.photo = this.formBuilder.group({
         title: ['', Validators.required],
@@ -71,8 +72,10 @@ private formBuilder: FormBuilder
       this.httpClient.post("https://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php", form.value, requestOptions)
           .subscribe(data => {
               console.log(data['_body']);
+              this.presentToastPrimary('Photo uploaded and added to Service \n');
           }, error => {
               console.log(error);
+              this.presentToast('Upload failed! Please try again');
           });
 
 
@@ -82,4 +85,24 @@ private formBuilder: FormBuilder
   async  fillTitle(title){
       this.photo.title = title;
   }
+
+    async presentToast(message: string) {
+        var toast = await this.toastController.create({
+            message: message,
+            duration: 2000,
+            position: "bottom",
+            color: "danger"
+        });
+        toast.present();
+    }
+
+    async presentToastPrimary(message: string) {
+        var toast = await this.toastController.create({
+            message: message,
+            duration: 2000,
+            position: "bottom",
+            color: "primary"
+        });
+        toast.present();
+    }
 }
