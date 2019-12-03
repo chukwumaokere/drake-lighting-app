@@ -6,20 +6,22 @@
 </ion-header>
 
 <ion-content fullscreen>
-    <form>
+    <form #form="ngForm"  (ngSubmit)="uploadImage(form)">
+        <ion-input type="text"  ng-show="false" [(ngModel)]="photo.serviceid" name="serviceid" value="{{serviceid}}"></ion-input>
     <ion-card>
         <ion-card-header>
             <ion-card-subtitle>Image Preview</ion-card-subtitle>
         </ion-card-header>
          <img src="{{base64Image}}" />
+        <ion-input type="text"  ng-show="false" [(ngModel)]="photo.base64Image" name="base64Image" value="{{base64Image}}"></ion-input>
          <ion-card-header>
              <ion-card-subtitle>Image Title</ion-card-subtitle>
          </ion-card-header>
          <ion-card-content>
-             <ion-button size="default" color="tertiary">Antenna</ion-button>
-             <ion-button size="default" color="tertiary">Body</ion-button>
-             <ion-button size="default" color="tertiary">Before</ion-button>
-             <ion-button size="default" color="tertiary">After</ion-button>
+             <ion-button size="default" color="tertiary" (click)="fillTitle('Antenna')">Antenna</ion-button>
+             <ion-button size="default" color="tertiary" (click)="fillTitle('Body')">Body</ion-button>
+             <ion-button size="default" color="tertiary" (click)="fillTitle('Before')">Before</ion-button>
+             <ion-button size="default" color="tertiary" (click)="fillTitle('After')">After</ion-button>
          </ion-card-content>
         <ion-card-header>
             <ion-card-subtitle>
@@ -27,11 +29,11 @@
             </ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-            <ion-input type="text" oninput="" size="100"></ion-input>
+            <ion-input type="text" oninput="" size="100" required="" [(ngModel)]="photo.title" name="title"></ion-input>
         </ion-card-content>
     </ion-card>
     <div class="button-grouping ion-padding">
-        <ion-button size="large" expand="block" color="primary" (click)="uploadImage()">
+        <ion-button size="large" expand="block" color="primary" type="submit">
             <ion-text>Save</ion-text>
         </ion-button>
     </div>
