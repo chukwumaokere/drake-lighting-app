@@ -14,23 +14,43 @@
         </ion-card-header>
          <img src="{{base64Image}}" />
         <ion-input type="text"  ng-show="false" [(ngModel)]="photo.base64Image" name="base64Image" value="{{base64Image}}"></ion-input>
-         <ion-card-header>
-             <ion-card-subtitle>Image Title</ion-card-subtitle>
-         </ion-card-header>
-         <ion-card-content>
-             <ion-button size="default" color="tertiary" (click)="fillTitle('Antenna')">Antenna</ion-button>
-             <ion-button size="default" color="tertiary" (click)="fillTitle('Body')">Body</ion-button>
-             <ion-button size="default" color="tertiary" (click)="fillTitle('Before')">Before</ion-button>
-             <ion-button size="default" color="tertiary" (click)="fillTitle('After')">After</ion-button>
-         </ion-card-content>
+
         <ion-card-header>
-            <ion-card-subtitle>
-                <ion-label position="stacked">Title Preview</ion-label>
-            </ion-card-subtitle>
+                <ion-card-subtitle>Image Location</ion-card-subtitle>
+            </ion-card-header>
+         <ion-card-content>
+             <ion-button size="default" color="tertiary" (click)="fillTitlePrimary('Aerial')">Aerial</ion-button>
+             <ion-button size="default" color="tertiary" (click)="fillTitlePrimary('Ground')">Ground</ion-button>
+             <ion-button size="default" color="tertiary" (click)="fillTitlePrimary('Tower')">Tower</ion-button>
+         </ion-card-content>
+
+         <ion-card-header>
+           <ion-card-subtitle>Image Profile</ion-card-subtitle>
         </ion-card-header>
         <ion-card-content>
-            <ion-input type="text" oninput="" size="100" required="" [(ngModel)]="photo.title" name="title" class="title-input" placeholder="Enter a name..."></ion-input>
+            <ion-button size="default" color="tertiary" (click)="fillTitleSecondary('AB')">AB</ion-button>
+            <ion-button size="default" color="tertiary" (click)="fillTitleSecondary('BG')">BG</ion-button>
+            <ion-button size="default" color="tertiary" (click)="fillTitleSecondary('GA')">GA</ion-button>
         </ion-card-content>
+
+         <ion-card-header>
+            <ion-card-subtitle>Tower Section</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <!-- <ion-picker></ion-picker> -->
+            <ion-button size="default" color="tertiary" (click)="showPicker()">Select Tower Section</ion-button>
+        </ion-card-content>
+
+        <ion-card-header>
+            <ion-card-subtitle>
+                <ion-label position="stacked">Image Description</ion-label>
+            </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-input type="text" oninput="" size="100" required="" [(ngModel)]="photo.title" name="title" class="title-input" placeholder="Enter a description..."></ion-input>
+        </ion-card-content>
+
     </ion-card>
     <div class="button-grouping ion-padding">
         <ion-button size="large" expand="block" color="primary" type="submit">
