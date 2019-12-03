@@ -71,7 +71,7 @@ public toastController: ToastController,
           })
       };
 
-      this.httpClient.post("https://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php", form.value, requestOptions)
+      this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php", form.value, requestOptions)
           .subscribe(data => {
               console.log(data['_body']);
               this.presentToastPrimary('Photo uploaded and added to Service \n');
