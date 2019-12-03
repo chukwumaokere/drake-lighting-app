@@ -247,7 +247,7 @@ openActionSheet(serviceid) {
            this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
-        this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
+        //this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
       }, (err) => {
         // Handle error
         console.error(err);
@@ -265,7 +265,7 @@ openActionSheet(serviceid) {
           this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
-        this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
+        //this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
       }, (err) => {
         // Handle error
         console.error(err);
