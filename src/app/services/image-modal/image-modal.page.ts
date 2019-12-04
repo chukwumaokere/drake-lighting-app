@@ -76,7 +76,7 @@ public imgpov: ImageProvider,
   }
 
   async  uploadImage(form){
-      console.log('form submitted',form.value);
+      //console.log('form submitted',form.value);
       /*const fileTransfer: FileTransferObject = this.transfer.create();
       let options: FileUploadOptions = {
           fileKey: "photo",
@@ -109,13 +109,13 @@ public imgpov: ImageProvider,
       form.value.base64Image = this.imageData;
       this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php?recordid=108405", form.value, { headers:headers, observe: 'response' })
           .subscribe(data => {
-              console.log(data['_body']);
+              //console.log(data['_body']);
               this.presentToastPrimary('Photo uploaded and added to Service \n');
               this.closeModal();
           }, error => {
-              console.log(error);
-              console.log(error.message);
-              console.error(error.message);
+              //console.log(error);
+              //console.log(error.message);
+              //console.error(error.message);
               this.presentToast("Upload failed! Please try again \n" + error.message);
               this.closeModal();
           });
