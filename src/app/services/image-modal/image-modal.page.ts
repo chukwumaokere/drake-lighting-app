@@ -77,7 +77,7 @@ public imgpov: ImageProvider,
 
   async  uploadImage(form){
       console.log('form submitted',form.value);
-      const fileTransfer: FileTransferObject = this.transfer.create();
+      /*const fileTransfer: FileTransferObject = this.transfer.create();
       let options: FileUploadOptions = {
           fileKey: "photo",
           fileName: "test3.jpg",
@@ -99,13 +99,14 @@ public imgpov: ImageProvider,
           console.log(error);
           console.error(JSON.stringify(error));
           this.presentToast("Upload failed! Please try again \n" + error.message);
-      });
+      });*/
 
-      /*var headers = new HttpHeaders();
+      var headers = new HttpHeaders();
       headers.append("Accept", 'application/json');
       headers.append('Content-Type', 'application/json');
       headers.append('Access-Control-Allow-Origin', '*');
-      this.httpClient.post("http://localhost:80/drakelighting/phoneapi/postPhotos.php?recordid=108405", form.value, { headers:headers, observe: 'response' })
+      form.value.append('image',this.imageData);
+      this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php?recordid=108405", form.value, { headers:headers, observe: 'response' })
           .subscribe(data => {
               console.log(data['_body']);
               this.presentToastPrimary('Photo uploaded and added to Service \n');
@@ -114,7 +115,7 @@ public imgpov: ImageProvider,
               console.log(error.message);
               console.error(error.message);
               this.presentToast("Upload failed! Please try again \n" + error.message);
-          });*/
+          });
 
 
     this.closeModal();
