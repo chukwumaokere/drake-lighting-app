@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, ToastController, PickerController, } from '@ionic/angular';
+import { ModalController, NavParams, ToastController, PickerController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file';
@@ -101,24 +101,24 @@ public imgpov: ImageProvider,
           this.presentToast("Upload failed! Please try again \n" + error.message);
       });*/
 
+
       var headers = new HttpHeaders();
       headers.append("Accept", 'application/json');
       headers.append('Content-Type', 'application/json');
       headers.append('Access-Control-Allow-Origin', '*');
-      form.value.append('image',this.imageData);
+      form.value.base64Image = this.imageData;
       this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php?recordid=108405", form.value, { headers:headers, observe: 'response' })
           .subscribe(data => {
               console.log(data['_body']);
               this.presentToastPrimary('Photo uploaded and added to Service \n');
+              this.closeModal();
           }, error => {
               console.log(error);
               console.log(error.message);
               console.error(error.message);
               this.presentToast("Upload failed! Please try again \n" + error.message);
+              this.closeModal();
           });
-
-
-    this.closeModal();
   }
 
   async  fillTitlePrimary(title){
