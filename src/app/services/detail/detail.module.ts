@@ -13,7 +13,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 // import { AppComponent } from './app.component';
 // import { AppRoutingModule } from './app-routing.module';
 import { File } from '@ionic-native/file/ngx';
-import { Camera } from '@ionic-native/Camera/ngx';
+import { Camera } from '@ionic-native/camera/ngx';
 import { ImageModalPage } from '../image-modal/image-modal.page';
 
 const routes: Routes = [

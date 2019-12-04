@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, ToastController } from '@ionic/angular';
+import { ModalController, NavParams, ToastController, PickerController, } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 /*import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file';*/
@@ -16,6 +16,9 @@ modalTitle:string;
 modelId:number;
 photo = {
     title: '',
+    primary_title:'',
+    secondary_title:'',
+    tower_section: '',
     serviceid: '',
     base64Image: ''
     };
@@ -24,6 +27,7 @@ constructor(
 private modalController: ModalController,
 private navParams: NavParams,
 public httpClient: HttpClient,
+private pickerCtrl: PickerController,
 /*private transfer: FileTransfer,*/
 private formBuilder: FormBuilder,
 public toastController: ToastController,
@@ -43,6 +47,34 @@ public toastController: ToastController,
   async closeModal() {
     const onClosedData: string = "Wrapped Up!";
     await this.modalController.dismiss(onClosedData);
+  }
+
+  async showPicker(){
+      var x;
+      var optionValues = [];
+      for(x=0; x < 101; x++){
+        optionValues.push({text: x, value: x})
+      }
+      let opts = {
+        cssClass: 'section-picker',
+        buttons: [
+         {text: 'Cancel', role: 'cancel', cssClass: 'section-picker-cancel'},
+         {text: 'Confirm', cssClass: 'section-picker-confirm'},
+        ],
+        columns: [{
+            name: 'section',
+            options: optionValues
+        }],
+      }
+
+      let picker = await this.pickerCtrl.create(opts);
+      picker.present();
+      picker.onDidDismiss().then( async data => {
+          let col = await picker.getColumn('section');
+          if(col.options[col.selectedIndex].text){
+            this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + col.options[col.selectedIndex].text;
+          }
+      })
   }
 
   async  uploadImage(form){
@@ -78,21 +110,31 @@ public toastController: ToastController,
           }, error => {
               console.log(error);
               console.log(error.message);
-              this.presentToast('Upload failed! Please try again' + error.message);
+              console.error(error.message);
+              this.presentToast("Upload failed! Please try again \n" + error.message);
           });
 
 
     this.closeModal();
   }
 
-  async  fillTitle(title){
+  async  fillTitlePrimary(title){
+      this.photo.primary_title = title;
       this.photo.title = title;
   }
+  async  fillTitleSecondary(title){
+    this.photo.secondary_title = title;
+    this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title;
+    }
+    async  fillTowerSection(section){
+        this.photo.tower_section = section;
+        this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section ;
+    }
 
     async presentToast(message: string) {
         var toast = await this.toastController.create({
             message: message,
-            duration: 2000,
+            duration: 5500,
             position: "bottom",
             color: "danger"
         });
