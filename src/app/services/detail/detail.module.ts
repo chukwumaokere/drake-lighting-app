@@ -37,7 +37,7 @@ const routes: Routes = [
         SplashScreen,
         Camera,
         File,
-        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     ],
 })
 export class DetailPageModule {}

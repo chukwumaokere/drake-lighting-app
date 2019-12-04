@@ -13,9 +13,10 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { HttpClientModule } from '@angular/common/http';
-/*import { FileTransfer } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file/ngx';*/
+import { FileTransfer } from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ImageProvider } from './providers/image/image';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,8 +29,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     Camera,
     ActionSheet,
     PhotoLibrary,
-     /* FileTransfer,
-      File*/
+     FileTransfer,
+      File,
+      ImageProvider
+
   ],
   bootstrap: [AppComponent]
 })

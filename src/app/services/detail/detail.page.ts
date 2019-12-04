@@ -7,7 +7,8 @@ import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import { File } from '@ionic-native/file/ngx';
-import { ImageModalPage } from '../image-modal/image-modal.page'
+import { ImageModalPage } from '../image-modal/image-modal.page';
+import { ImageProvider } from '../../providers/image/image';
 
 @Component({
   selector: 'app-detail',
@@ -39,7 +40,6 @@ export class DetailPage implements OnInit {
     mediaType: this.camera.MediaType.PICTURE,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
   }
-
   dataReturned : any;
   userinfo: any;
   serviceid: any;
@@ -85,7 +85,7 @@ export class DetailPage implements OnInit {
       private actionSheet: ActionSheet, 
       private photoLibrary: PhotoLibrary,
       public modalCtrl : ModalController,
-
+      public imgpov : ImageProvider,
       @Inject(LOCALE_ID) private locale: string) { }
 
   loadDetails(serviceid){
@@ -243,7 +243,7 @@ openActionSheet(serviceid) {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
-        //console.log(base64Image);
+           this.imgpov.setImage(imageData);
            this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
@@ -261,7 +261,7 @@ openActionSheet(serviceid) {
         // imageData is either a base64 encoded string or a file URI
         // If it's base64 (DATA_URL):
         let base64Image = 'data:image/jpeg;base64,' + imageData;
-        //console.log(base64Image);
+          this.imgpov.setImage(imageData);
           this.openModal(serviceid,base64Image);
         // TODO: need code to upload to server here.
         // On success: show toast
@@ -310,15 +310,13 @@ openActionSheet(serviceid) {
     });
   }
 
-    async openModal(serviceid,imageData) {
-    console.log('aaaaaaaa');
-    console.log(serviceid);
+    async openModal(serviceid,base64Image) {
         const modal = await this.modalCtrl.create({
             component: ImageModalPage,
             componentProps: {
-                "base64Image": imageData,
+                "base64Image": base64Image,
                 "paramTitle": "Edit Photo",
-                "serviceid" : serviceid
+                "serviceid" : serviceid,
             }
         });
 
