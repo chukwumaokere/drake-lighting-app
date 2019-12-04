@@ -137,7 +137,7 @@ public imgpov: ImageProvider,
     async presentToast(message: string) {
         var toast = await this.toastController.create({
             message: message,
-            duration: 5500,
+            duration: 3500,
             position: "bottom",
             color: "danger"
         });
