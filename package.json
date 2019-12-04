@@ -21,7 +21,7 @@
     "@angular/platform-browser-dynamic": "~8.1.2",
     "@angular/router": "~8.1.2",
     "@ionic-native/action-sheet": "^5.15.0",
-    "@ionic-native/camera": "^5.15.0",
+    "@ionic-native/camera": "^5.17.1",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/file": "^5.17.1",
     "@ionic-native/file-transfer": "^5.17.1",
