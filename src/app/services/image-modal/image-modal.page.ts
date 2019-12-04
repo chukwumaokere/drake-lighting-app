@@ -38,7 +38,7 @@ public imgpov: ImageProvider,
 }
 
   ngOnInit() {
-  console.table(this.navParams);
+  //console.table(this.navParams);
     this.modelId = this.navParams.data.paramID;
     this.modalTitle = this.navParams.data.paramTitle;
   }
