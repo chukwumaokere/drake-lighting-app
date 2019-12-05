@@ -16,18 +16,23 @@
     </ion-item>
 
     <div class="button-grouping ion-padding">
-      <ion-button size="large" expand="block" color="tertiary"  (click)="openActionSheet(servicedetail.serviceid)">
-          <ion-icon name="camera"></ion-icon>
-        <ion-text color="dark">
-          Add Photos
-        </ion-text>
-      </ion-button>
-     <!-- <ion-button size="large" expand="block" color="tertiary"  (click)="openModal(servicedetail.serviceid)">
-        <ion-icon name="camera"></ion-icon>
-        <ion-text color="dark">
-          Add Photos
-        </ion-text>
-      </ion-button>-->
+      <ion-grid class="ion-no-padding">
+        <ion-row class="ion-align-items-center ion-justify-content-center" >
+          <ion-col class="padding-left-none" size="9">
+            <ion-button expand="full" size="large" expand="block" color="tertiary"  (click)="openCamera(servicedetail.serviceid)">
+              <ion-icon name="camera"></ion-icon>
+              <ion-text class="add-photo-button">
+                Take Photos
+              </ion-text>
+            </ion-button>
+          </ion-col>
+          <ion-col size="3">
+            <ion-button size="large" expand="block" color="tertiary"  (click)="openLibrary(servicedetail.serviceid)">
+              <ion-icon name="albums"></ion-icon>
+            </ion-button>
+          </ion-col>          
+        </ion-row>
+      </ion-grid>
     </div>
 
     <ion-item>

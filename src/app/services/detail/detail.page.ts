@@ -215,6 +215,44 @@ async presentToastPrimary(message: string) {
   toast.present();
 }
 
+openCamera(serviceid){
+  console.log('launching camera');
+       this.camera.getPicture(this.options).then((imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64 (DATA_URL):
+        let base64Image = 'data:image/png;base64,' + imageData;
+           this.imgpov.setImage(imageData);
+           this.openModal(serviceid,base64Image);
+        // TODO: need code to upload to server here.
+        // On success: show toast
+        //this.presentToastPrimary('Photo uploaded and added! \n' + imageData);          
+      }, (err) => {
+        // Handle error
+        console.error(err);
+        // On Fail: show toast
+        this.presentToast(`Upload failed! Please try again \n` + err);
+      });
+}
+
+openLibrary(serviceid){
+  console.log('launching gallery');
+      this.camera.getPicture(this.libraryOptions).then((imageData) => {
+        // imageData is either a base64 encoded string or a file URI
+        // If it's base64 (DATA_URL):
+        let base64Image = 'data:image/png;base64,' + imageData;
+          this.imgpov.setImage(imageData);
+          this.openModal(serviceid,base64Image);
+        // TODO: need code to upload to server here.
+        // On success: show toast
+        //this.presentToastPrimary('Photo uploaded and added! \n' + imageData);
+      }, (err) => {
+        // Handle error
+        console.error(err);
+        // On Fail: show toast
+        this.presentToast(`Upload failed! Please try again \n` + err);
+      });  
+}
+
 openActionSheet(serviceid) {
    console.log('launching actionsheet');
    
