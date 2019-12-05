@@ -70,9 +70,27 @@ public imgpov: ImageProvider,
       picker.onDidDismiss().then( async data => {
           let col = await picker.getColumn('section');
           if(col.options[col.selectedIndex].text){
-            this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + col.options[col.selectedIndex].text;
+            this.photo.tower_section = col.options[col.selectedIndex].text;
+            if (this.photo.primary_title !== '' || this.photo.secondary_title !== ''){
+                this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section ;
+            }else{
+                this.photo.title = this.photo.tower_section ;
+            }
+            //this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + col.options[col.selectedIndex].text;
           }
       })
+  }
+
+  modifyTowerSection(direction){
+      if(direction == 'up'){
+        var val = parseInt(this.photo.tower_section) + 1;
+        this.photo.tower_section = val.toString();
+        this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section ;
+      }else if (direction == 'down'){
+        var val = parseInt(this.photo.tower_section) - 1;
+        this.photo.tower_section = val.toString();
+        this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section ;
+      }
   }
 
   async  uploadImage(form){
@@ -121,17 +139,30 @@ public imgpov: ImageProvider,
           });
   }
 
-  async  fillTitlePrimary(title){
-      this.photo.primary_title = title;
-      this.photo.title = title;
-  }
-  async  fillTitleSecondary(title){
-    this.photo.secondary_title = title;
-    this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title;
+    async  fillTitlePrimary(title){
+        this.photo.primary_title = title;
+        if (this.photo.secondary_title !== '' || this.photo.tower_section !== ''){
+            this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section ;
+        }else{
+            this.photo.title = title;
+        }
+    }
+    async  fillTitleSecondary(title){
+        this.photo.secondary_title = title;
+        if (this.photo.primary_title !== '' || this.photo.tower_section !== ''){
+            this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section ;
+        }else{
+            this.photo.title = this.photo.secondary_title;
+        }
+        
     }
     async  fillTowerSection(section){
         this.photo.tower_section = section;
-        this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section ;
+        if (this.photo.primary_title !== '' || this.photo.secondary_title !== ''){
+            this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section ;
+        }else{
+            this.photo.title =  this.photo.tower_section ;
+        }
     }
 
     async presentToast(message: string) {
