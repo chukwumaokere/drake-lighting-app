@@ -12,7 +12,7 @@ import { Storage } from '@ionic/storage';
 })
 export class ServicesPage implements OnInit {
   userinfo: any;
-  todayServices: object;
+  weeklyServices: object;
   futureServices: object;
   completedServices: object;
   service = {
@@ -164,7 +164,7 @@ export class ServicesPage implements OnInit {
     console.log('turning off previous theme', theme_switcher[theme]);
    }
 
-   getWorkOrders(user_id){
+   getWorkOrders(user_id, type){
     var logged_user = {
       user_id: user_id
     }
@@ -182,8 +182,9 @@ export class ServicesPage implements OnInit {
               if(success == true){
                 var workorders = data['body']['data'];
                 console.log('workorders', workorders);
-                this.todayServices= workorders;
-                
+                if(type == 'weekly'){
+                  this.weeklyServices= workorders;
+                }
               }else{
                 console.log('failed to fetch records');
               }
@@ -214,7 +215,7 @@ export class ServicesPage implements OnInit {
              console.log('loading storage data (within param route function)', result);
              this.userinfo = result;
              this.loadTheme(result.theme.toLowerCase());
-             this.getWorkOrders(this.userinfo.id);
+             this.getWorkOrders(this.userinfo.id, 'weekly');
            }else{
              console.log('nothing in storage, going back to login');
              this.logout();

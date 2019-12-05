@@ -17,11 +17,11 @@
       <ion-label>Today's Open Services</ion-label>
     </ion-list-header> -->
 
-    <ion-item (click)="goToDetail(service.workorderid)" detail *ngFor="let service of todayServices">
+    <ion-item (click)="goToDetail(service.workorderid)" detail *ngFor="let service of weeklyServices">
       <ion-avatar><ion-icon size="large" name="flash"></ion-icon></ion-avatar>
       <ion-label>
-        <h2>{{service.subject}}</h2>
-        <h2>{{service.tower_id}}</h2>
+        <h2>{{service[0]}}</h2>
+        <h2>{{service.towersites}}</h2>
         <div class="service-details-div">
           <ion-grid class="service-details-grid">
             <ion-row>
@@ -29,8 +29,8 @@
               <ion-col><p class="et">End Time</p></ion-col>
             </ion-row>
             <ion-row>
-              <ion-col><p>{{service.startTime}}</p></ion-col>
-              <ion-col><p>{{service.endTime}}</p></ion-col>
+              <ion-col><p>{{service.time_start}}</p></ion-col>
+              <ion-col><p>{{service.time_end}}</p></ion-col>
             </ion-row>
           </ion-grid>
         </div>
@@ -39,7 +39,7 @@
       data-color="{{(service?.status == 'Cancelled' || service?.status == 'Declined') ? 'danger' : 'success'}}"
       [ngStyle]="{'background-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == 'Attention Required' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == 'Attention Required' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
       >
-        <ion-text class="status-text">{{service.wostatus}}</ion-text>
+        <ion-text class="status-text">{{service.eventstatus}}</ion-text>
       </ion-badge>
     </ion-item>
 
