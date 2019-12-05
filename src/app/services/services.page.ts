@@ -2,6 +2,7 @@ import { Component, OnInit, LOCALE_ID, Inject, } from '@angular/core';
 import { ActivatedRoute, Router } from  "@angular/router";
 import { NavController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -29,7 +30,7 @@ export class ServicesPage implements OnInit {
   typesOfServices= ['Radio Implementation Services', 'Labor', 'Mount Installation', 'Power Installation', 'Structural Analysis'];
   statuses= ['Attention Required', 'Declined', 'Complete', 'Cancelled', 'Closed', 'Open'];
 
-  constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, @Inject(LOCALE_ID) private locale: string) { }
+  constructor(private httpClient: HttpClient, public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, @Inject(LOCALE_ID) private locale: string) { }
 
   async loadRandomServices(type){
     var limit = 16;
@@ -163,6 +164,38 @@ export class ServicesPage implements OnInit {
     console.log('turning off previous theme', theme_switcher[theme]);
    }
 
+   getWorkOrders(user_id){
+    var logged_user = {
+      user_id: user_id
+    }
+    console.log('fetching records for', logged_user);
+    var headers = new HttpHeaders();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Access-Control-Allow-Origin', '*');
+    this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/getWorkOrders.php", logged_user, { headers:headers, observe: 'response' })
+          .subscribe(data => {
+              console.log(data['body']);
+              var success = data['body']['success'];
+              console.log('login response was', success);
+
+              if(success == true){
+                var workorders = data['body']['data'];
+                console.log('workorders', workorders);
+                this.todayServices= workorders;
+                
+              }else{
+                console.log('failed to fetch records');
+              }
+              
+          }, error => {
+            //console.log(error);
+            //console.log(error.message);
+            //console.error(error.message);
+            console.log('failed to fetch records');
+          });
+   }
+
   ngOnInit(){
     this.activatedRoute.params.subscribe((userData)=>{
      if(userData.length !== 0){
@@ -181,6 +214,7 @@ export class ServicesPage implements OnInit {
              console.log('loading storage data (within param route function)', result);
              this.userinfo = result;
              this.loadTheme(result.theme.toLowerCase());
+             this.getWorkOrders(this.userinfo.id);
            }else{
              console.log('nothing in storage, going back to login');
              this.logout();
@@ -189,7 +223,7 @@ export class ServicesPage implements OnInit {
        }
      }
    }); 
-   this.loadRandomServices('today').then((result) => { this.todayServices= result; });
+   //this.loadRandomServices('today').then((result) => { this.todayServices= result; });
    this.loadRandomServices('future').then((result) => { this.futureServices= result; });
    this.loadRandomServices('completed').then((result) => { this.completedServices= result; });
  }
