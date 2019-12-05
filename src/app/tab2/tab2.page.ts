@@ -4,6 +4,7 @@ import { NavController, AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { formatDate } from '@angular/common';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-tab2',
@@ -33,11 +34,49 @@ export class Tab2Page implements OnInit {
 
   @ViewChild(CalendarComponent, <any>[]) myCal: CalendarComponent;
 
-  constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string ) { }
+  constructor(private httpClient: HttpClient, public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string ) { }
 
   loadEvents() {
     this.eventSource = this.createRandomEvents();
   }
+
+  getWorkOrders(user_id){
+    var events = [];
+    var logged_user = {
+      user_id: user_id
+    }
+    console.log('fetching records for', logged_user);
+    var headers = new HttpHeaders();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Access-Control-Allow-Origin', '*');
+    this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/getCalendar.php", logged_user, { headers:headers, observe: 'response' })
+          .subscribe(data => {
+              console.log(data['body']);
+              var success = data['body']['success'];
+              console.log('login response was', success);
+
+              if(success == true){
+                var workorders = data['body']['data'];
+                console.log('workorders', workorders);
+                workorders.forEach(workorder => {
+                  workorder.startTime = new Date(workorder.startTime);
+                  workorder.endTime = new Date(workorder.endTime);
+                });
+                //TODO: Fix the date being start of epoch time.
+                this.eventSource= workorders;
+                console.log(this.eventSource);
+              }else{
+                console.log('failed to fetch records');
+              }
+              
+          }, error => {
+            //console.log(error);
+            //console.log(error.message);
+            //console.error(error.message);
+            console.log('failed to fetch records');
+          });
+   }
   randomCompany = ['Simmons - MOSPG2014', 'Marysville - ARLIT2062', 'Coldspring - TXHOU2041', 'Yellow Rock - KYLEX2020', 'Medora - ILSPG2027', 'Lawtell - LALWL2000', 'HWY 584 (FTCA) LAMON2002', 'HWY 120 (FTCA) - LASRV2006', 'York - ALBRH2003', 'Jorge Auto Sales - TXLAR2007', 'Sawmill - ARLIT2065', 'Saxton - PAPIT2008', 'Rockwood - PAPIT2006', 'Mellen - WIWAU2029', 'Calvin - LAMON2113', 'Funston - LARSV2021'];
   createRandomEvents() {
     var events = [];
@@ -264,6 +303,7 @@ export class Tab2Page implements OnInit {
               console.log('loading storage data (within param route function)', result);
               this.userinfo = result;
               this.loadTheme(result.theme.toLowerCase());
+              this.getWorkOrders(this.userinfo.id);
             }else{
               console.log('nothing in storage, going back to login');
               this.logout();
@@ -272,7 +312,7 @@ export class Tab2Page implements OnInit {
         }
       }
     }); 
-    this.loadEvents();
+    //this.loadEvents();
   }
 
 }
