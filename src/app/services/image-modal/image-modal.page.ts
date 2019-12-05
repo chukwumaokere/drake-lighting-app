@@ -15,6 +15,8 @@ export class ImageModalPage implements OnInit {
 imageData: any;
 modalTitle:string;
 modelId:number;
+serviceid: any;
+
 photo = {
     title: '',
     primary_title:'',
@@ -40,6 +42,7 @@ public imgpov: ImageProvider,
   ngOnInit() {
   //console.table(this.navParams);
     this.modelId = this.navParams.data.paramID;
+    this.serviceid = this.navParams.data.serviceid;
     this.modalTitle = this.navParams.data.paramTitle;
   }
   async closeModal() {
@@ -125,17 +128,23 @@ public imgpov: ImageProvider,
       headers.append('Content-Type', 'application/json');
       headers.append('Access-Control-Allow-Origin', '*');
       form.value.base64Image = this.imageData;
-      this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php?recordid=108405", form.value, { headers:headers, observe: 'response' })
+      form.value.serviceid = this.serviceid;
+      console.log('adding photo for', form.value.serviceid);
+      this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php", form.value, { headers:headers, observe: 'response' })
           .subscribe(data => {
               //console.log(data['_body']);
-              this.presentToastPrimary('Photo uploaded and added to Service \n');
-              this.closeModal();
+              if(data['body']['success'] == true){
+                this.presentToastPrimary('Photo uploaded and added to Work Order \n');
+                this.closeModal();
+              }else{
+                  console.log('upload failed');
+                  this.presentToast('Upload failed! Please try again \n');
+              }
           }, error => {
               //console.log(error);
               //console.log(error.message);
               //console.error(error.message);
               this.presentToast("Upload failed! Please try again \n" + error.message);
-              this.closeModal();
           });
   }
 
