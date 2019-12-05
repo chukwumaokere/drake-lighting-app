@@ -3,6 +3,9 @@ import { Router } from "@angular/router";
 import { Storage } from '@ionic/storage';
 import { ToastController } from '@ionic/angular';
 import * as userjson from '../../assets/js/sampledata/users.json'; 
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { error } from 'util';
+import { async } from 'q';
 
 @Component({
   selector: 'app-login',
@@ -11,7 +14,7 @@ import * as userjson from '../../assets/js/sampledata/users.json';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private  router:  Router, public storage: Storage, public toastController: ToastController) { }
+  constructor(private  router:  Router, public storage: Storage, public toastController: ToastController, private httpClient: HttpClient) { }
 
   userdata: Object;
 
@@ -32,12 +35,16 @@ export class LoginPage implements OnInit {
   login(form: any, origin: any){
     //TODO: Wrap storage setting and data setting to API call return
      console.log('login function accessed');
+     var headers = new HttpHeaders();
+     headers.append("Accept", 'application/json');
+     headers.append('Content-Type', 'application/json');
+     headers.append('Access-Control-Allow-Origin', '*');
     
      if(origin == 'manual'){
       console.log('login clicked');
       var data = form.value;
     /* Verify user login */
-      if (userjson.users[data.email]){
+      /* if (userjson.users[data.email]){
         if(userjson.users[data.email].password == data.password){
           this.userdata = userjson.users[data.email];
           this.storage.ready().then(() => {
@@ -51,8 +58,39 @@ export class LoginPage implements OnInit {
       }else{
         console.log('login failed');
         this.presentToast('Login failed. Please try again');
-      }
+      } */
+      var username = data.email;
+      var password = data.password;
+      console.log(form.value);
+      this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postLogin.php", form.value, { headers:headers, observe: 'response' })
+          .subscribe(data => {
+              console.log(data['body']);
+              var verified = data['body']['success'];
+              console.log('login response was', verified);
+
+              if(verified == true){
+                var userdata = data['body']['data'];
+                console.log('usersdata', userdata);
+                this.storage.ready().then(() => {
+                  this.userdata = userdata;
+                  this.userdata['theme'] = 'Light';
+                  this.storage.set('userdata', this.userdata);
+                  return this.router.navigate(["/tabs/services", this.userdata]);
+                })
+              }else{
+                console.log('login failed');
+                this.presentToast('Login failed. Please try again');
+              }
+              
+          }, error => {
+            //console.log(error);
+            //console.log(error.message);
+            //console.error(error.message);
+            console.log('login failed');
+            this.presentToast('Login failed. Please try again');
+          });
     /* Verify user login */
+
     }else if (origin == 'auto'){
       console.log('auto login from session');
       return this.router.navigate(["/tabs/services", form]);
