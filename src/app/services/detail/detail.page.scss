@@ -15,3 +15,14 @@ ion-text.status-text{
 .button-grouping{
  
 }
+
+.anchor-bottom{
+    position: fixed;
+    bottom: 0;
+    /* display: block; */
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.137);
+}
+.text-align-center {
+    text-align: center !important;
+}

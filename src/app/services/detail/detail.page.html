@@ -15,7 +15,81 @@
       <ion-text>{{servicedetail.tower}}</ion-text>
     </ion-item>
 
-    <div class="button-grouping ion-padding">
+    <ion-item>
+      <ion-label position="stacked">Address Details</ion-label>
+      <ion-text>{{servicedetail.address_details}}</ion-text>
+      <ion-button target="_blank" color="primary" href="https://maps.apple.com/?daddr={{servicedetail.address_details}}" size="default" slot="end" type="button"><ion-icon name="navigate" size="large" ></ion-icon></ion-button>
+    </ion-item>
+
+    <!-- <ion-item>
+        <ion-label position="stacked">Work Order Status</ion-label>
+        <ion-badge class="status" color="white"
+        data-color="{{(servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined') ? 'danger' : 'success'}}"
+        [ngStyle]="{'background-color':servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined' ? 'var(--ion-color-danger)' : servicedetail?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 
+        'border-color':servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined' ? 'var(--ion-color-danger)' : servicedetail?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
+        >
+          <ion-text class="status-text">{{servicedetail.status}}</ion-text>
+        </ion-badge>
+      </ion-item> -->
+
+    <ion-item>
+      <ion-label>Description of Work</ion-label>
+    </ion-item>
+    <ion-item>
+        <ion-textarea auto-grow="true" name="descofwork" rows="8"></ion-textarea>
+    </ion-item>
+
+    <ion-item lines="none">
+      <ion-label>Equipment List</ion-label>
+    </ion-item>
+    <div>
+
+      <ion-grid class="ion-padding">
+          <ion-row class="ion-align-items-center ion-justify-content-center" >
+            <ion-col class="padding-left-none" size="9">
+              <ion-text><h5>Equipment</h5></ion-text>
+            </ion-col>
+            <ion-col size="3">
+                <ion-text><h5>Quantity</h5></ion-text>
+            </ion-col>          
+          </ion-row>
+          <ion-row class="ion-align-items-center ion-justify-content-center" >
+            <ion-col class="padding-left-none" size="9">
+              Beacon Light
+            </ion-col>
+            <ion-col size="3" align-self-center class="text-align-center">
+              <ion-text>2</ion-text>
+            </ion-col>          
+          </ion-row>
+          <ion-row class="ion-align-items-center ion-justify-content-center" >
+            <ion-col class="padding-left-none" size="9">
+              Antenna wing
+            </ion-col >
+            <ion-col size="3" align-self-center class="text-align-center">
+              <ion-text>4</ion-text>
+            </ion-col>          
+          </ion-row>
+          <ion-row class="ion-align-items-center ion-justify-content-center" >
+            <ion-col class="padding-left-none" size="9">
+              Satellite Dish
+            </ion-col>
+            <ion-col size="3" align-self-center class="text-align-center">
+              <ion-text>1</ion-text>
+            </ion-col>          
+          </ion-row>
+      </ion-grid>
+    </div>
+
+    <ion-item>
+      <ion-label position="stacked">Weather</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked">Light Standard</ion-label>
+      <ion-input></ion-input>
+    </ion-item>
+
+    <div class="button-grouping ion-padding anchor-bottom" >
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-align-items-center ion-justify-content-center" >
           <ion-col class="padding-left-none" size="9">
@@ -35,23 +109,10 @@
       </ion-grid>
     </div>
 
-    <ion-item>
-      <ion-label position="stacked">Work Order Status</ion-label>
-     <!--  <ion-text>{{servicedetail.status}}</ion-text> -->
-      <ion-badge class="status" color="white"
-      data-color="{{(servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined') ? 'danger' : 'success'}}"
-      [ngStyle]="{'background-color':servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined' ? 'var(--ion-color-danger)' : servicedetail?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 
-      'border-color':servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined' ? 'var(--ion-color-danger)' : servicedetail?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
-      >
-        <ion-text class="status-text">{{servicedetail.status}}</ion-text>
-      </ion-badge>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Address Details</ion-label>
-      <ion-text>{{servicedetail.address_details}}</ion-text>
-      <ion-button target="_blank" color="primary" href="https://maps.apple.com/?daddr={{servicedetail.address_details}}" size="default" slot="end" type="button"><ion-icon name="navigate" size="large" ></ion-icon></ion-button>
-    </ion-item>
-    <ion-item>
+    <br><br><br><br><br>
+    
+    
+   <!--  <ion-item>
       <ion-label position="stacked">Tech 1</ion-label>
       <ion-text>{{servicedetail.tech1}}</ion-text>
     </ion-item>
@@ -82,9 +143,9 @@
     <ion-item>
       <ion-label position="stacked">Service Description</ion-label>
       <ion-text>{{servicedetail.desc}}</ion-text>
-    </ion-item>
-  </ion-list>
-<div class="button-grouping ion-padding">
+    </ion-item> -->
+
+<!-- <div class="button-grouping ion-padding">
   <ion-button size="large" expand="block" color="warning"  [disabled]="servicedetail?.status == 'Open' ? null : 'disabled'" >
     <ion-text color="dark">
       {{(servicedetail?.status == 'Open') ? 'Start' : 'Started' }}
@@ -95,5 +156,6 @@
       {{(servicedetail?.status !== 'Open') ? 'Completed' : 'Complete' }}       
     </ion-text>
   </ion-button>
-</div>
+</div> -->
+</ion-list>
 </ion-content>
