@@ -5,6 +5,7 @@ import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-nati
 import { File } from '@ionic-native/file';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { ImageProvider } from '../../providers/image/image';
+import { AppConstants } from '../../providers/constant/constant';
 
 @Component({
   selector: 'app-image-modal',
@@ -16,7 +17,7 @@ imageData: any;
 modalTitle:string;
 modelId:number;
 serviceid: any;
-
+apiurl:any;
 photo = {
     title: '',
     primary_title:'',
@@ -35,8 +36,10 @@ private transfer: FileTransfer,
 private formBuilder: FormBuilder,
 public toastController: ToastController,
 public imgpov: ImageProvider,
-) {
+public appConst: AppConstants,
+){
     this.imageData = this.imgpov.getImage();
+    this.apiurl = this.appConst.getApiUrl();
 }
 
   ngOnInit() {
@@ -130,7 +133,7 @@ public imgpov: ImageProvider,
       form.value.base64Image = this.imageData;
       form.value.serviceid = this.serviceid;
       console.log('adding photo for', form.value.serviceid);
-      this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postPhotos.php", form.value, { headers:headers, observe: 'response' })
+      this.httpClient.post(this.apiurl + "postPhotos.php", form.value, { headers:headers, observe: 'response' })
           .subscribe(data => {
               //console.log(data['_body']);
               if(data['body']['success'] == true){

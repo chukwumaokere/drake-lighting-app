@@ -17,6 +17,7 @@ import { FileTransfer } from '@ionic-native/file-transfer/ngx';
 import { File } from '@ionic-native/file/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageProvider } from './providers/image/image';
+import { AppConstants } from './providers/constant/constant';
 
 @NgModule({
   declarations: [AppComponent],
@@ -31,8 +32,8 @@ import { ImageProvider } from './providers/image/image';
     PhotoLibrary,
      FileTransfer,
       File,
-      ImageProvider
-
+      ImageProvider,
+      AppConstants
   ],
   bootstrap: [AppComponent]
 })

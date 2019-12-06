@@ -15,6 +15,10 @@
     {
       "path": "/drakelighting/*",
       "proxyUrl": "http://devl06.borugroup.com"
+    },
+    {
+      "path": "/drakelighting/*",
+      "proxyUrl": "http://localhost"
     }
   ]
 }

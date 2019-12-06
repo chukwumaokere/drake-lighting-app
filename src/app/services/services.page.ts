@@ -4,6 +4,7 @@ import { NavController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+import { AppConstants } from '../providers/constant/constant';
 
 @Component({
   selector: 'app-services',
@@ -15,6 +16,7 @@ export class ServicesPage implements OnInit {
   weeklyServices: object;
   futureServices: object;
   completedServices: object;
+  apiurl:any;
   service = {
     id: '',
     tower: '', //Will be the Transferee + type of service
@@ -30,7 +32,17 @@ export class ServicesPage implements OnInit {
   typesOfServices= ['Radio Implementation Services', 'Labor', 'Mount Installation', 'Power Installation', 'Structural Analysis'];
   statuses= ['Attention Required', 'Declined', 'Complete', 'Cancelled', 'Closed', 'Open'];
 
-  constructor(private httpClient: HttpClient, public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, @Inject(LOCALE_ID) private locale: string) { }
+  constructor(
+      private httpClient: HttpClient,
+      public navCtrl: NavController,
+      private  router:  Router,
+      public storage: Storage,
+      private activatedRoute: ActivatedRoute,
+      public appConst: AppConstants,
+      @Inject(LOCALE_ID) private locale: string
+  ){
+    this.apiurl = this.appConst.getApiUrl();
+  }
 
   async loadRandomServices(type){
     var limit = 16;
@@ -173,7 +185,7 @@ export class ServicesPage implements OnInit {
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Access-Control-Allow-Origin', '*');
-    this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/getWorkOrders.php", logged_user, { headers:headers, observe: 'response' })
+    this.httpClient.post(this.apiurl + "getWorkOrders.php", logged_user, { headers:headers, observe: 'response' })
           .subscribe(data => {
               console.log(data['body']);
               var success = data['body']['success'];

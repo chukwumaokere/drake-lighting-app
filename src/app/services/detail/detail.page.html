@@ -1,94 +1,50 @@
+<!---->
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
         <ion-back-button type="button" defaultHref="/tabs/services" text="Back"></ion-back-button>
       </ion-buttons>
-    <ion-title>{{servicedetail.subject}}</ion-title>
+    <ion-title>{{serviceName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <form #form="ngForm"  (ngSubmit)="saveWO(form)">
   <ion-list>
-    
-    <ion-item>
-      <ion-label position="stacked">Tower</ion-label>
-      <ion-text>{{servicedetail.tower}}</ion-text>
-    </ion-item>
+    <ion-item detail *ngFor="let service of servicedetail">
+      <ion-label  position="stacked" >{{service.fieldlabel}}</ion-label>
 
-    <ion-item>
-      <ion-label position="stacked">Address Details</ion-label>
-      <ion-text>{{servicedetail.address_details}}</ion-text>
-      <ion-button target="_blank" color="primary" href="https://maps.apple.com/?daddr={{servicedetail.address_details}}" size="default" slot="end" type="button"><ion-icon name="navigate" size="large" ></ion-icon></ion-button>
-    </ion-item>
+      <div [ngSwitch]="service.uitype">
+        <!--uitype = 10-->
+        <ion-text *ngSwitchCase="10">{{service.value}} </ion-text>
 
-    <!-- <ion-item>
-        <ion-label position="stacked">Work Order Status</ion-label>
-        <ion-badge class="status" color="white"
-        data-color="{{(servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined') ? 'danger' : 'success'}}"
-        [ngStyle]="{'background-color':servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined' ? 'var(--ion-color-danger)' : servicedetail?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 
-        'border-color':servicedetail?.status == 'Cancelled' || servicedetail?.status == 'Declined' ? 'var(--ion-color-danger)' : servicedetail?.status == '1 In-Process' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
-        >
-          <ion-text class="status-text">{{servicedetail.status}}</ion-text>
-        </ion-badge>
-      </ion-item> -->
+        <!--uitype = 56-->
+        <div *ngSwitchCase="56">
+          <ion-checkbox *ngIf="service.value == 1" checked="true">{{service.value}} </ion-checkbox>
+          <ion-checkbox  *ngIf="service.value != 1">{{service.value}} </ion-checkbox>
+        </div>
 
-    <ion-item>
-      <ion-label>Description of Work</ion-label>
-    </ion-item>
-    <ion-item>
-        <ion-textarea auto-grow="true" name="descofwork" rows="8"></ion-textarea>
-    </ion-item>
+        <!--uitype = 19.20-->
+        <ion-textarea auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="19">{{service.value}}</ion-textarea>
+        <ion-textarea auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="20">{{service.value}}</ion-textarea>
 
-    <ion-item lines="none">
-      <ion-label>Equipment List</ion-label>
+        <!--uitype = 15.16-->
+        <ion-select  *ngSwitchCase="16" name="{{service.columnname}}"  value="{{service.value}}">
+          <ion-select-option *ngFor="let picklist of service.picklist">{{picklist}}</ion-select-option>
+        </ion-select>
+        <ion-select  *ngSwitchCase="15" name="{{service.columnname}}"  value="{{service.value}}">
+          <ion-select-option *ngFor="let picklist of service.picklist">{{picklist}}</ion-select-option>
+        </ion-select>
+        <!--uitype = 33-->
+        <ion-select  *ngSwitchCase="33" name="{{service.columnname}}" multiple="true">
+          <ion-select-option *ngFor="let picklist of service.picklist" >{{picklist}}</ion-select-option>
+        </ion-select>
+        <!--else-->
+        <ion-input type="text" name="{{service.columnname}}" *ngSwitchDefault>{{service.value}}</ion-input>
+      </div>
     </ion-item>
-    <div>
-
-      <ion-grid class="ion-padding">
-          <ion-row class="ion-align-items-center ion-justify-content-center" >
-            <ion-col class="padding-left-none" size="9">
-              <ion-text><h5>Equipment</h5></ion-text>
-            </ion-col>
-            <ion-col size="3">
-                <ion-text><h5>Quantity</h5></ion-text>
-            </ion-col>          
-          </ion-row>
-          <ion-row class="ion-align-items-center ion-justify-content-center" >
-            <ion-col class="padding-left-none" size="9">
-              Beacon Light
-            </ion-col>
-            <ion-col size="3" align-self-center class="text-align-center">
-              <ion-text>2</ion-text>
-            </ion-col>          
-          </ion-row>
-          <ion-row class="ion-align-items-center ion-justify-content-center" >
-            <ion-col class="padding-left-none" size="9">
-              Antenna wing
-            </ion-col >
-            <ion-col size="3" align-self-center class="text-align-center">
-              <ion-text>4</ion-text>
-            </ion-col>          
-          </ion-row>
-          <ion-row class="ion-align-items-center ion-justify-content-center" >
-            <ion-col class="padding-left-none" size="9">
-              Satellite Dish
-            </ion-col>
-            <ion-col size="3" align-self-center class="text-align-center">
-              <ion-text>1</ion-text>
-            </ion-col>          
-          </ion-row>
-      </ion-grid>
-    </div>
-
-    <ion-item>
-      <ion-label position="stacked">Weather</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Light Standard</ion-label>
-      <ion-input></ion-input>
-    </ion-item>
-
+    <br><br><br><br><br>
+</ion-list>
     <div class="button-grouping ion-padding anchor-bottom" >
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-align-items-center ion-justify-content-center" >
@@ -104,58 +60,11 @@
             <ion-button size="large" expand="block" color="tertiary"  (click)="openLibrary(servicedetail.serviceid)">
               <ion-icon name="albums"></ion-icon>
             </ion-button>
-          </ion-col>          
+          </ion-col>
         </ion-row>
       </ion-grid>
     </div>
-
-    <br><br><br><br><br>
-    
-    
-   <!--  <ion-item>
-      <ion-label position="stacked">Tech 1</ion-label>
-      <ion-text>{{servicedetail.tech1}}</ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Tech 2</ion-label>
-      <ion-text>{{servicedetail.tech2}}</ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Tech 3</ion-label>
-      <ion-text>{{servicedetail.tech3}}</ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Tech 4</ion-label>
-      <ion-text>{{servicedetail.tech4}}</ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Emergency Contact</ion-label>
-      <ion-text>{{servicedetail.econtact2}}</ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Emergency Contact 2</ion-label>
-      <ion-text>{{servicedetail.econtact3}}</ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Scheduled Start Time</ion-label>
-      <ion-text>{{servicedetail.startdate}} {{servicedetail.starttime}}</ion-text>
-    </ion-item>
-    <ion-item>
-      <ion-label position="stacked">Service Description</ion-label>
-      <ion-text>{{servicedetail.desc}}</ion-text>
-    </ion-item> -->
-
-<!-- <div class="button-grouping ion-padding">
-  <ion-button size="large" expand="block" color="warning"  [disabled]="servicedetail?.status == 'Open' ? null : 'disabled'" >
-    <ion-text color="dark">
-      {{(servicedetail?.status == 'Open') ? 'Start' : 'Started' }}
-    </ion-text>
-  </ion-button>
-  <ion-button size="large" expand="block" color="success" [disabled]="servicedetail?.status == 'Open' ? 'disabled' : null">
-    <ion-text color="dark">
-      {{(servicedetail?.status !== 'Open') ? 'Completed' : 'Complete' }}       
-    </ion-text>
-  </ion-button>
-</div> -->
-</ion-list>
+  </form>
 </ion-content>
+<!--
+-->

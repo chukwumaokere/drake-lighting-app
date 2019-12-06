@@ -9,6 +9,8 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import { File } from '@ionic-native/file/ngx';
 import { ImageModalPage } from '../image-modal/image-modal.page';
 import { ImageProvider } from '../../providers/image/image';
+import { AppConstants } from '../../providers/constant/constant';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 @Component({
   selector: 'app-detail',
@@ -40,37 +42,13 @@ export class DetailPage implements OnInit {
     mediaType: this.camera.MediaType.PICTURE,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
   }
+
   dataReturned : any;
   userinfo: any;
   serviceid: any;
-  servicedetails: object;
-  servicedetail = {
-    tower: '',
-    tech1: '',
-    tech2: '',
-    tech3: '',
-    tech4: '',
-    tech1_ph: '',
-    tech2_ph: '',
-    tech3_ph: '',
-    tech4_ph: '',
-    address_details: '',
-    econtact2: '',
-    econtact2_ph: '',
-    econtact3: '',
-    econtact3_ph: '',
-    status: '',
-    service_type: '',
-    subject: '',
-    complete_date: '',
-    desc: '',
-    startdate: '',
-    starttime:'',
-    duedate: '',
-    duetime: '',
-    enddate: '',
-    endtime: ''
-  }
+  apiurl:any;
+  serviceName: string;
+  public servicedetail: any[] = [];
     //actionSheet:any;
   constructor(
       public navCtrl: NavController,
@@ -86,11 +64,15 @@ export class DetailPage implements OnInit {
       private photoLibrary: PhotoLibrary,
       public modalCtrl : ModalController,
       public imgpov : ImageProvider,
-      @Inject(LOCALE_ID) private locale: string) { }
+      public appConst : AppConstants,
+      private httpClient: HttpClient,
+      @Inject(LOCALE_ID) private locale: string) {
+        this.apiurl = this.appConst.getApiUrl();
+  }
 
   loadDetails(serviceid){
     console.log('loading details for service id:', serviceid)
-    var result = {
+   /* var result = {
       tower: 'Simmons - MOSPG2014',
       tech1: 'Stanton Neece',
       tech2: 'Austin Shepeard',
@@ -118,7 +100,42 @@ export class DetailPage implements OnInit {
       endtime:'',
       serviceid:serviceid,
     };
-    this.servicedetail = result;
+    this.servicedetail = result;*/
+      var params = {
+          record_id: serviceid
+      }
+      var headers = new HttpHeaders();
+      headers.append("Accept", 'application/json');
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      headers.append('Access-Control-Allow-Origin', '*');
+      this.httpClient.post(this.apiurl + "getWorkOrderDetail.php", params, { headers:headers, observe: 'response' })
+          .subscribe(data => {
+              console.log(data['body']);
+              var success = data['body']['success'];
+              console.log('login response was', success);
+              if(success == true){
+                  var workorders = data['body']['data'];
+                  this.serviceName = workorders['subject'];
+                  for(let key in workorders){
+                      if(key != 'subject') {
+                          this.servicedetail.push({
+                              columnname: key,
+                              uitype: workorders[key].uitype,
+                              value: workorders[key].value,
+                              picklist: workorders[key].picklist,
+                              fieldlabel: workorders[key].fieldlabel,
+                          });
+                      }
+                  }
+                  console.log('workorders', workorders);
+                  console.log('workorders', this.servicedetail);
+              }else{
+                  console.log('failed to fetch records');
+              }
+
+          }, error => {
+              console.log('failed to fetch records');
+          });
   }
 
   logout(){
@@ -349,6 +366,10 @@ openActionSheet(serviceid) {
         });
 
         return await modal.present();
+    }
+
+    saveWO(form){
+
     }
     
 
