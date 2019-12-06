@@ -2,16 +2,77 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button type="button" defaultHref="/tabs/services" text="Back"></ion-back-button>
+        <ion-back-button type="submit" defaultHref="/tabs/services" text="Back"></ion-back-button>
       </ion-buttons>
     <ion-title>{{serviceName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form #form="ngForm"  (ngSubmit)="saveWO(form)">
+  <form #form="ngForm" (ngSubmit)="saveWO(form)">
   <ion-list>
-    <ion-item detail *ngFor="let service of servicedetail">
+    <!--read only fields -->
+      <ion-item>
+        <ion-label position="stacked">Tower</ion-label>
+        <ion-text>{{workorderdetail.towersites}}</ion-text>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="stacked">Address Details</ion-label>
+        <ion-text>{{workorderdetail.cf_site_coordinate}}</ion-text>
+        <ion-button target="_blank" color="primary" href="https://maps.apple.com/?daddr={{workorderdetail.cf_site_coordinate}}" size="default" slot="end" type="button"><ion-icon name="navigate" size="large" ></ion-icon></ion-button>
+      </ion-item>
+      <ion-item>
+        <ion-label>Description of Work</ion-label>
+      </ion-item>
+      <ion-item>
+          <ion-textarea auto-grow="true" name="descofwork" rows="8">{{workorderdetail.description}}</ion-textarea>
+      </ion-item>
+    
+      <ion-item lines="none">
+        <ion-label>Equipment List</ion-label>
+      </ion-item>
+
+      <div>
+        <ion-grid class="ion-padding">
+            <ion-row class="ion-align-items-center ion-justify-content-center" >
+              <ion-col class="padding-left-none" size="9">
+                <ion-text><h5>Equipment</h5></ion-text>
+              </ion-col>
+              <ion-col size="3">
+                  <ion-text><h5>Quantity</h5></ion-text>
+              </ion-col>          
+            </ion-row>
+            <ion-row class="ion-align-items-center ion-justify-content-center" >
+              <ion-col class="padding-left-none" size="9">
+                Beacon Light
+              </ion-col>
+              <ion-col size="3" align-self-center class="text-align-center">
+                <ion-text>2</ion-text>
+              </ion-col>          
+            </ion-row>
+            <ion-row class="ion-align-items-center ion-justify-content-center" >
+              <ion-col class="padding-left-none" size="9">
+                Antenna wing
+              </ion-col >
+              <ion-col size="3" align-self-center class="text-align-center">
+                <ion-text>4</ion-text>
+              </ion-col>          
+            </ion-row>
+            <ion-row class="ion-align-items-center ion-justify-content-center" >
+              <ion-col class="padding-left-none" size="9">
+                Satellite Dish
+              </ion-col>
+              <ion-col size="3" align-self-center class="text-align-center">
+                <ion-text>1</ion-text>
+              </ion-col>          
+            </ion-row>
+        </ion-grid>
+      </div>
+    <!-- read only fields -->
+
+<!-- editable fields -->
+    <ion-item detail="false" *ngFor="let service of servicedetail">
       <ion-label  position="stacked" >{{service.fieldlabel}}</ion-label>
 
       <div [ngSwitch]="service.uitype">
@@ -21,7 +82,7 @@
         <!--uitype = 56-->
         <div *ngSwitchCase="56">
           <ion-checkbox *ngIf="service.value == 1" checked="true">{{service.value}} </ion-checkbox>
-          <ion-checkbox  *ngIf="service.value != 1">{{service.value}} </ion-checkbox>
+          <ion-checkbox *ngIf="service.value != 1">{{service.value}} </ion-checkbox>
         </div>
 
         <!--uitype = 19.20-->
@@ -39,13 +100,19 @@
         <ion-select  *ngSwitchCase="33" name="{{service.columnname}}" multiple="true">
           <ion-select-option *ngFor="let picklist of service.picklist" >{{picklist}}</ion-select-option>
         </ion-select>
+        <!-- uitype = 7 -->
+        <ion-input *ngSwitchCase="7" type="text" name="{{service.columnname}}">{{service.value | number}}</ion-input>
+        <!-- uitype = 9 -->
+        <ion-input *ngSwitchCase="9" type="text" name="{{service.columnname}}">{{service.value | number}}%</ion-input>
         <!--else-->
         <ion-input type="text" name="{{service.columnname}}" *ngSwitchDefault>{{service.value}}</ion-input>
       </div>
     </ion-item>
-    <br><br><br><br><br>
-</ion-list>
-    <div class="button-grouping ion-padding anchor-bottom" >
+<!-- editable fields -->
+  <div><br><br><br><br><br></div>
+  </ion-list>
+<!--photos buttons -->
+  <div class="button-grouping ion-padding anchor-bottom" >
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-align-items-center ion-justify-content-center" >
           <ion-col class="padding-left-none" size="9">
@@ -64,7 +131,6 @@
         </ion-row>
       </ion-grid>
     </div>
+<!--photos buttons -->
   </form>
 </ion-content>
-<!--
--->

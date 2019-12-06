@@ -48,6 +48,7 @@ export class DetailPage implements OnInit {
   serviceid: any;
   apiurl:any;
   serviceName: string;
+  public workorderdetail: any[] = [];
   public servicedetail: any[] = [];
     //actionSheet:any;
   constructor(
@@ -72,35 +73,6 @@ export class DetailPage implements OnInit {
 
   loadDetails(serviceid){
     console.log('loading details for service id:', serviceid)
-   /* var result = {
-      tower: 'Simmons - MOSPG2014',
-      tech1: 'Stanton Neece',
-      tech2: 'Austin Shepeard',
-      tech3: 'Matt Ferguson',
-      tech4: 'Richard Carrigan',
-      tech1_ph: '17733072548',
-      tech2_ph: '17733072548',
-      tech3_ph: '17733072548',
-      tech4_ph: '17733072548',
-      address_details: '35.045556, -89.906111',
-      econtact2: 'Joshua Broder',
-      econtact2_ph: '17733072548',
-      econtact3: 'Rick Grace',
-      econtact3_ph: '17733072548',
-      status: 'Open',
-      service_type: '',
-      subject: 'Radio Implementation Services',
-      complete_date: '',
-      desc: `This is where the description would be if there was one`,
-      startdate: '2019-11-12',
-      starttime: '08:00AM',
-      duedate: '2019-11-12',
-      duetime: '09:00AM',
-      enddate: '',
-      endtime:'',
-      serviceid:serviceid,
-    };
-    this.servicedetail = result;*/
       var params = {
           record_id: serviceid
       }
@@ -112,29 +84,30 @@ export class DetailPage implements OnInit {
           .subscribe(data => {
               console.log(data['body']);
               var success = data['body']['success'];
-              console.log('login response was', success);
+              console.log('getWorkOrderDetail response was', success);
               if(success == true){
-                  var workorders = data['body']['data'];
-                  this.serviceName = workorders['subject'];
-                  for(let key in workorders){
+                  var workorder = data['body']['data'];
+                  var allfields = data['body']['allfields'];
+                  this.workorderdetail = allfields; 
+                  this.serviceName = workorder['subject'];
+                  for(let key in workorder){
                       if(key != 'subject') {
                           this.servicedetail.push({
                               columnname: key,
-                              uitype: workorders[key].uitype,
-                              value: workorders[key].value,
-                              picklist: workorders[key].picklist,
-                              fieldlabel: workorders[key].fieldlabel,
+                              uitype: workorder[key].uitype,
+                              value: workorder[key].value,
+                              picklist: workorder[key].picklist,
+                              fieldlabel: workorder[key].fieldlabel,
                           });
                       }
                   }
-                  console.log('workorders', workorders);
-                  console.log('workorders', this.servicedetail);
+                  console.log('workorder', this.servicedetail);
               }else{
-                  console.log('failed to fetch records');
+                  console.log('failed to fetch record');
               }
 
           }, error => {
-              console.log('failed to fetch records');
+              console.log('failed to fetch record');
           });
   }
 
@@ -216,7 +189,7 @@ async presentToast(message: string) {
   var toast = await this.toastController.create({
     message: message,
     duration: 2000,
-    position: "bottom",
+    position: "top",
     color: "danger"
   });
   toast.present();
@@ -247,7 +220,9 @@ openCamera(serviceid){
         // Handle error
         console.error(err);
         // On Fail: show toast
-        this.presentToast(`Upload failed! Please try again \n` + err);
+        if(err != "no image selected"){
+          this.presentToast(`Upload failed! Please try again \n` + err);
+        }
       });
 }
 
@@ -266,7 +241,9 @@ openLibrary(serviceid){
         // Handle error
         console.error(err);
         // On Fail: show toast
-        this.presentToast(`Upload failed! Please try again \n` + err);
+        if(err != "has no access to assets"){
+          this.presentToast(`Upload failed! Please try again \n` + err);
+        }
       });  
 }
 
