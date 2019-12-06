@@ -50,6 +50,7 @@ export class DetailPage implements OnInit {
   serviceName: string;
   public workorderdetail: any[] = [];
   public servicedetail: any[] = [];
+  updatefields: any[] = [];
     //actionSheet:any;
   constructor(
       public navCtrl: NavController,
@@ -70,7 +71,9 @@ export class DetailPage implements OnInit {
       @Inject(LOCALE_ID) private locale: string) {
         this.apiurl = this.appConst.getApiUrl();
   }
-
+  addUpdate(key: any, value: any){
+    console.log('adding update to queue: ', key, value);
+  }
   loadDetails(serviceid){
     console.log('loading details for service id:', serviceid)
       var params = {
@@ -294,6 +297,10 @@ openActionSheet(serviceid) {
   }); 
 }
 
+openChecklist(record_id){
+  console.log('opening checklist for record', record_id);
+}
+
   ngOnInit() {
     this.activatedRoute.params.subscribe((userData)=>{
       if(userData.length !== 0){
@@ -305,9 +312,6 @@ openActionSheet(serviceid) {
           console.log('couldnt load theme');
         }
         console.log('param user data length:', userData.length);
-        if(userData.serviceid){
-          this.loadDetails(userData.serviceid);
-        }
         if(userData.length == undefined){
           console.log ('nothing in params, so loading from storage');
           this.isLogged().then(result => {
@@ -315,6 +319,9 @@ openActionSheet(serviceid) {
               console.log('loading storage data (within param route function)', result);
               this.userinfo = result;
               this.loadTheme(result.theme.toLowerCase());
+              if(userData.serviceid){
+                this.loadDetails(userData.serviceid);
+              }
             }else{
               console.log('nothing in storage, going back to login');
               this.logout();
@@ -345,8 +352,28 @@ openActionSheet(serviceid) {
         return await modal.present();
     }
 
-    saveWO(form){
-
+    saveWO(){
+      var data = this.updatefields;
+      console.log('submitting data to vtiger', data);
+      /* var params = {
+        data: data
+      }
+      var headers = new HttpHeaders();
+      headers.append("Accept", 'application/json');
+      headers.append('Content-Type', 'application/x-www-form-urlencoded');
+      headers.append('Access-Control-Allow-Origin', '*');
+      this.httpClient.post(this.apiurl + "postWorkOrderInfo.php", params, { headers:headers, observe: 'response' })
+        .subscribe(data=> {
+          var success = data['body']['success'];
+          if(success == true){
+    
+          }else{ 
+            this.presentToast('Failed to save due to an error');
+          }
+        }, error => {
+          this.presentToast('Failed to save due to an error \n' + error);
+          console.log('failed to save record');
+        }); */
     }
     
 

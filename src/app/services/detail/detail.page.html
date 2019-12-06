@@ -2,16 +2,17 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button type="submit" defaultHref="/tabs/services" text="Back"></ion-back-button>
+        <ion-back-button type="submit" defaultHref="/tabs/services" text="Back" (click)="saveWO()"></ion-back-button>
       </ion-buttons>
     <ion-title>{{serviceName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form #form="ngForm" (ngSubmit)="saveWO(form)">
+  <form #form="ngForm" (ngSubmit)="saveWO()">
   <ion-list>
     <!--read only fields -->
+    <div class="readonly-fields">
       <ion-item>
         <ion-label position="stacked">Tower</ion-label>
         <ion-text>{{workorderdetail.towersites}}</ion-text>
@@ -22,11 +23,11 @@
         <ion-text>{{workorderdetail.cf_site_coordinate}}</ion-text>
         <ion-button target="_blank" color="primary" href="https://maps.apple.com/?daddr={{workorderdetail.cf_site_coordinate}}" size="default" slot="end" type="button"><ion-icon name="navigate" size="large" ></ion-icon></ion-button>
       </ion-item>
-      <ion-item>
+      <ion-item lines="none">
         <ion-label>Description of Work</ion-label>
       </ion-item>
       <ion-item>
-          <ion-textarea auto-grow="true" name="descofwork" rows="8">{{workorderdetail.description}}</ion-textarea>
+          <ion-text auto-grow="true" name="descofwork" rows="8">{{workorderdetail.description}}</ion-text>
       </ion-item>
     
       <ion-item lines="none">
@@ -36,12 +37,8 @@
       <div>
         <ion-grid class="ion-padding">
             <ion-row class="ion-align-items-center ion-justify-content-center" >
-              <ion-col class="padding-left-none" size="9">
-                <ion-text><h5>Equipment</h5></ion-text>
-              </ion-col>
-              <ion-col size="3">
-                  <ion-text><h5>Quantity</h5></ion-text>
-              </ion-col>          
+              <ion-col class="padding-left-none" size="9"></ion-col>
+              <ion-col size="3"></ion-col>          
             </ion-row>
             <ion-row class="ion-align-items-center ion-justify-content-center" >
               <ion-col class="padding-left-none" size="9">
@@ -69,6 +66,7 @@
             </ion-row>
         </ion-grid>
       </div>
+    </div>
     <!-- read only fields -->
 
 <!-- editable fields -->
@@ -81,33 +79,40 @@
 
         <!--uitype = 56-->
         <div *ngSwitchCase="56">
-          <ion-checkbox *ngIf="service.value == 1" checked="true">{{service.value}} </ion-checkbox>
-          <ion-checkbox *ngIf="service.value != 1">{{service.value}} </ion-checkbox>
+          <ion-checkbox (ionChange)="addUpdate()" *ngIf="service.value == 1" checked="true">{{service.value}} </ion-checkbox>
+          <ion-checkbox (ionChange)="addUpdate()" *ngIf="service.value != 1">{{service.value}} </ion-checkbox>
         </div>
 
         <!--uitype = 19.20-->
-        <ion-textarea auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="19">{{service.value}}</ion-textarea>
-        <ion-textarea auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="20">{{service.value}}</ion-textarea>
+        <ion-textarea (ionInput)="addUpdate()" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="19" value="{{service.value}}"></ion-textarea>
+        <ion-textarea (ionInput)="addUpdate()" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="20" value="{{service.value}}"></ion-textarea>
 
         <!--uitype = 15.16-->
-        <ion-select  *ngSwitchCase="16" name="{{service.columnname}}"  value="{{service.value}}">
+        <ion-select (ionChange)="addUpdate()" *ngSwitchCase="16" name="{{service.columnname}}"  value="{{service.value}}">
           <ion-select-option *ngFor="let picklist of service.picklist">{{picklist}}</ion-select-option>
         </ion-select>
-        <ion-select  *ngSwitchCase="15" name="{{service.columnname}}"  value="{{service.value}}">
+        <ion-select (ionChange)="addUpdate()" *ngSwitchCase="15" name="{{service.columnname}}"  value="{{service.value}}">
           <ion-select-option *ngFor="let picklist of service.picklist">{{picklist}}</ion-select-option>
         </ion-select>
         <!--uitype = 33-->
-        <ion-select  *ngSwitchCase="33" name="{{service.columnname}}" multiple="true">
+        <ion-select (ionChange)="addUpdate()" *ngSwitchCase="33" name="{{service.columnname}}" multiple="true">
           <ion-select-option *ngFor="let picklist of service.picklist" >{{picklist}}</ion-select-option>
         </ion-select>
         <!-- uitype = 7 -->
-        <ion-input *ngSwitchCase="7" type="text" name="{{service.columnname}}">{{service.value | number}}</ion-input>
+        <ion-input (ionInput)="addUpdate()" *ngSwitchCase="7" type="text" name="{{service.columnname}}">{{service.value | number}}</ion-input>
         <!-- uitype = 9 -->
-        <ion-input *ngSwitchCase="9" type="text" name="{{service.columnname}}">{{service.value | number}}%</ion-input>
+        <ion-input (ionInput)="addUpdate()" *ngSwitchCase="9" type="text" name="{{service.columnname}}">{{service.value | number}}%</ion-input>
         <!--else-->
-        <ion-input type="text" name="{{service.columnname}}" *ngSwitchDefault>{{service.value}}</ion-input>
+        <ion-input (ionInput)="addUpdate()" type="text" name="{{service.columnname}}" *ngSwitchDefault>{{service.value}}</ion-input>
       </div>
     </ion-item>
+
+    <!-- open checklist modal -->
+    <div class="button-grouping ion-padding" >
+      <ion-button expand="full" size="large" expand="block" color="primary" (click)="openChecklist(workorderdetail.workorderid)">Complete Work Order</ion-button>
+    </div>
+    <!-- open checklist modal -->
+  
 <!-- editable fields -->
   <div><br><br><br><br><br></div>
   </ion-list>
@@ -116,7 +121,7 @@
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-align-items-center ion-justify-content-center" >
           <ion-col class="padding-left-none" size="9">
-            <ion-button expand="full" size="large" expand="block" color="tertiary"  (click)="openCamera(servicedetail.serviceid)">
+            <ion-button expand="full" size="large" expand="block" color="tertiary"  (click)="openCamera(workorderdetail.workorderid)">
               <ion-icon name="camera"></ion-icon>
               <ion-text class="add-photo-button">
                 Take Photos
@@ -124,8 +129,8 @@
             </ion-button>
           </ion-col>
           <ion-col size="3">
-            <ion-button size="large" expand="block" color="tertiary"  (click)="openLibrary(servicedetail.serviceid)">
-              <ion-icon name="albums"></ion-icon>
+            <ion-button size="large" expand="block" color="tertiary"  (click)="openLibrary(workorderdetail.workorderid)">
+              <ion-icon name="folder-open"></ion-icon>
             </ion-button>
           </ion-col>
         </ion-row>
