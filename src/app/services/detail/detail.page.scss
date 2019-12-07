@@ -15,7 +15,9 @@ ion-text.status-text{
 .button-grouping{
  
 }
-
+ion-input > input {
+    width: 100% !important;
+}
 .anchor-bottom{
     position: fixed;
     bottom: 0;
