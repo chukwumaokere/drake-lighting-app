@@ -213,7 +213,7 @@ export class ServicesPage implements OnInit {
     this.activatedRoute.params.subscribe((userData)=>{
      if(userData.length !== 0){
        this.userinfo = userData;
-       console.log('param user data:', userData);
+       //console.log('param user data:', userData);
        try{ 
          this.loadTheme(userData.theme.toLowerCase());
        }catch{
@@ -224,7 +224,7 @@ export class ServicesPage implements OnInit {
          console.log ('nothing in params, so loading from storage');
          this.isLogged().then(result => {
            if (!(result == false)){
-             console.log('loading storage data (within param route function)', result);
+             //console.log('loading storage data (within param route function)', result);
              this.userinfo = result;
              this.loadTheme(result.theme.toLowerCase());
              this.getWorkOrders(this.userinfo.id, 'weekly');

@@ -50,7 +50,7 @@ export class DetailPage implements OnInit {
   serviceName: string;
   public workorderdetail: any[] = [];
   public servicedetail: any[] = [];
-  updatefields: any[] = [];
+  updatefields: any = {};
     //actionSheet:any;
   constructor(
       public navCtrl: NavController,
@@ -71,8 +71,18 @@ export class DetailPage implements OnInit {
       @Inject(LOCALE_ID) private locale: string) {
         this.apiurl = this.appConst.getApiUrl();
   }
-  addUpdate(key: any, value: any){
-    console.log('adding update to queue: ', key, value);
+  addUpdate(event){
+    var fieldname = event.target.name;
+    var fieldvalue = event.target.textContent + event.target.value;
+    if (fieldname == 'cf_climb' || fieldname == 'cf_overnight'){
+      fieldvalue = event.detail.checked;
+    }
+    if (event.target.tagName == 'ION-TEXTAREA'){
+      fieldvalue = event.target.value;
+    }
+    this.updatefields[fieldname] = fieldvalue;
+    console.log('adding update to queue: ', fieldname, fieldvalue);
+    console.log(this.updatefields);
   }
   loadDetails(serviceid){
     console.log('loading details for service id:', serviceid)
@@ -305,7 +315,7 @@ openChecklist(record_id){
     this.activatedRoute.params.subscribe((userData)=>{
       if(userData.length !== 0){
         this.userinfo = userData;
-        console.log('param user data:', userData);
+        //console.log('param user data:', userData);
         try{ 
           this.loadTheme(userData.theme.toLowerCase());
         }catch{
@@ -316,7 +326,7 @@ openChecklist(record_id){
           console.log ('nothing in params, so loading from storage');
           this.isLogged().then(result => {
             if (!(result == false)){
-              console.log('loading storage data (within param route function)', result);
+              //console.log('loading storage data (within param route function)', result);
               this.userinfo = result;
               this.loadTheme(result.theme.toLowerCase());
               if(userData.serviceid){
@@ -352,28 +362,38 @@ openChecklist(record_id){
         return await modal.present();
     }
 
-    saveWO(){
+    saveWO(worecord){
       var data = this.updatefields;
-      console.log('submitting data to vtiger', data);
-      /* var params = {
-        data: data
+      var data_stringified = JSON.stringify(data);
+      console.log('attempting to submitting data to vtiger', worecord, data);
+      var params = {
+        recordid: worecord,
+        updates: data_stringified
+      } 
+      if(Object.keys(data).length > 0){
+        console.log('Some data was changed, pushing ' + Object.keys(data).length + ' changes');
+        var headers = new HttpHeaders();
+        headers.append("Accept", 'application/json');
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append('Access-Control-Allow-Origin', '*');
+        this.httpClient.post(this.apiurl + "postWorkOrderInfo.php", params, { headers:headers, observe: 'response' })
+          .subscribe(data=> {
+            var success = data['body']['success'];
+            console.log(data['body']);
+            if(success == true){
+              console.log("Saved and updated data for workorder");
+            }else{ 
+              this.presentToast('Failed to save due to an error');
+              console.log('failed to save record, response was false');
+            }
+          }, error => {
+            this.presentToast('Failed to save due to an error \n' + error.message);
+            console.log('failed to save record', error.message);
+          }); 
+      }else{
+        console.log('no data modified for record', worecord)
       }
-      var headers = new HttpHeaders();
-      headers.append("Accept", 'application/json');
-      headers.append('Content-Type', 'application/x-www-form-urlencoded');
-      headers.append('Access-Control-Allow-Origin', '*');
-      this.httpClient.post(this.apiurl + "postWorkOrderInfo.php", params, { headers:headers, observe: 'response' })
-        .subscribe(data=> {
-          var success = data['body']['success'];
-          if(success == true){
-    
-          }else{ 
-            this.presentToast('Failed to save due to an error');
-          }
-        }, error => {
-          this.presentToast('Failed to save due to an error \n' + error);
-          console.log('failed to save record');
-        }); */
+        
     }
     
 

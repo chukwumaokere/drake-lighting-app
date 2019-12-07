@@ -2,14 +2,14 @@
 <ion-header>
   <ion-toolbar>
       <ion-buttons slot="start">
-        <ion-back-button type="submit" defaultHref="/tabs/services" text="Back" (click)="saveWO()"></ion-back-button>
+        <ion-back-button type="submit" defaultHref="/tabs/services" text="Back" (click)="saveWO(workorderdetail.workorderid)"></ion-back-button>
       </ion-buttons>
     <ion-title>{{serviceName}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <form #form="ngForm" (ngSubmit)="saveWO()">
+  <form #form="ngForm" (ngSubmit)="saveWO(workorderdetail.workorderid)">
   <ion-list>
     <!--read only fields -->
     <div class="readonly-fields">
@@ -79,31 +79,31 @@
 
         <!--uitype = 56-->
         <div *ngSwitchCase="56">
-          <ion-checkbox (ionChange)="addUpdate()" *ngIf="service.value == 1" checked="true">{{service.value}} </ion-checkbox>
-          <ion-checkbox (ionChange)="addUpdate()" *ngIf="service.value != 1">{{service.value}} </ion-checkbox>
+          <ion-checkbox (ionChange)="addUpdate($event)" *ngIf="service.value == 1" checked="true"  name="{{service.columnname}}">{{service.value}} </ion-checkbox>
+          <ion-checkbox (ionChange)="addUpdate($event)" *ngIf="service.value != 1"  name="{{service.columnname}}">{{service.value}} </ion-checkbox>
         </div>
 
         <!--uitype = 19.20-->
-        <ion-textarea (ionInput)="addUpdate()" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="19" value="{{service.value}}"></ion-textarea>
-        <ion-textarea (ionInput)="addUpdate()" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="20" value="{{service.value}}"></ion-textarea>
+        <ion-textarea (ionInput)="addUpdate($event)" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="19" value="{{service.value}}"></ion-textarea>
+        <ion-textarea (ionInput)="addUpdate($event)" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="20" value="{{service.value}}"></ion-textarea>
 
         <!--uitype = 15.16-->
-        <ion-select (ionChange)="addUpdate()" *ngSwitchCase="16" name="{{service.columnname}}"  value="{{service.value}}">
+        <ion-select (ionChange)="addUpdate($event)" *ngSwitchCase="16" name="{{service.columnname}}"  value="{{service.value}}">
           <ion-select-option *ngFor="let picklist of service.picklist">{{picklist}}</ion-select-option>
         </ion-select>
-        <ion-select (ionChange)="addUpdate()" *ngSwitchCase="15" name="{{service.columnname}}"  value="{{service.value}}">
+        <ion-select (ionChange)="addUpdate($event)" *ngSwitchCase="15" name="{{service.columnname}}"  value="{{service.value}}">
           <ion-select-option *ngFor="let picklist of service.picklist">{{picklist}}</ion-select-option>
         </ion-select>
         <!--uitype = 33-->
-        <ion-select (ionChange)="addUpdate()" *ngSwitchCase="33" name="{{service.columnname}}" multiple="true">
+        <ion-select (ionChange)="addUpdate($event)" *ngSwitchCase="33" name="{{service.columnname}}" multiple="true">
           <ion-select-option *ngFor="let picklist of service.picklist" >{{picklist}}</ion-select-option>
         </ion-select>
         <!-- uitype = 7 -->
-        <ion-input (ionInput)="addUpdate()" *ngSwitchCase="7" type="text" name="{{service.columnname}}">{{service.value | number}}</ion-input>
+        <ion-input (ionInput)="addUpdate($event)" *ngSwitchCase="7" type="text" name="{{service.columnname}}" value="{{service.value | number}}"></ion-input>
         <!-- uitype = 9 -->
-        <ion-input (ionInput)="addUpdate()" *ngSwitchCase="9" type="text" name="{{service.columnname}}">{{service.value | number}}%</ion-input>
+        <ion-input (ionInput)="addUpdate($event)" *ngSwitchCase="9" type="text" name="{{service.columnname}}" value="{{service.value | number}}"></ion-input>
         <!--else-->
-        <ion-input (ionInput)="addUpdate()" type="text" name="{{service.columnname}}" *ngSwitchDefault>{{service.value}}</ion-input>
+        <ion-input (ionInput)="addUpdate($event)" type="text" name="{{service.columnname}}" *ngSwitchDefault value="{{service.value}}"></ion-input>
       </div>
     </ion-item>
 
@@ -121,7 +121,7 @@
       <ion-grid class="ion-no-padding">
         <ion-row class="ion-align-items-center ion-justify-content-center" >
           <ion-col class="padding-left-none" size="9">
-            <ion-button expand="full" size="large" expand="block" color="tertiary"  (click)="openCamera(workorderdetail.workorderid)">
+            <ion-button expand="full" size="large" expand="block" color="tertiary" (click)="openCamera(workorderdetail.workorderid)">
               <ion-icon name="camera"></ion-icon>
               <ion-text class="add-photo-button">
                 Take Photos
