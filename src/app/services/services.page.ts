@@ -1,10 +1,11 @@
 import { Component, OnInit, LOCALE_ID, Inject, } from '@angular/core';
 import { ActivatedRoute, Router } from  "@angular/router";
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { AppConstants } from '../providers/constant/constant';
+import { ProfileModalPage } from './profile/profile.page';
 
 @Component({
   selector: 'app-services',
@@ -13,6 +14,7 @@ import { AppConstants } from '../providers/constant/constant';
 })
 export class ServicesPage implements OnInit {
   userinfo: any;
+  user_id: any;
   weeklyServices: object;
   futureServices: object;
   completedServices: object;
@@ -31,6 +33,7 @@ export class ServicesPage implements OnInit {
   randomPeople = ['Simmons - MOSPG2014', 'Marysville - ARLIT2062', 'Coldspring - TXHOU2041', 'Yellow Rock - KYLEX2020', 'Medora - ILSPG2027', 'Lawtell - LALWL2000', 'HWY 584 (FTCA) - LAMON2002', 'HWY 120 (FTCA) - LASRV2006', 'York - ALBRH2003', 'Jorge Auto Sales - TXLAR2007', 'Sawmill - ARLIT2065', 'Saxton - PAPIT2008', 'Rockwood - PAPIT2006', 'Mellen - WIWAU2029', 'Calvin - LAMON2113', 'Funston - LARSV2021'];
   typesOfServices= ['Radio Implementation Services', 'Labor', 'Mount Installation', 'Power Installation', 'Structural Analysis'];
   statuses= ['Attention Required', 'Declined', 'Complete', 'Cancelled', 'Closed', 'Open'];
+  dataReturned: any;
 
   constructor(
       private httpClient: HttpClient,
@@ -39,6 +42,7 @@ export class ServicesPage implements OnInit {
       public storage: Storage,
       private activatedRoute: ActivatedRoute,
       public appConst: AppConstants,
+      public modalCtrl : ModalController,
       @Inject(LOCALE_ID) private locale: string
   ){
     this.apiurl = this.appConst.getApiUrl();
@@ -208,6 +212,24 @@ export class ServicesPage implements OnInit {
             console.log('failed to fetch records');
           });
    }
+   async openSettings(){
+     console.log('opening settings page for user id', this.user_id);
+      const modal = await this.modalCtrl.create({
+          component: ProfileModalPage,
+          componentProps: {
+              "user_id" : this.user_id,
+              "userinfo": this.userinfo,
+          }
+      });
+
+      modal.onDidDismiss().then((dataReturned) => {
+          if (dataReturned !== null) {
+              this.dataReturned = dataReturned.data;
+          }
+      });
+
+      return await modal.present();
+   }
 
   ngOnInit(){
     this.activatedRoute.params.subscribe((userData)=>{
@@ -228,6 +250,7 @@ export class ServicesPage implements OnInit {
              this.userinfo = result;
              this.loadTheme(result.theme.toLowerCase());
              this.getWorkOrders(this.userinfo.id, 'weekly');
+             this.user_id = this.userinfo.id;
            }else{
              console.log('nothing in storage, going back to login');
              this.logout();
