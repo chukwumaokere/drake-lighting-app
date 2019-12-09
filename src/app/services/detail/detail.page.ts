@@ -102,6 +102,8 @@ export class DetailPage implements OnInit {
               if(success == true){
                   var workorder = data['body']['data'];
                   var allfields = data['body']['allfields'];
+                  allfields.description.replace(/\n/g, "<br>");
+                  console.log('allfields are', allfields);
                   this.workorderdetail = allfields; 
                   this.serviceName = workorder['subject'];
                   for(let key in workorder){

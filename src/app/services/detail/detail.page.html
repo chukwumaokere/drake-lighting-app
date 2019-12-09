@@ -20,14 +20,14 @@
   
       <ion-item lines="none">
         <ion-label position="stacked">Address Details</ion-label>
-        <ion-text>{{workorderdetail.cf_site_coordinate}}</ion-text>
-        <ion-button target="_blank" color="primary" href="https://maps.apple.com/?daddr={{workorderdetail.cf_site_coordinate}}" size="default" slot="end" type="button"><ion-icon name="navigate" size="large" ></ion-icon></ion-button>
+        <ion-text>{{workorderdetail.cf_longtitude}}</ion-text>
+        <ion-button target="_blank" color="primary" href="https://maps.apple.com/?daddr={{workorderdetail.cf_longtitude}}" size="default" slot="end" type="button"><ion-icon name="navigate" size="large" ></ion-icon></ion-button>
       </ion-item>
       <ion-item lines="none">
         <ion-label>Description of Work</ion-label>
       </ion-item>
-      <ion-item lines="none">
-          <ion-text auto-grow="true" name="descofwork" rows="8">{{workorderdetail.description}}</ion-text>
+      <ion-item lines="none" style="white-space: pre-wrap;">
+          <ion-text name="descofwork">{{workorderdetail.description}}</ion-text>
       </ion-item>
     
       <ion-item lines="none">
