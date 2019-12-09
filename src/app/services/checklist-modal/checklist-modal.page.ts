@@ -133,6 +133,7 @@ export class ChecklistModalPage implements OnInit {
         }
     }
     addUpdate(event,value){
+        console.log(event);
         var fieldname = event.target.name;
         console.log(fieldname);
         var is_checked = event.detail.checked;
@@ -141,8 +142,12 @@ export class ChecklistModalPage implements OnInit {
             this.checklistDetail.site_photo = false;
             console.log(this.checklistDetail.site_photo);
         }*/
+
         this.updatefields[fieldname] = value;
         console.log('adding update to queue: ', fieldname, value);
         console.log(this.updatefields);
+    }
+    async  checkItem(columnname, value){
+
     }
 }
