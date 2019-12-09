@@ -1,0 +1,37 @@
+<ion-header>
+    <ion-toolbar text-center>
+        <ion-title>{{modalTitle}}</ion-title>
+        <ion-icon name="close" (click)="closeModal()" size="large"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <form #form="ngForm"  (ngSubmit)="completeOrder(serviceid)">
+        <ion-grid>
+            <ion-row>
+                <ion-col>Checklist</ion-col>
+                <ion-col>Yes</ion-col>
+                <ion-col>N/A</ion-col>
+            </ion-row>
+            <ion-row *ngFor="let service of servicedetail">
+                <ion-col>{{service.fieldlabel}}</ion-col>
+               <ion-col>
+                   <ion-checkbox  (ionChange)="addUpdate($event,'Yes')" *ngIf="service.value == 'Yes'" checked="true"  name="{{service.columnname}}"></ion-checkbox>
+                   <ion-checkbox (ionChange)="addUpdate($event,'Yes')" *ngIf="service.value != 'Yes'" name="{{service.columnname}}">{{service.value}} </ion-checkbox>
+                </ion-col>
+                <ion-col>
+                    <ion-checkbox (ionChange)="addUpdate($event,'N/A')" *ngIf="service.value == 'N/A'" checked="true"  name="{{service.columnname}}"></ion-checkbox>
+                    <ion-checkbox  (ionChange)="addUpdate($event,'N/A')" *ngIf="service.value != 'N/A'" name="{{service.columnname}}">{{service.value}} </ion-checkbox>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div class="button-grouping ion-padding">
+            <ion-button size="large" expand="block" color="primary" type="submit">
+                <ion-text>Save</ion-text>
+            </ion-button>
+        </div>
+    </form>
+        <ion-radio-group [value]="cord">
+                <ion-radio value="cord"></ion-radio>
+                <ion-radio value="duesenberg"></ion-radio>
+        </ion-radio-group>
+</ion-content>

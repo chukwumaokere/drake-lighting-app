@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 //import { File } from '@ionic-native/file/ngx';
 import { ImageModalPage } from '../image-modal/image-modal.page';
+import { ChecklistModalPage } from '../checklist-modal/checklist-modal.page';
 import { ImageProvider } from '../../providers/image/image';
 import { AppConstants } from '../../providers/constant/constant';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
@@ -307,8 +308,24 @@ openActionSheet(serviceid) {
   }); 
 }
 
-openChecklist(record_id){
+async openChecklist(record_id){
   console.log('opening checklist for record', record_id);
+    const modal_checklist = await this.modalCtrl.create({
+        component: ChecklistModalPage,
+        componentProps: {
+            "paramTitle": "Complete Work Order",
+            "serviceid" : record_id,
+        }
+    });
+
+    modal_checklist.onDidDismiss().then((dataReturned) => {
+        if (dataReturned !== null) {
+            this.dataReturned = dataReturned.data;
+            //alert('Modal Sent Data :'+ dataReturned);
+        }
+    });
+
+    return await modal_checklist.present();
 }
 
   ngOnInit() {
