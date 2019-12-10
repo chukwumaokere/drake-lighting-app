@@ -33,35 +33,15 @@
       <ion-item lines="none">
         <ion-label>Equipment List</ion-label>
       </ion-item>
-
-      <div>
+      <p class="ion-padding" *ngIf="countItemList == 0">No Equipment Available</p>
+      <div *ngIf="countItemList > 0">
         <ion-grid class="ion-padding">
-            <ion-row class="ion-align-items-center ion-justify-content-center" >
-              <ion-col class="padding-left-none" size="9"></ion-col>
-              <ion-col size="3"></ion-col>          
-            </ion-row>
-            <ion-row class="ion-align-items-center ion-justify-content-center" >
+            <ion-row class="ion-align-items-center ion-justify-content-center" *ngFor="let item of itemgrid" >
               <ion-col class="padding-left-none" size="9">
-                Beacon Light
+               {{item.itemname}}
               </ion-col>
               <ion-col size="3" align-self-center class="text-align-center">
-                <ion-text>2</ion-text>
-              </ion-col>          
-            </ion-row>
-            <ion-row class="ion-align-items-center ion-justify-content-center" >
-              <ion-col class="padding-left-none" size="9">
-                Antenna wing
-              </ion-col >
-              <ion-col size="3" align-self-center class="text-align-center">
-                <ion-text>4</ion-text>
-              </ion-col>          
-            </ion-row>
-            <ion-row class="ion-align-items-center ion-justify-content-center" >
-              <ion-col class="padding-left-none" size="9">
-                Satellite Dish
-              </ion-col>
-              <ion-col size="3" align-self-center class="text-align-center">
-                <ion-text>1</ion-text>
+                <ion-text> {{item.quantity}}</ion-text>
               </ion-col>          
             </ion-row>
         </ion-grid>

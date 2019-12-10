@@ -51,6 +51,8 @@ export class DetailPage implements OnInit {
   serviceName: string;
   public workorderdetail: any[] = [];
   public servicedetail: any[] = [];
+  public itemgrid: any[] = [];
+  public countItemList: number = 0;
   updatefields: any = {};
     //actionSheet:any;
   constructor(
@@ -96,14 +98,14 @@ export class DetailPage implements OnInit {
       headers.append('Access-Control-Allow-Origin', '*');
       this.httpClient.post(this.apiurl + "getWorkOrderDetail.php", params, { headers:headers, observe: 'response' })
           .subscribe(data => {
-              console.log(data['body']);
+              //console.log(data['body']);
               var success = data['body']['success'];
               console.log('getWorkOrderDetail response was', success);
               if(success == true){
                   var workorder = data['body']['data'];
                   var allfields = data['body']['allfields'];
                   allfields.description.replace(/\n/g, "<br>");
-                  console.log('allfields are', allfields);
+                  //console.log('allfields are', allfields);
                   this.workorderdetail = allfields; 
                   this.serviceName = workorder['subject'];
                   for(let key in workorder){
@@ -117,7 +119,17 @@ export class DetailPage implements OnInit {
                           });
                       }
                   }
-                  console.log('workorder', this.servicedetail);
+                  //console.log('workorder', this.servicedetail);
+
+                  //load item grid 43636
+                  this.httpClient.post(this.apiurl + "getItemList.php", params, { headers:headers, observe: 'response' })
+                      .subscribe(data => {
+                          var success = data['body']['success'];
+                          if(success == true){
+                              this.itemgrid =  data['body']['data'];
+                              this.countItemList = data['body']['count'];
+                          }
+                      });
               }else{
                   console.log('failed to fetch record');
               }
