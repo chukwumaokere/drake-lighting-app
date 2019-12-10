@@ -203,14 +203,26 @@ export class ServicesPage implements OnInit {
                 var workorders = data['body']['data'];
                 console.log('workorders', workorders);
                 if(type == 'weekly'){
+                  workorders.forEach(workorder => {
+                    workorder['longdate'] = workorder['date_start'] + ' ' + workorder['time_start'];
+                  });
                   this.weeklyServices= workorders;
                   this.count_weeklyServices = data['body']['count'];
+                  //console.log('weekly services,', this.weeklyServices);
                 }else if(type == 'future'){
+                    workorders.forEach(workorder => {
+                      workorder['longdate'] = workorder['date_start'] + ' ' + workorder['time_start'];
+                    });
                     this.futureServices = workorders;
                     this.count_futureServices = data['body']['count'];
+                    //console.log('future services,', this.futureServices);
                 }else if(type == 'completed'){
+                    workorders.forEach(workorder => {
+                      workorder['longdate'] = workorder['date_start'] + ' ' + workorder['time_start'];
+                    });
                     this.completedServices = workorders;
                     this.count_completedServices = data['body']['count'];
+                   // console.log('completed services,', this.completedServices);
                     console.log(this.count_completedServices);
                 }
               }else{
