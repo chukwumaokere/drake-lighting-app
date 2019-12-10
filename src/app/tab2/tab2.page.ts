@@ -16,7 +16,8 @@ export class Tab2Page implements OnInit {
   userinfo: any;
   nextId: any = 51;
   event = {
-    id: this.nextId,
+    //id: this.nextId,
+    id: '',
     title: '',
     desc: '',
     startTime: '',
@@ -60,12 +61,18 @@ export class Tab2Page implements OnInit {
                 var workorders = data['body']['data'];
                 console.log('workorders', workorders);
                 workorders.forEach(workorder => {
+                  workorder.startTimeRaw = workorder.startTime;
+                  workorder.endTimeRaw = workorder.endTime;
                   workorder.startTime = new Date(workorder.startTime);
                   workorder.endTime = new Date(workorder.endTime);
+                  workorder.allDay = false;
+                  workorder.id = workorder.workorderid;
+                  workorder.title = workorder.subject;
+                  workorder.desc = workorder.towersites;
                 });
                 //TODO: Fix the date being start of epoch time.
                 this.eventSource= workorders;
-                console.log(this.eventSource);
+                console.log('eventsource: ', this.eventSource);
               }else{
                 console.log('failed to fetch records');
               }
