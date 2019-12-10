@@ -41,10 +41,10 @@
         </div>
       </ion-label>
       <ion-badge slot="end" class="status" color="white"
-      data-color="{{(service?.status == 'Cancelled' || service?.status == 'Declined') ? 'danger' : 'warning'}}"
+      data-color="{{(service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined') ? 'danger' : 'warning'}}"
       [ngStyle]="{'background-color': service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : 
       service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 
-      service?.wostatus == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == 'Under Review' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
+      service?.wostatus == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-success)', 'border-color':service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
       >
         <ion-text class="status-text">{{service.wostatus}}</ion-text>
       </ion-badge>
@@ -80,7 +80,7 @@
           </div>
         </ion-label>
         <ion-badge slot="end" class="status" color="medium"
-        data-color="{{(service?.status == 'Cancelled' || service?.status == 'Declined') ? 'danger' : 'success'}}"
+        data-color="{{(service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined') ? 'danger' : 'success'}}"
         [ngStyle]="{'background-color':service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : 'var(--ion-color-success)', 'border-color':service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : 'var(--ion-color-success)' }"
         >
           <ion-text class="status-text">{{service.wostatus}}</ion-text>
