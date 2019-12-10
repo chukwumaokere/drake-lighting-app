@@ -33,7 +33,6 @@
       <ion-item lines="none">
         <ion-label>Equipment List</ion-label>
       </ion-item>
-      <p class="ion-padding" *ngIf="countItemList == 0">No Equipment Available</p>
       <div *ngIf="countItemList > 0">
         <ion-grid class="ion-padding">
             <ion-row class="ion-align-items-center ion-justify-content-center" *ngFor="let item of itemgrid" >
@@ -46,6 +45,7 @@
             </ion-row>
         </ion-grid>
       </div>
+      <p class="ion-padding" *ngIf="countItemList == 0">No Equipment Available</p>
     </div>
     <!-- read only fields -->
 
