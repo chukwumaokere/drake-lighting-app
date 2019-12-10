@@ -18,6 +18,9 @@ export class ServicesPage implements OnInit {
   weeklyServices: object;
   futureServices: object;
   completedServices: object;
+  count_weeklyServices : number=0;
+  count_futureServices : number=0;
+  count_completedServices : number=0;
   apiurl:any;
   service = {
     id: '',
@@ -182,7 +185,8 @@ export class ServicesPage implements OnInit {
 
    getWorkOrders(user_id, type){
     var logged_user = {
-      user_id: user_id
+      user_id: user_id,
+      type: type
     }
     console.log('fetching records for', logged_user);
     var headers = new HttpHeaders();
@@ -200,6 +204,14 @@ export class ServicesPage implements OnInit {
                 console.log('workorders', workorders);
                 if(type == 'weekly'){
                   this.weeklyServices= workorders;
+                  this.count_weeklyServices = data['body']['count'];
+                }else if(type == 'future'){
+                    this.futureServices = workorders;
+                    this.count_futureServices = data['body']['count'];
+                }else if(type == 'completed'){
+                    this.completedServices = workorders;
+                    this.count_completedServices = data['body']['count'];
+                    console.log(this.count_completedServices);
                 }
               }else{
                 console.log('failed to fetch records');
@@ -250,6 +262,8 @@ export class ServicesPage implements OnInit {
              this.userinfo = result;
              this.loadTheme(result.theme.toLowerCase());
              this.getWorkOrders(this.userinfo.id, 'weekly');
+             this.getWorkOrders(this.userinfo.id, 'future');
+             this.getWorkOrders(this.userinfo.id, 'completed');
              this.user_id = this.userinfo.id;
            }else{
              console.log('nothing in storage, going back to login');
@@ -260,8 +274,8 @@ export class ServicesPage implements OnInit {
      }
    }); 
    //this.loadRandomServices('today').then((result) => { this.todayServices= result; });
-   this.loadRandomServices('future').then((result) => { this.futureServices= result; });
-   this.loadRandomServices('completed').then((result) => { this.completedServices= result; });
+   // this.loadRandomServices('future').then((result) => { this.futureServices= result; });
+   // this.loadRandomServices('completed').then((result) => { this.completedServices= result; });
  }
 
 }
