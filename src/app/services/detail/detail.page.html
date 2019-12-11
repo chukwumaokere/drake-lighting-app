@@ -50,6 +50,7 @@
     <!-- read only fields -->
 
 <!-- editable fields -->
+    <div *ngIf="isCompleteWO == 0">
     <ion-item detail="false" *ngFor="let service of servicedetail">
       <ion-label  position="stacked" >{{service.fieldlabel}}</ion-label>
 
@@ -92,7 +93,22 @@
       <ion-button expand="full" size="large" expand="block" color="primary" (click)="openChecklist(workorderdetail.workorderid)">Complete Work Order</ion-button>
     </div>
     <!-- open checklist modal -->
-  
+    </div>
+
+    <!-- if WO is Completed, Cancelled, Closed, make fields readonly-->
+    <div *ngIf="isCompleteWO == 1">
+      <ion-item detail="false" *ngFor="let service of servicedetail" lines="none">
+        <ion-label  position="stacked" >{{service.fieldlabel}}</ion-label>
+        <div [ngSwitch]="service.uitype">
+          <div *ngSwitchCase="56">
+            <ion-text *ngIf="service.value == 1">Yes </ion-text>
+            <ion-text *ngIf="service.value != 1">No </ion-text>
+          </div>
+          <ion-text *ngSwitchDefault>{{service.value}} </ion-text>
+        </div>
+      </ion-item>
+    </div>
+
 <!-- editable fields -->
   <div><br><br><br><br><br></div>
   </ion-list>

@@ -49,6 +49,7 @@ export class DetailPage implements OnInit {
   serviceid: any;
   apiurl:any;
   serviceName: string;
+  isCompleteWO: number=0;
   public workorderdetail: any[] = [];
   public servicedetail: any[] = [];
   public itemgrid: any[] = [];
@@ -106,7 +107,10 @@ export class DetailPage implements OnInit {
                   var allfields = data['body']['allfields'];
                   allfields.description.replace(/\n/g, "<br>");
                   //console.log('allfields are', allfields);
-                  this.workorderdetail = allfields; 
+                  this.workorderdetail = allfields;
+                  if(allfields.wostatus == 'Completed' || allfields.wostatus == 'Cancelled' || allfields.wostatus == 'Closed'){
+                      this.isCompleteWO = 1;
+                  }
                   this.serviceName = workorder['subject'];
                   for(let key in workorder){
                       if(key != 'subject') {

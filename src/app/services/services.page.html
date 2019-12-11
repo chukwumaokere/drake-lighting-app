@@ -4,7 +4,7 @@
       <ion-button type="button" text="Profile" (click)="openSettings()">
         <ion-text>Profile</ion-text>
       </ion-button>
-    </ion-buttons> 
+    </ion-buttons>
     <ion-title>Work Orders</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -21,7 +21,8 @@
     <!-- <ion-list-header>
       <ion-label>Today's Open Services</ion-label>
     </ion-list-header> -->
-
+    <p class="ion-padding" *ngIf="count_weeklyServices == 0">No work orders available for this section</p>
+    <div  *ngIf="count_weeklyServices > 0">
     <ion-item (click)="goToDetail(service.workorderid)" detail *ngFor="let service of weeklyServices">
       <ion-avatar><ion-icon size="large" name="flash"></ion-icon></ion-avatar>
       <ion-label>
@@ -43,14 +44,14 @@
       </ion-label>
       <ion-badge slot="end" class="status" color="white"
       data-color="{{(service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined') ? 'danger' : 'warning'}}"
-      [ngStyle]="{'background-color': service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : 
-      service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 
+      [ngStyle]="{'background-color': service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' :
+      service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' :
       service?.wostatus == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-success)', 'border-color':service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
       >
         <ion-text class="status-text">{{service.wostatus}}</ion-text>
       </ion-badge>
     </ion-item>
-    <p class="ion-padding" *ngIf="count_weeklyServices == 0">No work orders available for this section</p>
+    </div>
 
     <ion-item-divider sticky="true">
         <ion-label>
@@ -83,8 +84,8 @@
         </ion-label>
         <ion-badge slot="end" class="status" color="medium"
         data-color="{{(service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined') ? 'danger' : 'success'}}"
-        [ngStyle]="{'background-color': service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : 
-      service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 
+        [ngStyle]="{'background-color': service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' :
+      service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' :
       service?.wostatus == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-success)', 'border-color':service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
         >
           <ion-text class="status-text">{{service.wostatus}}</ion-text>
