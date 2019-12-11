@@ -6,6 +6,7 @@
 
 <ion-content>
     <ion-list lines="full">
+        <div *ngIf="count_underreview > 0">
         <ion-item (click)="goToDetail(service.workorderid)" detail *ngFor="let service of underreview">
             <ion-avatar><ion-icon size="large" name="flash"></ion-icon></ion-avatar>
             <ion-label>
@@ -15,12 +16,7 @@
               <div class="service-details-div">
                 <ion-grid class="service-details-grid">
                   <ion-row>
-                    <ion-col><p class="st">Start Time</p></ion-col>
-                    <ion-col><p class="et">End Time</p></ion-col>
-                  </ion-row>
-                  <ion-row>
-                    <ion-col><p>{{service.time_start}}</p></ion-col>
-                    <ion-col><p>{{service.time_end}}</p></ion-col>
+                    <ion-col><p>{{service.comment}}</p></ion-col>
                   </ion-row>
                 </ion-grid>
               </div>
@@ -34,6 +30,7 @@
               <ion-text class="status-text">{{service.wostatus}}</ion-text>
             </ion-badge>
           </ion-item>
-          <p class="ion-padding" *ngIf="count_weeklyServices == 0">No work orders available for this section</p>
+        </div>
+          <p class="ion-padding" *ngIf="count_underreview == 0">No work orders available for this section</p>
     </ion-list>
 </ion-content>
