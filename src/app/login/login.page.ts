@@ -74,6 +74,7 @@ export class LoginPage implements OnInit {
                 this.storage.ready().then(() => {
                   this.userdata = userdata;
                   this.userdata['theme'] = 'Light';
+                  this.userdata['profile_picture'] = "https://devl06.borugroup.com/drakelighting/" + userdata.path + userdata.attachmentsid + '_' + userdata.imagename;
                   this.storage.set('userdata', this.userdata);
                   return this.router.navigate(["/tabs/services", this.userdata]);
                 })

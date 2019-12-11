@@ -6,6 +6,15 @@
 </ion-header>
 
 <ion-content class="ion-padding">
+    <ion-item lines="none" >
+            <ion-avatar *ngIf="has_profile_picture == true">
+                <img src="{{profile_picture}}">  
+            </ion-avatar>
+        <div *ngIf="has_profile_picture == true">
+            &nbsp;&nbsp;   
+        </div> 
+        <ion-text>Hello, <b>{{userinfo?.first_name}}</b>!</ion-text>
+    </ion-item>
     <ion-item lines="none">
         <ion-label position="stacked">USER NAME</ion-label>
         <ion-text>{{userinfo?.user_name}}</ion-text>
@@ -19,6 +28,7 @@
         <ion-input value="{{userinfo?.email1}}"></ion-input>
     </ion-item>
     <ion-item lines="none">
+        <br>
         <ion-label position="stacked">
             CURRENT THEME (TAP TO CHANGE)
         </ion-label>
@@ -42,8 +52,9 @@
             </ion-col>
             </ion-row>
         </ion-grid> -->
+        <br>
     </ion-item>
-    <br><br><br><br><br><br><br><br>
+    <br><br><br><br>
     
     <ion-button (click)="logout()" color="danger" routerDirection="root" size="default"><ion-icon name="log-out"></ion-icon> &nbsp; Logout</ion-button>
     

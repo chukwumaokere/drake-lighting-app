@@ -23,6 +23,8 @@ modelId:number;
 serviceid: any;
 apiurl:any;
 updatefields: any;
+profile_picture: any;
+has_profile_picture: boolean = false;
 
 constructor(
 private modalController: ModalController,
@@ -44,6 +46,13 @@ public appConst: AppConstants,
   ngOnInit() {
     this.user_id = this.navParams.data.user_id;
     this.userinfo = this.navParams.data.userinfo;
+    this.profile_picture = this.navParams.data.userinfo.profile_picture;
+    if(this.navParams.data.userinfo.imagename !== ""){
+      this.has_profile_picture = true
+    }else{
+      this.has_profile_picture = false;
+    }
+    console.log('nav params', this.navParams.data.userinfo);
   }
   
   async closeModal() {

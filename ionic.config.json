@@ -5,13 +5,15 @@
     "capacitor": {}
   },
   "type": "angular",
-  "proxies": [{
-    "path": "/drakelighting/*",
-    "proxyUrl": "http://devl06.borugroup.com"
-  },
+  "proxies": [
+    {
+      "path": "/drakelighting/*",
+      "proxyUrl": "http://devl06.borugroup.com"
+    },
     {
       "path": "/drakelighting/*",
       "proxyUrl": "http://localhost"
     }
-  ]
+  ],
+  "id": "917d965b"
 }
