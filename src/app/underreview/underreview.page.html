@@ -8,7 +8,7 @@
     <ion-list lines="full">
         <div *ngIf="count_underreview > 0">
         <ion-item (click)="goToDetail(service.workorderid)" detail *ngFor="let service of underreview">
-            <ion-avatar><ion-icon size="large" name="flash"></ion-icon></ion-avatar>
+            <ion-avatar><ion-icon color="warning" size="large" name="alert"></ion-icon></ion-avatar>
             <ion-label>
               <h2>{{service[0]}}</h2>
               <h2>{{service.towersites}}</h2>
@@ -21,14 +21,14 @@
                 </ion-grid>
               </div>
             </ion-label>
-            <ion-badge slot="end" class="status" color="white"
+            <!-- <ion-badge slot="end" class="status" color="white"
             data-color="{{(service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined') ? 'danger' : 'warning'}}"
             [ngStyle]="{'background-color': service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : 
             service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 
             service?.wostatus == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-success)', 'border-color':service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
             >
               <ion-text class="status-text">{{service.wostatus}}</ion-text>
-            </ion-badge>
+            </ion-badge> -->
           </ion-item>
         </div>
           <p class="ion-padding" *ngIf="count_underreview == 0">No work orders available for this section</p>

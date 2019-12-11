@@ -67,7 +67,7 @@ export class Tab2Page implements OnInit {
                   workorder.endTime = new Date(workorder.endTime);
                   workorder.allDay = false;
                   workorder.id = workorder.workorderid;
-                  workorder.title = workorder.subject;
+                  workorder.title = workorder[0].substring(0, 25);
                   workorder.desc = workorder.towersites;
                 });
                 //TODO: Fix the date being start of epoch time.
