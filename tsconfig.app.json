@@ -10,5 +10,15 @@
   "exclude": [
     "src/test.ts",
     "src/**/*.spec.ts"
+  ],
+  "proxies": [
+    {
+      "path": "/drakelighting/*",
+      "proxyUrl": "http://devl06.borugroup.com"
+    },
+    {
+      "path": "/drakelighting/*",
+      "proxyUrl": "http://localhost"
+    }
   ]
 }
