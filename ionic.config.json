@@ -1,7 +1,17 @@
 {
-  "name": "conveyor",
+  "name": "DrakeLighting",
   "integrations": {
     "cordova": {}
   },
-  "type": "angular"
+  "type": "angular",
+  "proxies": [
+    {
+      "path": "/drakelighting/*",
+      "proxyUrl": "http://devl06.borugroup.com"
+    },
+    {
+      "path": "/drakelighting/*",
+      "proxyUrl": "http://localhost"
+    }
+  ]
 }
