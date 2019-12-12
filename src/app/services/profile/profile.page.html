@@ -1,0 +1,61 @@
+<ion-header>
+    <ion-toolbar text-center>
+        <ion-title>Profile</ion-title>
+        <ion-icon name="close" (click)="closeModal()" size="large"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+    <ion-item lines="none" >
+            <ion-avatar *ngIf="has_profile_picture == true">
+                <img src="{{profile_picture}}">  
+            </ion-avatar>
+        <div *ngIf="has_profile_picture == true">
+            &nbsp;&nbsp;   
+        </div> 
+        <ion-text>Hello, <b>{{userinfo?.first_name}}</b>!</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+        <ion-label position="stacked">USER NAME</ion-label>
+        <ion-text>{{userinfo?.user_name}}</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+        <ion-label position="stacked">FULL NAME</ion-label>
+        <ion-text value="">{{userinfo?.first_name}} {{userinfo?.last_name}}</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+        <ion-label position="stacked">EMAIL</ion-label>
+        <ion-text value="">{{userinfo?.email1}}</ion-text>
+    </ion-item>
+    <ion-item lines="none">
+        <br>
+        <ion-label position="stacked">
+            CURRENT THEME (TAP TO CHANGE)
+        </ion-label>
+        <ion-button id="themecolor" *ngIf="userinfo?.theme=='Dark'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+        <ion-button id="themecolor" *ngIf="userinfo?.theme=='Light'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+        <!-- <ion-grid class="ion-no-padding">
+            <ion-row class="ion-align-items-center ion-justify-content-center" >
+            <ion-col class="padding-left-none" >
+                <ion-label position="stacked">Current Theme <br/> (Tap to change)</ion-label> 
+            </ion-col>
+            <ion-col>
+                <ion-button id="themecolor" *ngIf="userinfo?.theme=='Dark'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+                <ion-button id="themecolor" *ngIf="userinfo?.theme=='Light'" type="button" size="default" color="dark" (click)="switchTheme()"><ion-icon name="color-palette"></ion-icon>&nbsp; {{userinfo.theme}}</ion-button>
+            </ion-col>          
+            </ion-row>
+            <ion-row class="ion-align-items-center ion-justify-content-center">
+            <ion-col class="padding-left-none">
+            </ion-col>
+            <ion-col>
+                
+            </ion-col>
+            </ion-row>
+        </ion-grid> -->
+        <br>
+    </ion-item>
+    <br><br><br><br>
+    
+    <ion-button (click)="logout()" color="danger" routerDirection="root" size="default"><ion-icon name="log-out"></ion-icon> &nbsp; Logout</ion-button>
+    
+</ion-content>

@@ -1,0 +1,19 @@
+ion-card-header{
+  padding-bottom: 0px !important;
+}
+ion-card-content{
+  padding-top: 10px !important;
+}
+ion-input input.native-input{
+  border: 1px solid #ccc !important;
+  padding-left:20px !important;
+  padding-right: 20px !important;
+}
+ion-toolbar ion-icon[name="close"]{
+  float: right;
+  cursor: pointer;
+}
+
+.title-input{
+  background-color: var(--ion-color-light-shade);
+}

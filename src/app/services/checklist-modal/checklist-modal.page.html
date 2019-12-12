@@ -1,0 +1,53 @@
+<ion-header>
+    <ion-toolbar text-center>
+        <ion-title>{{modalTitle}}</ion-title>
+        <ion-icon name="close" (click)="closeModal()" size="large" style="float: right;"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+    <form #form="ngForm"  (ngSubmit)="completeOrder(serviceid)">
+        <!--<ion-grid>
+            <ion-row>
+                <ion-col>Checklist</ion-col>
+                <ion-col>Yes</ion-col>
+                <ion-col>N/A</ion-col>
+            </ion-row>
+            <ion-row *ngFor="let service of servicedetail">
+                <ion-col>{{service.fieldlabel}}</ion-col>
+                <ion-col>
+                   <ion-checkbox  (ionChange)="addUpdate($event,'Yes')" *ngIf="service.value == 'Yes'" checked="true"  name="{{service.columnname}}"></ion-checkbox>
+                   <ion-checkbox (ionChange)="addUpdate($event,'Yes')" *ngIf="service.value != 'Yes'" name="{{service.columnname}}">{{service.value}} </ion-checkbox>
+                </ion-col>
+                <ion-col>
+                    <ion-checkbox (ionChange)="addUpdate($event,'N/A')" *ngIf="service.value == 'N/A'" checked="true"  name="{{service.columnname}}"></ion-checkbox>
+                    <ion-checkbox  (ionChange)="addUpdate($event,'N/A')" *ngIf="service.value != 'N/A'" name="{{service.columnname}}">{{service.value}} </ion-checkbox>
+                </ion-col>
+            </ion-row>
+        </ion-grid>-->
+        <ion-grid>
+            <ion-row>
+                <ion-col size="8">Checklist</ion-col>
+                <ion-col size="4">
+                    <div style="float:left;margin-right: 40%">Yes</div>
+                    <div style="float:left">N/A</div>
+                </ion-col>
+            </ion-row>
+            <ion-row *ngFor="let service of servicedetail">
+                <ion-col size="8">{{service.fieldlabel}}</ion-col>
+                <ion-col size="4">
+                    <ion-radio-group>
+                        <ion-radio style="margin-right: 42%" mode="md" value="Yes" (ionSelect)="addUpdate($event,'Yes')" *ngIf="service.value == 'Yes'" checked  name="{{service.columnname}}"></ion-radio>
+                        <ion-radio style="margin-right: 40%" mode="md" value="Yes" (ionSelect)="addUpdate($event,'Yes')" *ngIf="service.value != 'Yes'"  name="{{service.columnname}}"></ion-radio>
+                        <ion-radio mode="md" value="N/A" (ionSelect)="addUpdate($event,'N/A')" *ngIf="service.value == 'N/A'" checked  name="{{service.columnname}}"></ion-radio>
+                        <ion-radio mode="md" value="N/A" (ionSelect)="addUpdate($event,'N/A')" *ngIf="service.value != 'N/A'"  name="{{service.columnname}}"></ion-radio>
+                    </ion-radio-group>
+                </ion-col>
+            </ion-row>
+        </ion-grid>
+        <div class="button-grouping ion-padding">
+            <ion-button size="large" expand="block" color="primary" type="submit">
+                <ion-text>Save</ion-text>
+            </ion-button>
+        </div>
+    </form>
+</ion-content>
