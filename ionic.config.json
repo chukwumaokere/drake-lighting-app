@@ -1,7 +1,8 @@
 {
-  "name": "DrakeLighting",
+  "name": "Drakelighting",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular",
   "proxies": [
