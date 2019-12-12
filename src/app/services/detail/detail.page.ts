@@ -88,6 +88,11 @@ export class DetailPage implements OnInit {
     console.log('adding update to queue: ', fieldname, fieldvalue);
     console.log(this.updatefields);
   }
+  decodeHTML(html) {
+    var txt = document.createElement('textarea');
+    txt.innerHTML = html;
+    return txt.value;
+  };
   loadDetails(serviceid){
     console.log('loading details for service id:', serviceid)
       var params = {
@@ -106,7 +111,9 @@ export class DetailPage implements OnInit {
                   var workorder = data['body']['data'];
                   var allfields = data['body']['allfields'];
                   allfields.description.replace(/\n/g, "<br>");
-                  //console.log('allfields are', allfields);
+                  var longitude = this.decodeHTML(allfields.cf_longtitude);
+                  allfields.cf_longtitude = longitude;
+                  console.log('allfields are', allfields);
                   this.workorderdetail = allfields;
                   if(allfields.wostatus == 'Completed' || allfields.wostatus == 'Cancelled' || allfields.wostatus == 'Closed'){
                       this.isCompleteWO = 1;
@@ -123,7 +130,7 @@ export class DetailPage implements OnInit {
                           });
                       }
                   }
-                  //console.log('workorder', this.servicedetail);
+                  console.log('servicedetail', this.servicedetail);
 
                   //load item grid 43636
                   this.httpClient.post(this.apiurl + "getItemList.php", params, { headers:headers, observe: 'response' })
