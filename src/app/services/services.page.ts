@@ -1,8 +1,11 @@
 import { Component, OnInit, LOCALE_ID, Inject, } from '@angular/core';
 import { ActivatedRoute, Router } from  "@angular/router";
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { formatDate } from '@angular/common';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+import { AppConstants } from '../providers/constant/constant';
+import { ProfileModalPage } from './profile/profile.page';
 
 @Component({
   selector: 'app-services',
@@ -11,9 +14,14 @@ import { Storage } from '@ionic/storage';
 })
 export class ServicesPage implements OnInit {
   userinfo: any;
-  todayServices: object;
+  user_id: any;
+  weeklyServices: object;
   futureServices: object;
   completedServices: object;
+  count_weeklyServices : number=0;
+  count_futureServices : number=0;
+  count_completedServices : number=0;
+  apiurl:any;
   service = {
     id: '',
     tower: '', //Will be the Transferee + type of service
@@ -28,8 +36,20 @@ export class ServicesPage implements OnInit {
   randomPeople = ['Simmons - MOSPG2014', 'Marysville - ARLIT2062', 'Coldspring - TXHOU2041', 'Yellow Rock - KYLEX2020', 'Medora - ILSPG2027', 'Lawtell - LALWL2000', 'HWY 584 (FTCA) - LAMON2002', 'HWY 120 (FTCA) - LASRV2006', 'York - ALBRH2003', 'Jorge Auto Sales - TXLAR2007', 'Sawmill - ARLIT2065', 'Saxton - PAPIT2008', 'Rockwood - PAPIT2006', 'Mellen - WIWAU2029', 'Calvin - LAMON2113', 'Funston - LARSV2021'];
   typesOfServices= ['Radio Implementation Services', 'Labor', 'Mount Installation', 'Power Installation', 'Structural Analysis'];
   statuses= ['Attention Required', 'Declined', 'Complete', 'Cancelled', 'Closed', 'Open'];
+  dataReturned: any;
 
-  constructor(public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, @Inject(LOCALE_ID) private locale: string) { }
+  constructor(
+      private httpClient: HttpClient,
+      public navCtrl: NavController,
+      private  router:  Router,
+      public storage: Storage,
+      private activatedRoute: ActivatedRoute,
+      public appConst: AppConstants,
+      public modalCtrl : ModalController,
+      @Inject(LOCALE_ID) private locale: string
+  ){
+    this.apiurl = this.appConst.getApiUrl();
+  }
 
   async loadRandomServices(type){
     var limit = 16;
@@ -163,11 +183,75 @@ export class ServicesPage implements OnInit {
     console.log('turning off previous theme', theme_switcher[theme]);
    }
 
+   getWorkOrders(user_id, type){
+    var logged_user = {
+      user_id: user_id,
+      type: type
+    }
+    console.log('fetching records for', logged_user);
+    var headers = new HttpHeaders();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Access-Control-Allow-Origin', '*');
+    this.httpClient.post(this.apiurl + "getWorkOrders.php", logged_user, { headers:headers, observe: 'response' })
+          .subscribe(data => {
+              console.log(data['body']);
+              var success = data['body']['success'];
+              console.log('login response was', success);
+
+              if(success == true){
+                var workorders = data['body']['data'];
+                console.log('workorders', workorders);
+                if(data['body']['count'] > 0){
+                    workorders.forEach(workorder => {
+                        workorder['longdate'] = workorder['date_start'] + ' ' + workorder['time_start'];
+                    });
+                }
+                if(type == 'weekly'){
+                  this.weeklyServices= workorders;
+                  this.count_weeklyServices = data['body']['count'];
+                }else if(type == 'future'){
+                    this.futureServices = workorders;
+                    this.count_futureServices = data['body']['count'];
+                }else if(type == 'completed'){
+                    this.completedServices = workorders;
+                    this.count_completedServices = data['body']['count'];
+                }
+              }else{
+                console.log('failed to fetch records');
+              }
+              
+          }, error => {
+            //console.log(error);
+            //console.log(error.message);
+            //console.error(error.message);
+            console.log('failed to fetch records');
+          });
+   }
+   async openSettings(){
+     console.log('opening settings page for user id', this.user_id);
+      const modal = await this.modalCtrl.create({
+          component: ProfileModalPage,
+          componentProps: {
+              "user_id" : this.user_id,
+              "userinfo": this.userinfo,
+          }
+      });
+
+      modal.onDidDismiss().then((dataReturned) => {
+          if (dataReturned !== null) {
+              this.dataReturned = dataReturned.data;
+          }
+      });
+
+      return await modal.present();
+   }
+
   ngOnInit(){
     this.activatedRoute.params.subscribe((userData)=>{
      if(userData.length !== 0){
        this.userinfo = userData;
-       console.log('param user data:', userData);
+       //console.log('param user data:', userData);
        try{ 
          this.loadTheme(userData.theme.toLowerCase());
        }catch{
@@ -178,9 +262,13 @@ export class ServicesPage implements OnInit {
          console.log ('nothing in params, so loading from storage');
          this.isLogged().then(result => {
            if (!(result == false)){
-             console.log('loading storage data (within param route function)', result);
+             //console.log('loading storage data (within param route function)', result);
              this.userinfo = result;
              this.loadTheme(result.theme.toLowerCase());
+             this.getWorkOrders(this.userinfo.id, 'weekly');
+             this.getWorkOrders(this.userinfo.id, 'future');
+             this.getWorkOrders(this.userinfo.id, 'completed');
+             this.user_id = this.userinfo.id;
            }else{
              console.log('nothing in storage, going back to login');
              this.logout();
@@ -189,9 +277,9 @@ export class ServicesPage implements OnInit {
        }
      }
    }); 
-   this.loadRandomServices('today').then((result) => { this.todayServices= result; });
-   this.loadRandomServices('future').then((result) => { this.futureServices= result; });
-   this.loadRandomServices('completed').then((result) => { this.completedServices= result; });
+   //this.loadRandomServices('today').then((result) => { this.todayServices= result; });
+   // this.loadRandomServices('future').then((result) => { this.futureServices= result; });
+   // this.loadRandomServices('completed').then((result) => { this.completedServices= result; });
  }
 
 }

@@ -1,0 +1,85 @@
+<ion-header>
+    <ion-toolbar text-center>
+        <ion-title>{{modalTitle}}</ion-title>
+        <ion-icon name="close" (click)="closeModal()" size="large"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form #form="ngForm"  (ngSubmit)="uploadImage(form)">
+        <ion-input type="text" hidden ng-show="false" [(ngModel)]="photo.serviceid" name="serviceid" value="{{serviceid}}"></ion-input>
+    <ion-card>
+        <ion-card-header>
+            <ion-card-subtitle>Image Preview</ion-card-subtitle>
+        </ion-card-header>
+         <img src="{{base64Image}}" />
+        <ion-input type="text"  ng-show="false" [(ngModel)]="photo.base64Image" name="base64Image" value="{{base64Image}}"></ion-input>
+
+        <ion-card-header>
+                <ion-card-subtitle>Image Location</ion-card-subtitle>
+            </ion-card-header>
+         <ion-card-content>
+             <!-- <ion-button size="default" color="tertiary" (click)="fillTitlePrimary('Aerial')">Aerial</ion-button>
+             <ion-button size="default" color="tertiary" (click)="fillTitlePrimary('Ground')">Ground</ion-button>
+             <ion-button size="default" color="tertiary" (click)="fillTitlePrimary('Tower')">Tower</ion-button> -->
+             <ion-segment  color="tertiary">
+                 <ion-segment-button value="Aerial" (ionSelect)="fillTitlePrimary('Aerial')">
+                     <ion-label>Aerial</ion-label>
+                 </ion-segment-button>
+                 <ion-segment-button value="Ground" (ionSelect)="fillTitlePrimary('Ground')">
+                    <ion-label>Ground</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="Tower" (ionSelect)="fillTitlePrimary('Tower')">
+                    <ion-label>Tower</ion-label>
+                </ion-segment-button>
+             </ion-segment>
+         </ion-card-content>
+
+         <ion-card-header>
+           <ion-card-subtitle>Image Profile</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <!-- <ion-button size="default" color="tertiary" (click)="fillTitleSecondary('AB')">AB</ion-button>
+            <ion-button size="default" color="tertiary" (click)="fillTitleSecondary('BG')">BG</ion-button>
+            <ion-button size="default" color="tertiary" (click)="fillTitleSecondary('GA')">GA</ion-button> -->
+            <ion-segment  color="tertiary">
+                <ion-segment-button value="Aerial" (ionSelect)="fillTitleSecondary('AB')">
+                    <ion-label>AB</ion-label>
+                </ion-segment-button>
+                <ion-segment-button value="Ground" (ionSelect)="fillTitleSecondary('BG')">
+                   <ion-label>BG</ion-label>
+               </ion-segment-button>
+               <ion-segment-button value="Tower" (ionSelect)="fillTitleSecondary('GA')">
+                   <ion-label>GA</ion-label>
+               </ion-segment-button>
+            </ion-segment>
+        </ion-card-content>
+
+         <ion-card-header>
+            <ion-card-subtitle>Tower Section</ion-card-subtitle>
+        </ion-card-header>
+        <ion-card-content>
+            <!-- <ion-picker></ion-picker> -->
+            <ion-button size="default" color="tertiary" (click)="showPicker()">Select Tower Section</ion-button>
+            <ion-button size="default" color="tertiary" (click)="modifyTowerSection('up')"><ion-icon name="add"></ion-icon></ion-button>
+            <ion-button size="default" color="tertiary" (click)="modifyTowerSection('down')"><ion-icon name="remove"></ion-icon></ion-button>
+        </ion-card-content>
+
+        <ion-card-header>
+            <ion-card-subtitle>
+                <ion-label position="stacked">Image Description</ion-label>
+            </ion-card-subtitle>
+        </ion-card-header>
+
+        <ion-card-content>
+            <ion-input type="text" oninput="" size="100" required="" [(ngModel)]="photo.title" name="title" class="title-input" placeholder="Enter a description..."></ion-input>
+        </ion-card-content>
+
+    </ion-card>
+    <div class="button-grouping ion-padding">
+        <ion-button size="large" expand="block" color="primary" type="submit">
+            <ion-text>Save</ion-text>
+        </ion-button>
+    </div>
+    </form>
+</ion-content>

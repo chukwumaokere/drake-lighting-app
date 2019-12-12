@@ -1,5 +1,10 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="primary">
+      <ion-button type="button" text="Profile" (click)="openSettings()">
+        <ion-text>Profile</ion-text>
+      </ion-button>
+    </ion-buttons>
     <ion-title>Work Orders</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,92 +14,20 @@
 
       <ion-item-divider sticky="true">
         <ion-label>
-          Weekly Open Services
+          Weekly ({{count_weeklyServices}})
         </ion-label>
       </ion-item-divider>
 
     <!-- <ion-list-header>
       <ion-label>Today's Open Services</ion-label>
     </ion-list-header> -->
-
-    <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of todayServices">
+    <p class="ion-padding" *ngIf="count_weeklyServices == 0">No work orders available for this section</p>
+    <div  *ngIf="count_weeklyServices > 0">
+    <ion-item (click)="goToDetail(service.workorderid)" detail *ngFor="let service of weeklyServices">
       <ion-avatar><ion-icon size="large" name="flash"></ion-icon></ion-avatar>
       <ion-label>
-        <h2>{{service.tower}}</h2>
-        <h2>{{service.tos}}</h2>
-        <div class="service-details-div">
-          <ion-grid class="service-details-grid">
-            <ion-row>
-              <ion-col><p class="st">Start Time</p></ion-col>
-              <ion-col><p class="et">End Time</p></ion-col>
-            </ion-row>
-            <ion-row>
-              <ion-col><p>{{service.startTime}}</p></ion-col>
-              <ion-col><p>{{service.endTime}}</p></ion-col>
-            </ion-row>
-          </ion-grid>
-        </div>
-      </ion-label>
-      <ion-badge slot="end" class="status" color="white"
-      data-color="{{(service?.status == 'Cancelled' || service?.status == 'Declined') ? 'danger' : 'success'}}"
-      [ngStyle]="{'background-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == 'Attention Required' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : service?.status == 'Attention Required' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
-      >
-        <ion-text class="status-text">{{service.status}}</ion-text>
-      </ion-badge>
-    </ion-item>
-
-    <ion-item-divider sticky="true">
-        <ion-label>
-          Future Services
-        </ion-label>
-      </ion-item-divider>
-
-    <!-- <ion-list-header sticky="true" lines="none">
-      <ion-label>Future Services</ion-label>
-    </ion-list-header> -->
-
-      <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of futureServices">
-        <ion-avatar><ion-icon size="large" name="flash"></ion-icon></ion-avatar>
-        <ion-label>
-          <h2>{{service.tower}}</h2>
-          <h2>{{service.tos}}</h2>
-          <p>{{service.longdate}}</p>
-          <div class="service-details-div">
-            <ion-grid class="service-details-grid">
-              <ion-row>
-                <ion-col><p class="st">Start Time</p></ion-col>
-                <ion-col><p class="et">End Time</p></ion-col>
-              </ion-row>
-              <ion-row>
-                <ion-col><p>{{service.startTime}}</p></ion-col>
-                <ion-col><p>{{service.endTime}}</p></ion-col>
-              </ion-row>
-            </ion-grid>
-          </div>
-        </ion-label>
-        <ion-badge slot="end" class="status" color="medium"
-        data-color="{{(service?.status == 'Cancelled' || service?.status == 'Declined') ? 'danger' : 'success'}}"
-        [ngStyle]="{'background-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : 'var(--ion-color-success)', 'border-color':service?.status == 'Cancelled' || service?.status == 'Declined' ? 'var(--ion-color-danger)' : 'var(--ion-color-success)' }"
-        >
-          <ion-text class="status-text">{{service.status}}</ion-text>
-        </ion-badge>
-      </ion-item>
-
-    <ion-item-divider sticky="true">
-      <ion-label>
-        Completed Services
-      </ion-label>
-    </ion-item-divider>
-
-    <!-- <ion-list-header>
-      <ion-label>All Completed Services</ion-label>
-    </ion-list-header> -->
-
-    <ion-item (click)="goToDetail(service.id)" detail *ngFor="let service of completedServices">
-      <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
-      <ion-label>
-        <h2>{{service.tower}}</h2>
-        <h2>{{service.tos}}</h2>
+        <h2>{{service[0]}}</h2>
+        <h2>{{service.towersites}}</h2>
         <p>{{service.longdate}}</p>
         <div class="service-details-div">
           <ion-grid class="service-details-grid">
@@ -103,17 +36,98 @@
               <ion-col><p class="et">End Time</p></ion-col>
             </ion-row>
             <ion-row>
-              <ion-col><p>{{service.startTime}}</p></ion-col>
-              <ion-col><p>{{service.endTime}}</p></ion-col>
+              <ion-col><p>{{service.time_start}}</p></ion-col>
+              <ion-col><p>{{service.time_end}}</p></ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-label>
+      <ion-badge slot="end" class="status" color="white"
+      data-color="{{(service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined') ? 'danger' : 'warning'}}"
+      [ngStyle]="{'background-color': service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' :
+      service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' :
+      service?.wostatus == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-success)', 'border-color':service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
+      >
+        <ion-text class="status-text">{{service.wostatus}}</ion-text>
+      </ion-badge>
+    </ion-item>
+    </div>
+
+    <ion-item-divider sticky="true">
+        <ion-label>
+          Upcoming ({{count_futureServices}})
+        </ion-label>
+      </ion-item-divider>
+
+    <!-- <ion-list-header sticky="true" lines="none">
+      <ion-label>Future Services</ion-label>
+    </ion-list-header> -->
+
+      <ion-item (click)="goToDetail(service.workorderid)" detail *ngFor="let service of futureServices">
+        <ion-avatar><ion-icon size="large" name="flash"></ion-icon></ion-avatar>
+        <ion-label>
+          <h2>{{service[0]}}</h2>
+          <h2>{{service.towersites}}</h2>
+          <p>{{service.longdate}}</p>
+          <div class="service-details-div">
+            <ion-grid class="service-details-grid">
+              <ion-row>
+                <ion-col><p class="st">Start Time</p></ion-col>
+                <ion-col><p class="et">End Time</p></ion-col>
+              </ion-row>
+              <ion-row>
+                <ion-col><p>{{service.time_start}}</p></ion-col>
+                <ion-col><p>{{service.time_end}}</p></ion-col>
+              </ion-row>
+            </ion-grid>
+          </div>
+        </ion-label>
+        <ion-badge slot="end" class="status" color="medium"
+        data-color="{{(service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined') ? 'danger' : 'success'}}"
+        [ngStyle]="{'background-color': service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' :
+      service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' :
+      service?.wostatus == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-success)', 'border-color':service?.wostatus == 'Cancelled' || service?.wostatus == 'Declined' ? 'var(--ion-color-danger)' : service?.wostatus == 'Under Review' ? 'var(--ion-color-warning)' : 'var(--ion-color-success)' }"
+        >
+          <ion-text class="status-text">{{service.wostatus}}</ion-text>
+        </ion-badge>
+      </ion-item>
+    <p class="ion-padding" *ngIf="count_futureServices == 0">No work orders available for this section</p>
+
+
+    <ion-item-divider sticky="true">
+      <ion-label>
+        Completed ({{count_completedServices}})
+      </ion-label>
+    </ion-item-divider>
+
+    <!-- <ion-list-header>
+      <ion-label>All Completed Services</ion-label>
+    </ion-list-header> -->
+
+    <ion-item (click)="goToDetail(service.workorderid)" detail *ngFor="let service of completedServices">
+      <ion-avatar><ion-icon size="large" name="document"></ion-icon></ion-avatar>
+      <ion-label>
+        <h2>{{service[0]}}</h2>
+        <h2>{{service.towersites}}</h2>
+        <p>{{service.longdate}}</p>
+        <div class="service-details-div">
+          <ion-grid class="service-details-grid">
+            <ion-row>
+              <ion-col><p class="st">Start Time</p></ion-col>
+              <ion-col><p class="et">End Time</p></ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col><p>{{service.time_start}}</p></ion-col>
+              <ion-col><p>{{service.time_end}}</p></ion-col>
             </ion-row>
           </ion-grid>
         </div>
       </ion-label>
       <ion-badge size="large" slot="end" color="white" data-color="medium" class="status"
-      [ngStyle]="{'background-color':service?.status == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-medium)', 'border-color':service?.status == 'Completed' ? 'var(--ion-color-medium)' : 'var(--ion-color-medium)' }"
-      >
-        <ion-text class="status-text">{{service.status}}</ion-text>
+      [ngStyle]="{'background-color': 'var(--ion-color-medium)' , 'border-color': 'var(--ion-color-medium)' }">
+        <ion-text class="status-text">{{service.wostatus}}</ion-text>
       </ion-badge>
     </ion-item>
+    <p class="ion-padding" *ngIf="count_completedServices == 0">No work orders available for this section</p>
   </ion-list>
 </ion-content>

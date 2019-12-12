@@ -2,7 +2,7 @@ ion-label{
     color: grey !important;
 }
 
-ion-badge.status{
+ion-badge.ios.status{
     padding: 10px;
     border-radius: 50px;
     margin-bottom: 5px;
@@ -10,4 +10,33 @@ ion-badge.status{
 
 ion-text.status-text{
     color: white !important;
+}
+
+.button-grouping{
+ 
+}
+ion-input > input {
+    width: 100% !important;
+}
+.anchor-bottom{
+    position: fixed;
+    bottom: 0;
+    /* display: block; */
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.137);
+    z-index: 9999;
+}
+.text-align-center {
+    text-align: center !important;
+}
+ion-select{
+    width:100%;
+    max-width: none;
+}
+
+.readonly-fields{
+    
+}
+ion-item > div {
+    width: 100% !important;
 }
