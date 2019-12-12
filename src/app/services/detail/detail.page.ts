@@ -29,7 +29,7 @@ export class DetailPage implements OnInit {
     androidTheme: 1 //this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
   }
   options: CameraOptions = {
-    quality: 100,
+    quality: 50,
     destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
@@ -84,6 +84,7 @@ export class DetailPage implements OnInit {
     if (event.target.tagName == 'ION-TEXTAREA'){
       fieldvalue = event.target.value;
     }
+    this.updatefields['wostatus'] = 'In-Process';
     this.updatefields[fieldname] = fieldvalue;
     console.log('adding update to queue: ', fieldname, fieldvalue);
     console.log(this.updatefields);
@@ -115,7 +116,7 @@ export class DetailPage implements OnInit {
                   allfields.cf_longtitude = longitude;
                   console.log('allfields are', allfields);
                   this.workorderdetail = allfields;
-                  if(allfields.wostatus == 'Completed' || allfields.wostatus == 'Cancelled' || allfields.wostatus == 'Closed'){
+                  if(allfields.wostatus == 'Completed' || allfields.wostatus == 'Cancelled' || allfields.wostatus == 'Closed' || allfields.wostatus == 'Approved'){
                       this.isCompleteWO = 1;
                   }
                   this.serviceName = workorder['subject'];
