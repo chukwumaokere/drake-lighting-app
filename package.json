@@ -1,8 +1,8 @@
 {
-  "name": "conveyor",
+  "name": "drakelighting",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
+  "author": "Boru Apps",
+  "homepage": "https://boruapps.com",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
