@@ -438,6 +438,42 @@ async openChecklist(record_id){
       }
         
     }
+
+    checkJHA(serviceid, siteCoordinate){
+        console.log('loading details for service id:', serviceid)
+        console.log('loading cf_site_coordinate:', siteCoordinate)
+        var params = {
+            record_id: serviceid
+        }
+        var headers = new HttpHeaders();
+        headers.append("Accept", 'application/json');
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append('Access-Control-Allow-Origin', '*');
+        this.httpClient.post(this.apiurl + "checkDocumentJHA.php", params, { headers:headers, observe: 'response' })
+            .subscribe(data => {
+                console.log(data['body']);
+                var success = data['body']['success'];
+                console.log('getChecklist response was', success);
+                if(success == true){
+                    var number_of_document_jha = data['body']['data'];
+                    console.log('number jha documnet',number_of_document_jha);
+                    if(number_of_document_jha == 0){
+                        var lat_long = siteCoordinate.split(',');
+                        var lat = lat_long[0];
+                        var long = lat_long[1];
+                        console.log('lat' + lat);
+                        console.log('long'+ long);
+                       // this.router.navigateByUrl(`/services/jha/${serviceid}`, {state: {}});
+                        this.router.navigate(['/services/jha'], { queryParams: {serviceid: serviceid,lat:lat,long:long} });
+                    }
+                }else{
+                    console.log('failed to fetch record');
+                }
+
+            }, error => {
+                console.log('failed to fetch record');
+            });
+    }
     
 
 }
