@@ -46,6 +46,7 @@
     </platform>
     <platform name="ios">
         <preference name="UseSwiftLanguageVersion" value="5" />
+        <preference name="SWIFT_VERSION" value="5" />
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
