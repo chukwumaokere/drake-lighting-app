@@ -20,7 +20,7 @@ export class JhaPage implements OnInit {
     /*options : GeolocationOptions;
     currentPos : Geoposition;*/
     places : Array<any> ;
-    @ViewChild('map') mapElement: ElementRef;
+    @ViewChild('map', <any>[]) mapElement: ElementRef;
     map: any;
     constructor(
         private modalController: ModalController,
