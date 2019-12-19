@@ -1,0 +1,18 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>JHA/JSA: Select Nearest Hospital</ion-title>
+    <a href="services/detail/{{serviceid}}"><ion-icon name="close" size="large" style="float: right;"></ion-icon></a>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <!--<div #map id="map"></div>-->
+  <ion-img src="https://miro.medium.com/max/4064/1*qYUvh-EtES8dtgKiBRiLsA.png"></ion-img>
+  <div class="button-grouping ion-padding" >
+    <ion-button expand="full" size="small" expand="block" color="primary" >Hospital 1</ion-button>
+    <ion-button expand="full" size="small" expand="block" color="primary" >Hospital 2</ion-button>
+  </div>
+  <br>
+  <ion-button  >NEXT </ion-button>
+  <ion-button (click)="gotoJHA()" >BACK </ion-button>
+</ion-content>

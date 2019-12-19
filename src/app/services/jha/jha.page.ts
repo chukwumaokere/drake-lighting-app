@@ -17,6 +17,8 @@ export class JhaPage implements OnInit {
     lat: any;
     long:any;
     serviceid:any;
+    job_name: any;
+    data: any = {};
     /*options : GeolocationOptions;
     currentPos : Geoposition;*/
     places : Array<any> ;
@@ -26,6 +28,7 @@ export class JhaPage implements OnInit {
         private modalController: ModalController,
         public httpClient: HttpClient,
         public toastController: ToastController,
+        private  router:  Router,
         public appConst: AppConstants,
         //private geolocation : Geolocation,
         public route: ActivatedRoute
@@ -36,13 +39,20 @@ export class JhaPage implements OnInit {
   ngOnInit() {
       this.route.queryParams
           .subscribe(params => {
-              console.log(params); // {order: "popular"}
+              console.log(params);
+              for(let key in params){
+                console.log(key);
+                if(params[key] != undefined){
+                    this.data[key] = params[key];
+                }
+              }
               this.lat = params.lat;
-              this.lat = 42.786389;
               this.long = params.long;
-              this.long = -96.82187;
               this.serviceid = params.serviceid;
-              this.addMap(this.lat, this.long);
+              this.job_name = params.job_name;
+              this.serviceid = params.serviceid;
+
+              //this.addMap(this.lat, this.long);
           });
   }
     /*getUserPosition(){
@@ -59,16 +69,17 @@ export class JhaPage implements OnInit {
         },(err : PositionError)=>{
             console.log("error : " + err.message);
         })
-    }
-
-    ionViewDidEnter(){
-       this.getUserPosition();
     }*/
 
-    addMap(lat,long) {
+    ionViewDidEnter() {
+        this.addMap(this.lat, this.long);
+    }
 
-        let latLng = new google.maps.LatLng(lat, long);
-
+    addMap(lat, long) {
+        console.log(lat);
+        console.log(long);
+        let latLng = new google.maps.LatLng(lat,long);
+        console.log(latLng);
         let mapOptions = {
             center: latLng,
             zoom: 15,
@@ -77,12 +88,12 @@ export class JhaPage implements OnInit {
 
         this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
 
-        this.getHospital(latLng).then((results : Array<any>)=>{
+        /*this.getHospital(latLng).then((results : Array<any>)=>{
             this.places = results;
             for(let i = 0 ;i < results.length ; i++) {
                 this.createMarker(results[i]);
             }
-        },(status)=>console.log(status));
+        },(status)=>console.log(status));*/
 
         this.addMarker();
 
@@ -130,6 +141,19 @@ export class JhaPage implements OnInit {
             animation: google.maps.Animation.DROP,
             position: place.geometry.location
         });
+    }
+
+    gotoJHAHospital() {
+        this.router.navigate(['services/jha-hospital'], { queryParams: {serviceid: this.serviceid, lat: this.data["lat"], long: this.data["long"], job_name: this.data["job_name"]} });
+    }
+    addUpdate(event) {
+        var fieldname = event.target.name;
+        var fieldvalue = event.target.textContent + event.target.value;
+        if (event.target.tagName == 'ION-TEXTAREA'){
+            fieldvalue = event.target.value;
+        }
+        this.data[fieldname] = fieldvalue;
+        console.log(this.data);
     }
 
 }
