@@ -103,10 +103,8 @@
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-file": {},
-<<<<<<< HEAD
       "cordova-plugin-geolocation": {},
       "cordova-plugin-nativegeocoder": {}
-=======
       "cordova-plugin-ionic": {
         "APP_ID": "abe8a4fa",
         "CHANNEL_NAME": "Master",
@@ -115,7 +113,6 @@
         "MIN_BACKGROUND_DURATION": "30",
         "UPDATE_API": "https://api.ionicjs.com"
       }
->>>>>>> 5a0344efef670bd441adfeef8c026d47d4eb7437
     },
     "platforms": [
       "browser",
