@@ -35,6 +35,7 @@
     "@ionic/storage": "^2.2.0",
     "cordova-android": "8.1.0",
     "cordova-browser": "^6.0.0",
+    "cordova-ios": "^5.1.1",
     "cordova-plugin-actionsheet": "^2.3.3",
     "cordova-plugin-camera": "^4.1.0",
     "cordova-plugin-file": "^6.0.2",
@@ -42,6 +43,7 @@
     "cordova-plugin-geolocation": "^4.0.2",
     "cordova-plugin-nativegeocoder": "^3.2.2",
     "cordova-plugin-photo-library": "^2.2.1",
+    "cordova-plugin-ionic": "^5.4.5",
     "core-js": "^2.5.4",
     "cors": "^2.8.5",
     "file-system": "^2.2.2",
@@ -87,25 +89,38 @@
   "description": "An Ionic project",
   "cordova": {
     "plugins": {
-      "cordova-plugin-camera": {},
-      "cordova-plugin-actionsheet": {},
-      "cordova-plugin-photo-library": {
-        "PHOTO_LIBRARY_USAGE_DESCRIPTION": "To choose photos"
+      "cordova-plugin-camera": {
+        "ANDROID_SUPPORT_V4_VERSION": "27.+"
       },
+      "cordova-plugin-actionsheet": {},
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-device": {},
       "cordova-plugin-splashscreen": {},
-      "cordova-plugin-ionic-webview": {},
+      "cordova-plugin-ionic-webview": {
+        "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-file-transfer": {},
       "cordova-plugin-file": {},
+<<<<<<< HEAD
       "cordova-plugin-geolocation": {},
       "cordova-plugin-nativegeocoder": {}
+=======
+      "cordova-plugin-ionic": {
+        "APP_ID": "abe8a4fa",
+        "CHANNEL_NAME": "Master",
+        "UPDATE_METHOD": "background",
+        "MAX_STORE": "2",
+        "MIN_BACKGROUND_DURATION": "30",
+        "UPDATE_API": "https://api.ionicjs.com"
+      }
+>>>>>>> 5a0344efef670bd441adfeef8c026d47d4eb7437
     },
     "platforms": [
       "browser",
-      "android"
+      "android",
+      "ios"
     ]
   }
 }
