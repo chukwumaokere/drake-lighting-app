@@ -61,6 +61,22 @@ export class JhaPage implements OnInit {
   }*/
 
     async ngOnInit() {
+        this.route.queryParams
+            .subscribe(params => {
+                console.log(params);
+                for(let key in params){
+                    console.log(key);
+                    if(params[key] != undefined){
+                        this.data[key] = params[key];
+                    }
+                }
+                this.lat = params.lat;
+                this.long = params.long;
+                this.serviceid = params.serviceid;
+                this.job_name = params.job_name;
+                this.serviceid = params.serviceid;
+            });
+
         // Since ngOnInit() is executed before `deviceready` event,
         // you have to wait the event.
         await this.platform.ready();
@@ -71,56 +87,14 @@ export class JhaPage implements OnInit {
         this.map = GoogleMaps.create('map_canvas', {
             camera: {
                 target: {
-                    lat: 43.0741704,
-                    lng: -89.3809802
+                    lat: this.lat,
+                    lng: this.long
                 },
                 zoom: 18,
                 tilt: 30
             }
         });
 
-    }
-
-    /*ionViewDidEnter() {
-        this.addMap(this.lat, this.long);
-    }*/
-    /*ionViewDidLoad() {
-        console.log('aaa');
-        this.loadMap();
-    }*/
-    loadMap1(lat, long) {
-        console.log('aaaaaaaaaaa');
-        // This code is necessary for browser
-        Environment.setEnv({
-            'API_KEY_FOR_BROWSER_RELEASE': 'AIzaSyDmZNVDUxBxJvBByQcLZ4fOkOfgbCGaogA',
-            'API_KEY_FOR_BROWSER_DEBUG': 'AIzaSyDmZNVDUxBxJvBByQcLZ4fOkOfgbCGaogA'
-        });
-
-        let mapOptions: GoogleMapOptions = {
-            camera: {
-                target: {
-                    lat: 43.0741904,
-                    lng: -89.3809802
-                },
-                zoom: 18,
-                tilt: 30
-            }
-        };
-
-        this.map = GoogleMaps.create('map', mapOptions);
-        console.log(this.map);
-        let marker: Marker = this.map.addMarkerSync({
-            title: 'Ionic',
-            icon: 'blue',
-            animation: 'DROP',
-            position: {
-                lat: 43.0741904,
-                lng: -89.3809802
-            }
-        });
-        marker.on(GoogleMapsEvent.MARKER_CLICK).subscribe(() => {
-            alert('clicked');
-        });
     }
 
     /*addMap(lat, long) {
