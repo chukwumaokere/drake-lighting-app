@@ -81,7 +81,7 @@ export class DetailPage implements OnInit {
     if (fieldname == 'cf_climb' || fieldname == 'cf_overnight'){
       fieldvalue = event.detail.checked;
     }
-    if (event.target.tagName == 'ION-TEXTAREA'){
+    if (event.target.tagName == 'ION-TEXTAREA' || event.target.tagName == 'ION-SELECT'){
       fieldvalue = event.target.value;
     }
     this.updatefields['wostatus'] = 'In-Process';
@@ -459,8 +459,8 @@ async openChecklist(record_id){
                     console.log('number jha documnet',number_of_document_jha);
                     if(number_of_document_jha == 0){
                         var lat_long = siteCoordinate.split(',');
-                        var lat = lat_long[0];
-                        var long = lat_long[1];
+                        var lat = lat_long[0].trim();
+                        var long = lat_long[1].trim();
                         console.log('lat' + lat);
                         console.log('long'+ long);
                        // this.router.navigateByUrl(`/services/jha/${serviceid}`, {state: {}});

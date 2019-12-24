@@ -13,7 +13,9 @@ const routes: Routes = [
   { path: 'ratings', loadChildren: './ratings/ratings.module#RatingsPageModule' },
   { path: 'services/detail/:serviceid', loadChildren: './services/detail/detail.module#DetailPageModule' },
   { path: 'underreview', loadChildren: './underreview/underreview.module#UnderreviewPageModule' },
-  { path: 'services/jha', loadChildren: './services/jha/jha.module#JhaPageModule' }
+  { path: 'services/jha', loadChildren: './services/jha/jha.module#JhaPageModule' },
+  { path: 'services/jha-hospital', loadChildren: './services/jha-hospital/jha-hospital.module#JhaHospitalPageModule' }
+
 
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { Storage } from '@ionic/storage';
-import { ToastController } from '@ionic/angular';
+import { ToastController, NavController } from '@ionic/angular';
 import * as userjson from '../../assets/js/sampledata/users.json'; 
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { error } from 'util';
@@ -14,7 +14,7 @@ import { async } from 'q';
 })
 export class LoginPage implements OnInit {
 
-  constructor(private  router:  Router, public storage: Storage, public toastController: ToastController, private httpClient: HttpClient) { }
+  constructor(private  router:  Router, public storage: Storage, public toastController: ToastController, private httpClient: HttpClient, private navCtrl: NavController) { }
 
   userdata: Object;
 
@@ -76,7 +76,8 @@ export class LoginPage implements OnInit {
                   this.userdata['theme'] = 'Light';
                   this.userdata['profile_picture'] = "https://devl06.borugroup.com/drakelighting/" + userdata.path + userdata.attachmentsid + '_' + userdata.imagename;
                   this.storage.set('userdata', this.userdata);
-                  return this.router.navigate(["/tabs/services", this.userdata]);
+                  //return this.router.navigate(["/tabs/services", this.userdata]);
+                  this.navCtrl.navigateForward('/tabs/services');
                 })
               }else{
                 console.log('login failed');
@@ -94,7 +95,8 @@ export class LoginPage implements OnInit {
 
     }else if (origin == 'auto'){
       console.log('auto login from session');
-      return this.router.navigate(["/tabs/services", form]);
+      //return this.router.navigate(["/tabs/services", form]);
+      this.navCtrl.navigateForward('/tabs/services');
     }
 
     return false;
