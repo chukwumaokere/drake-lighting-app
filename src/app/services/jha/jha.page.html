@@ -6,8 +6,7 @@
 </ion-header>
 
 <ion-content>
-  <div #map id="map"></div>
-  <ion-img src="https://miro.medium.com/max/4064/1*qYUvh-EtES8dtgKiBRiLsA.png"></ion-img>
+  <div id="map_canvas"></div>
   <div>
     <ion-grid>
       <ion-row>
@@ -32,11 +31,11 @@
     <br>
     <ion-button (click)="gotoJHAHospital()" >NEXT </ion-button>
   </div>
-  <div style="width : 100% ;height: 60%">
+ <!-- <div style="width : 100% ;height: 60%">
     <ion-list>
       <ion-item *ngFor="let place of places">
         <p></p>
       </ion-item>
     </ion-list>
-  </div>
+  </div>-->
 </ion-content>
