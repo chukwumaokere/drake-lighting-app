@@ -6,15 +6,26 @@ import * as userjson from '../../assets/js/sampledata/users.json';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { error } from 'util';
 import { async } from 'q';
-
+import { AppConstants } from '../providers/constant/constant';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-
-  constructor(private  router:  Router, public storage: Storage, public toastController: ToastController, private httpClient: HttpClient, private navCtrl: NavController) { }
+    apiurl:any;
+    vturl:any;
+    constructor(
+        private  router:  Router,
+        public storage: Storage,
+        public toastController: ToastController,
+        private httpClient: HttpClient,
+        public appConst: AppConstants,
+        private navCtrl: NavController
+    ) {
+        this.apiurl = this.appConst.getApiUrl();
+        this.vturl = this.appConst.getVtUrl();
+    }
 
   userdata: Object;
 
@@ -62,7 +73,7 @@ export class LoginPage implements OnInit {
       var username = data.email;
       var password = data.password;
       console.log(form.value);
-      this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/postLogin.php", form.value, { headers:headers, observe: 'response' })
+      this.httpClient.post(this.apiurl + "postLogin.php", form.value, { headers:headers, observe: 'response' })
           .subscribe(data => {
               console.log(data['body']);
               var verified = data['body']['success'];
@@ -74,7 +85,7 @@ export class LoginPage implements OnInit {
                 this.storage.ready().then(() => {
                   this.userdata = userdata;
                   this.userdata['theme'] = 'Light';
-                  this.userdata['profile_picture'] = "https://devl06.borugroup.com/drakelighting/" + userdata.path + userdata.attachmentsid + '_' + userdata.imagename;
+                  this.userdata['profile_picture'] = this.vturl + userdata.path + userdata.attachmentsid + '_' + userdata.imagename;
                   this.storage.set('userdata', this.userdata);
                   //return this.router.navigate(["/tabs/services", this.userdata]);
                   this.navCtrl.navigateForward('/tabs/services');

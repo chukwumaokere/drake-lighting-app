@@ -5,6 +5,7 @@ import { Storage } from '@ionic/storage';
 import { formatDate } from '@angular/common';
 import { CalendarComponent } from 'ionic2-calendar/calendar';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { AppConstants } from '../providers/constant/constant';
 
 @Component({
   selector: 'app-tab2',
@@ -32,11 +33,21 @@ export class Tab2Page implements OnInit {
     mode: 'month',
     currentDate: new Date(),
   };
-
+    apiurl:any;
   @ViewChild(CalendarComponent, <any>[]) myCal: CalendarComponent;
 
-  constructor(private httpClient: HttpClient, public navCtrl: NavController, private  router:  Router, public storage: Storage, private activatedRoute: ActivatedRoute, private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string ) { }
-
+  constructor(
+     private httpClient: HttpClient,
+     public navCtrl: NavController,
+     private  router:  Router,
+     public storage: Storage,
+     private activatedRoute: ActivatedRoute,
+     public appConst: AppConstants,
+     private alertCtrl: AlertController, @Inject(LOCALE_ID)
+     private locale: string
+    ) {
+        this.apiurl = this.appConst.getApiUrl();
+    }
   loadEvents() {
     this.eventSource = this.createRandomEvents();
   }
@@ -51,7 +62,7 @@ export class Tab2Page implements OnInit {
     headers.append("Accept", 'application/json');
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     headers.append('Access-Control-Allow-Origin', '*');
-    this.httpClient.post("http://devl06.borugroup.com/drakelighting/phoneapi/getCalendar.php", logged_user, { headers:headers, observe: 'response' })
+    this.httpClient.post(this.apiurl + "getCalendar.php", logged_user, { headers:headers, observe: 'response' })
           .subscribe(data => {
               console.log(data['body']);
               var success = data['body']['success'];
