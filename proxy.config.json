@@ -8,5 +8,10 @@
     "target": "http://localhost",
     "secure": false,
     "logLevel": "debug"
+  },
+  {
+  "target": "https://www.drakelighting.com/sales",
+  "secure": false,
+  "logLevel": "debug"
   }
 }

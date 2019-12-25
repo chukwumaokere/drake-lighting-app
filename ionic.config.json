@@ -12,6 +12,10 @@
     {
       "path": "/drakelighting/*",
       "proxyUrl": "http://localhost"
+    },
+    {
+      "path": "/sales/*",
+      "proxyUrl": "https://www.drakelighting.com"
     }
   ],
   "id": "abe8a4fa"
