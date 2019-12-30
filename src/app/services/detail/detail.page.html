@@ -64,10 +64,6 @@
           <ion-checkbox (ionChange)="addUpdate($event)" *ngIf="service.value != 1" name="{{service.columnname}}">{{service.value}} </ion-checkbox>
         </div>
 
-        <!--uitype = 19.20-->
-        <ion-textarea (ionInput)="addUpdate($event)" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="19" value="{{service.value}}" width="100%"></ion-textarea>
-        <ion-textarea (ionInput)="addUpdate($event)" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="20" value="{{service.value}}" width="100%"></ion-textarea>
-
         <!--uitype = 15.16-->
         <ion-select (ionChange)="addUpdate($event)" *ngSwitchCase="16" name="{{service.columnname}}"  value="{{service.value}}">
           <ion-select-option *ngFor="let picklist of service.picklist">{{picklist}}</ion-select-option>
@@ -85,6 +81,11 @@
         <ion-input (ionInput)="addUpdate($event)" *ngSwitchCase="9" type="text" name="{{service.columnname}}" value="{{service.value | number}}" width="100%"></ion-input>
         <!--else-->
         <ion-input (ionInput)="addUpdate($event)" type="text" name="{{service.columnname}}" *ngSwitchDefault value="{{service.value}}"></ion-input>
+
+        <!--uitype = 19.20-->
+        <ion-textarea (ionInput)="addUpdate($event)" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="19" value="{{service.value}}" width="100%"></ion-textarea>
+        <ion-textarea (ionInput)="addUpdate($event)" auto-grow="true" name="{{service.columnname}}" rows="3" *ngSwitchCase="20" value="{{service.value}}" width="100%"></ion-textarea>
+
       </div>
     </ion-item>
 
