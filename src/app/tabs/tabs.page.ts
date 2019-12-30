@@ -88,7 +88,10 @@ export class TabsPage {
           this.isLogged().then(result => {
             if (!(result == false)){
               this.userinfo = result;
-              this.getWorkOrders(this.userinfo.id, 'underreview');
+              setInterval(() => {
+                console.log('refreshing under review count');
+                this.getWorkOrders(this.userinfo.id, 'underreview');
+              }, 5000);
               this.user_id = this.userinfo.id;
             }else{
               this.logout();
