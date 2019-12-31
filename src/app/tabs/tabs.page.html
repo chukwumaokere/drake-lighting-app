@@ -14,7 +14,7 @@
     <ion-tab-button tab="underreview">
       <ion-icon name="alert"></ion-icon>
       <ion-label>Under Review</ion-label>
-      <ion-badge color="danger">{{underreview}}</ion-badge>
+      <ion-badge *ngIf="underreview > 0" color="danger">{{underreview}}</ion-badge>
     </ion-tab-button>
 
     <ion-tab-button tab="tab2">
