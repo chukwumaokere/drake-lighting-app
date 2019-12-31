@@ -116,7 +116,7 @@ export class DetailPage implements OnInit {
                   allfields.cf_longtitude = longitude;
                   console.log('allfields are', allfields);
                   this.workorderdetail = allfields;
-                  if(allfields.wostatus == 'Completed' || allfields.wostatus == 'Cancelled' || allfields.wostatus == 'Closed' || allfields.wostatus == 'Approved'){
+                  if(allfields.wostatus == 'Cancelled' || allfields.wostatus == 'Closed' || allfields.wostatus == 'Approved'){
                       this.isCompleteWO = 1;
                   }
                   this.serviceName = workorder['subject'];
