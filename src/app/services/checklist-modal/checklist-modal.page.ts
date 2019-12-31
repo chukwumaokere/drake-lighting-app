@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, ToastController, PickerController } from '@ionic/angular';
+import { ModalController, NavParams, ToastController, PickerController, NavController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { AppConstants } from '../../providers/constant/constant';
 
@@ -22,6 +22,7 @@ export class ChecklistModalPage implements OnInit {
         private navParams: NavParams,
         public httpClient: HttpClient,
         public toastController: ToastController,
+        private navCtrl: NavController,
         public appConst: AppConstants,
     ){
         this.apiurl = this.appConst.getApiUrl();
@@ -117,6 +118,7 @@ export class ChecklistModalPage implements OnInit {
                 .subscribe(data=> {
                     var success = data['body']['success'];
                     if(success == true){
+                        this.navCtrl.navigateForward('/tabs/services');
                         this.closeModal();
                         console.log("Saved and updated data for workorder");
                     }else{
