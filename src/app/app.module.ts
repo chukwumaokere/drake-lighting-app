@@ -18,6 +18,7 @@ import { File } from '@ionic-native/file/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ImageProvider } from './providers/image/image';
 import { AppConstants } from './providers/constant/constant';
+import { GoogleMaps} from '@ionic-native/google-maps';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import { AppConstants } from './providers/constant/constant';
   providers: [
     StatusBar,
     SplashScreen,
+    GoogleMaps,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     Camera,
     ActionSheet,

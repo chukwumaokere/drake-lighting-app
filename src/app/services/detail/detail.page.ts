@@ -81,7 +81,7 @@ export class DetailPage implements OnInit {
     if (fieldname == 'cf_climb' || fieldname == 'cf_overnight'){
       fieldvalue = event.detail.checked;
     }
-    if (event.target.tagName == 'ION-TEXTAREA'){
+    if (event.target.tagName == 'ION-TEXTAREA' || event.target.tagName == 'ION-SELECT'){
       fieldvalue = event.target.value;
     }
     this.updatefields['wostatus'] = 'In-Process';
