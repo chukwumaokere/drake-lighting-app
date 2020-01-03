@@ -1,7 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.boruapps.drake" version="1.2.4" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.boruapps.drake" version="1.3.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Drake Services</name>
-    <description>An awesome Ionic/Cordova app.</description>
+    <description>Manage your Work Orders with ease.</description>
     <author email="appdev@boruapps.com" href="https://boruapps.com">Boru Apps</author>
     <content src="index.html" />
     <access origin="*" />
@@ -20,6 +20,7 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="WKWebViewOnly" value="true" />
+    <preference name="target-device" value="handset" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
