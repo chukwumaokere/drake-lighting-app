@@ -81,9 +81,11 @@ export class TabsPage {
           var workorders = data['body']['data'];
           console.log('workorders', workorders);
           if (type == 'underreview') {
-            workorders.forEach(workorder => {
-              workorder['longdate'] = workorder['date_start'] + ' ' + workorder['time_start'];
-            });
+            if(workorders){
+              workorders.forEach(workorder => {
+                workorder['longdate'] = workorder['date_start'] + ' ' + workorder['time_start'];
+              });
+            }
             //this.underreview= workorders;
             this.underreview = data['body']['count'];
             //console.log('weekly services,', this.weeklyServices);
