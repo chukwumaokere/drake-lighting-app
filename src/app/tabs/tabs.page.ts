@@ -73,6 +73,7 @@ export class TabsPage {
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers.append('Access-Control-Allow-Origin', '*');
         //this.showLoading();
+        console.log('show loading');
         this.httpClient.post(this.apiurl + "getWorkOrders.php", logged_user, {headers: headers, observe: 'response'})
             .subscribe(data => {
                 this.hideLoading();
