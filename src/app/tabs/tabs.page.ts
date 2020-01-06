@@ -41,11 +41,9 @@ export class TabsPage {
     }
 
     async hideLoading() {
-
-        setTimeout(function () {
+        setTimeout(() => {
             console.log('hide loading tab');
-            if (this.loading != undefined)
-                this.loading.dismiss();
+            this.loading.dismiss();
         }, 1000);
     }
 
