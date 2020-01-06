@@ -39,9 +39,11 @@ export class TabsPage {
         this.loading.present();
     }
 
-    async hideLoading() {       
-        if (this.loading != undefined)
+    async hideLoading() {
+        setTimeout(function () {
+          if (this.loading != undefined)
             this.loading.dismiss();
+        }, 1000);
     }
 
     async isLogged() {
