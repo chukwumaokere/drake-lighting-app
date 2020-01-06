@@ -66,6 +66,7 @@ export class Tab2Page implements OnInit {
     }
 
     async hideLoading() {
+        console.log('hide loading tab2');
         this.loading.dismiss();
     }
 

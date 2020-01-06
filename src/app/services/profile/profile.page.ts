@@ -68,6 +68,7 @@ export class ProfileModalPage implements OnInit {
   }
 
   async hideLoading() {
+    console.log('hide loading profile');
     this.loading.dismiss();
   }
 

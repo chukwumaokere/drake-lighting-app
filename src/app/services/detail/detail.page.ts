@@ -90,6 +90,7 @@ export class DetailPage implements OnInit {
   }
 
   async hideLoading() {
+    console.log('hide loading detail');
     this.loading.dismiss();
   }
 

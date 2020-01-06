@@ -49,6 +49,7 @@ export class ChecklistModalPage implements OnInit {
     }
 
     async hideLoading() {
+        console.log('hide loading checklist modal');
         this.loading.dismiss();
     }
 

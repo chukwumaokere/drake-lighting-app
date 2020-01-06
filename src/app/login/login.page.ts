@@ -58,6 +58,7 @@ export class LoginPage implements OnInit {
     }
 
     async hideLoading() {
+        console.log('hide loading login');
         this.loading.dismiss();
     }
 

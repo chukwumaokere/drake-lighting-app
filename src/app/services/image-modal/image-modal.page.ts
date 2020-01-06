@@ -101,6 +101,7 @@ export class ImageModalPage implements OnInit {
     }
 
     async hideLoading() {
+        console.log('hide loading image modal');
         this.loading.dismiss();
     }
 

@@ -54,6 +54,7 @@ export class UnderreviewPage implements OnInit {
   }
 
   async hideLoading() {
+    console.log('hide loading underreview');
     this.loading.dismiss();
   }
 

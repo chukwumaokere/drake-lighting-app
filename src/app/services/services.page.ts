@@ -64,6 +64,7 @@ export class ServicesPage implements OnInit {
     }
 
     async hideLoading() {
+        console.log('hide loading service');
         this.loading.dismiss();
     }
 
