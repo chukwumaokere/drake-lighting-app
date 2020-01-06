@@ -50,16 +50,18 @@ export class LoginPage implements OnInit {
     loading: any;
 
     async showLoading() {
-        console.log('loading login');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });
-        this.loading.present();
+        return await this.loading.present();
     }
 
     async hideLoading() {
-        console.log('hide loading login');
-        this.loading.dismiss();
+        setTimeout(() => {
+            if(this.loading != undefined){
+                this.loading.dismiss();
+            }
+        }, 3000);
     }
 
     login(form: any, origin: any) {

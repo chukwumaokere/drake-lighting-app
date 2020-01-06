@@ -56,16 +56,18 @@ export class ServicesPage implements OnInit {
     loading: any;
 
     async showLoading() {
-        console.log('loading service');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });
-        this.loading.present();
+        return await this.loading.present();
     }
 
     async hideLoading() {
-        console.log('hide loading service');
-        this.loading.dismiss();
+        setTimeout(() => {
+            if(this.loading != undefined){
+                this.loading.dismiss();
+            }
+        }, 3000);
     }
 
     async loadRandomServices(type) {

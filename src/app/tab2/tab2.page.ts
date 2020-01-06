@@ -58,16 +58,18 @@ export class Tab2Page implements OnInit {
     loading: any;
 
     async showLoading() {
-        console.log('loading tab2');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });
-        this.loading.present();
+        return await this.loading.present();
     }
 
     async hideLoading() {
-        console.log('hide loading tab2');
-        this.loading.dismiss();
+        setTimeout(() => {
+            if(this.loading != undefined){
+                this.loading.dismiss();
+            }
+        }, 3000);
     }
 
     getWorkOrders(user_id) {

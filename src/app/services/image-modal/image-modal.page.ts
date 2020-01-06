@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { ModalController, NavParams, ToastController, PickerController } from '@ionic/angular';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
-import { File } from '@ionic-native/file';
-import { Validators, FormBuilder, FormGroup } from '@angular/forms';
-import { ImageProvider } from '../../providers/image/image';
-import { AppConstants } from '../../providers/constant/constant';
-import { LoadingController } from '@ionic/angular';
+import {Component, OnInit} from '@angular/core';
+import {ModalController, NavParams, ToastController, PickerController} from '@ionic/angular';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {FileTransfer, FileUploadOptions, FileTransferObject} from '@ionic-native/file-transfer/ngx';
+import {File} from '@ionic-native/file';
+import {Validators, FormBuilder, FormGroup} from '@angular/forms';
+import {ImageProvider} from '../../providers/image/image';
+import {AppConstants} from '../../providers/constant/constant';
+import {LoadingController} from '@ionic/angular';
 
 @Component({
     selector: 'app-image-modal',
@@ -60,13 +60,13 @@ export class ImageModalPage implements OnInit {
         var x;
         var optionValues = [];
         for (x = 0; x < 101; x++) {
-            optionValues.push({ text: x, value: x })
+            optionValues.push({text: x, value: x})
         }
         let opts = {
             cssClass: 'section-picker',
             buttons: [
-                { text: 'Cancel', role: 'cancel', cssClass: 'section-picker-cancel' },
-                { text: 'Confirm', cssClass: 'section-picker-confirm' },
+                {text: 'Cancel', role: 'cancel', cssClass: 'section-picker-cancel'},
+                {text: 'Confirm', cssClass: 'section-picker-confirm'},
             ],
             columns: [{
                 name: 'section',
@@ -93,16 +93,18 @@ export class ImageModalPage implements OnInit {
     loading: any;
 
     async showLoading() {
-        console.log('loading image modal');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });
-        this.loading.present();
+        return await this.loading.present();
     }
 
     async hideLoading() {
-        console.log('hide loading image modal');
-        this.loading.dismiss();
+        setTimeout(() => {
+            if (this.loading != undefined) {
+                this.loading.dismiss();
+            }
+        }, 3000);
     }
 
 
@@ -118,7 +120,7 @@ export class ImageModalPage implements OnInit {
         }
     }
 
-    async  uploadImage(form) {
+    async uploadImage(form) {
         //console.log('form submitted',form.value);
         /*const fileTransfer: FileTransferObject = this.transfer.create();
         let options: FileUploadOptions = {
@@ -153,7 +155,7 @@ export class ImageModalPage implements OnInit {
         form.value.serviceid = this.serviceid;
         console.log('adding photo for', form.value.serviceid);
         this.showLoading();
-        this.httpClient.post(this.apiurl + "postPhotos.php", form.value, { headers: headers, observe: 'response' })
+        this.httpClient.post(this.apiurl + "postPhotos.php", form.value, {headers: headers, observe: 'response'})
             .subscribe(data => {
                 this.hideLoading();
                 //console.log(data['_body']);
@@ -173,7 +175,7 @@ export class ImageModalPage implements OnInit {
             });
     }
 
-    async  fillTitlePrimary(title) {
+    async fillTitlePrimary(title) {
         this.photo.primary_title = title;
         if (this.photo.secondary_title !== '' || this.photo.tower_section !== '') {
             this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section;
@@ -181,7 +183,8 @@ export class ImageModalPage implements OnInit {
             this.photo.title = title;
         }
     }
-    async  fillTitleSecondary(title) {
+
+    async fillTitleSecondary(title) {
         this.photo.secondary_title = title;
         if (this.photo.primary_title !== '' || this.photo.tower_section !== '') {
             this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section;
@@ -190,7 +193,8 @@ export class ImageModalPage implements OnInit {
         }
 
     }
-    async  fillTowerSection(section) {
+
+    async fillTowerSection(section) {
         this.photo.tower_section = section;
         if (this.photo.primary_title !== '' || this.photo.secondary_title !== '') {
             this.photo.title = this.photo.primary_title + "-" + this.photo.secondary_title + "-" + this.photo.tower_section;
