@@ -43,7 +43,8 @@ export class TabsPage {
     async hideLoading() {
         setTimeout(() => {
             console.log('hide loading tab');
-            this.loading.dismiss();
+            // this.loading.dismiss();
+            this.loadingController.dismiss();
         }, 1000);
     }
 
