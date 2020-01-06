@@ -79,11 +79,11 @@ export class TabsPage {
                 this.hideLoading();
                 console.log(data['body']);
                 var success = data['body']['success'];
-                console.log('login response was', success);
+                console.log('tab page: login response was', success);
 
                 if (success == true) {
                     var workorders = data['body']['data'];
-                    console.log('workorders', workorders);
+                    console.log('tab page: workorders', workorders);
                     if (type == 'underreview') {
                         if (workorders) {
                             workorders.forEach(workorder => {
