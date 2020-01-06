@@ -214,11 +214,11 @@ export class ServicesPage implements OnInit {
                 //this.hideLoading();
                 console.log(data['body']);
                 var success = data['body']['success'];
-                console.log('login response was', success);
+                console.log('services page: login response was', success);
 
                 if (success == true) {
                     var workorders = data['body']['data'];
-                    console.log('workorders', workorders);
+                    console.log('services page: workorders', workorders);
                     if (data['body']['count'] > 0) {
                         workorders.forEach(workorder => {
                             workorder['longdate'] = workorder['date_start'] + ' ' + workorder['time_start'];
