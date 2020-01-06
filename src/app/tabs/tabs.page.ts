@@ -39,8 +39,7 @@ export class TabsPage {
         this.loading.present();
     }
 
-    async hideLoading() {
-        console.log('hide loading');
+    async hideLoading() {       
         if (this.loading != undefined)
             this.loading.dismiss();
     }
@@ -72,8 +71,7 @@ export class TabsPage {
         headers.append("Accept", 'application/json');
         headers.append('Content-Type', 'application/x-www-form-urlencoded');
         headers.append('Access-Control-Allow-Origin', '*');
-        //this.showLoading();
-        console.log('show loading');
+        this.showLoading();
         this.httpClient.post(this.apiurl + "getWorkOrders.php", logged_user, {headers: headers, observe: 'response'})
             .subscribe(data => {
                 this.hideLoading();
