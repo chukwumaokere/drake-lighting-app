@@ -33,6 +33,7 @@ export class TabsPage {
     loading: any;
 
     async showLoading() {
+        console.log('loading tab');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });

@@ -93,6 +93,7 @@ export class ImageModalPage implements OnInit {
     loading: any;
 
     async showLoading() {
+        console.log('loading image modal');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });

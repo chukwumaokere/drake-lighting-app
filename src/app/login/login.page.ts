@@ -50,6 +50,7 @@ export class LoginPage implements OnInit {
     loading: any;
 
     async showLoading() {
+        console.log('loading login');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });

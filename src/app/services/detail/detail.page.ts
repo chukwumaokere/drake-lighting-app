@@ -82,6 +82,7 @@ export class DetailPage implements OnInit {
   loading: any;
 
   async showLoading() {
+    console.log('loading detail');
     this.loading = await this.loadingController.create({
       message: 'Loading ...'
     });

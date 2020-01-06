@@ -60,6 +60,7 @@ export class ProfileModalPage implements OnInit {
   loading: any;
 
   async showLoading() {
+    console.log('loading profile');
     this.loading = await this.loadingController.create({
       message: 'Loading ...'
     });

@@ -46,6 +46,7 @@ export class UnderreviewPage implements OnInit {
   loading: any;
 
   async showLoading() {
+    console.log('loading underreview');
     this.loading = await this.loadingController.create({
       message: 'Loading ...'
     });

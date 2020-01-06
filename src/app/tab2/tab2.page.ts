@@ -58,6 +58,7 @@ export class Tab2Page implements OnInit {
     loading: any;
 
     async showLoading() {
+        console.log('loading tab2');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });

@@ -41,6 +41,7 @@ export class ChecklistModalPage implements OnInit {
     loading: any;
 
     async showLoading() {
+        console.log('loading checklist modal');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });

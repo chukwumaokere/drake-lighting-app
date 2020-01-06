@@ -56,6 +56,7 @@ export class ServicesPage implements OnInit {
     loading: any;
 
     async showLoading() {
+        console.log('loading service');
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });
