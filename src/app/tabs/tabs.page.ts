@@ -37,7 +37,7 @@ export class TabsPage {
         this.loading = await this.loadingController.create({
             message: 'Loading ...'
         });
-        this.loading.present();
+        return await this.loading.present();
     }
 
     async hideLoading() {
@@ -45,7 +45,7 @@ export class TabsPage {
             console.log('hide loading tab');
             // this.loading.dismiss();
             this.loadingController.dismiss();
-        }, 1000);
+        }, 3000);
     }
 
     async isLogged() {
