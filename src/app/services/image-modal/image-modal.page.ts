@@ -104,7 +104,7 @@ export class ImageModalPage implements OnInit {
             if (this.loading != undefined) {
                 this.loading.dismiss();
             }
-        }, 3000);
+        }, 1000);
     }
 
 

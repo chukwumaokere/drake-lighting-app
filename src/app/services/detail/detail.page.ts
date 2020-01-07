@@ -95,7 +95,7 @@ export class DetailPage implements OnInit {
             if (this.loading != undefined) {
                 this.loading.dismiss();
             }
-        }, 3000);
+        }, 1000);
     }
 
     addUpdate(event) {

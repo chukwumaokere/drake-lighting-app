@@ -44,7 +44,7 @@ export class TabsPage {
             if(this.loading != undefined){
                 this.loading.dismiss();
             }
-        }, 3000);
+        }, 1000);
     }
 
     async isLogged() {
@@ -108,6 +108,49 @@ export class TabsPage {
             });
     }
 
+    refreshURCount(user_id, type) {
+        var logged_user = {
+            user_id: user_id,
+            type: type
+        }
+        console.log('fetching records for', logged_user);
+        var headers = new HttpHeaders();
+        headers.append("Accept", 'application/json');
+        headers.append('Content-Type', 'application/x-www-form-urlencoded');
+        headers.append('Access-Control-Allow-Origin', '*');
+        this.httpClient.post(this.apiurl + "getWorkOrders.php", logged_user, {headers: headers, observe: 'response'})
+            .subscribe(data => {
+
+                console.log(data['body']);
+                var success = data['body']['success'];
+                console.log('tab page: login response was', success);
+
+                if (success == true) {
+                    var workorders = data['body']['data'];
+                    console.log('tab page: workorders', workorders);
+                    if (type == 'underreview') {
+                        if (workorders) {
+                            workorders.forEach(workorder => {
+                                workorder['longdate'] = workorder['date_start'] + ' ' + workorder['time_start'];
+                            });
+                        }
+                        //this.underreview= workorders;
+                        this.underreview = data['body']['count'];
+                        //console.log('weekly services,', this.weeklyServices);
+                    }
+                } else {
+                    console.log('failed to fetch records');
+                }
+
+            }, error => {
+
+                //console.log(error);
+                //console.log(error.message);
+                //console.error(error.message);
+                console.log('failed to fetch records');
+            });
+    }
+
     ngOnInit() {
         this.activatedRoute.params.subscribe((userData) => {
             if (userData.length !== 0) {
@@ -116,7 +159,10 @@ export class TabsPage {
                     this.isLogged().then(result => {
                         if (!(result == false)) {
                             this.userinfo = result;
-                            this.getWorkOrders(this.userinfo.id, 'underreview');
+                            setInterval(() => {
+                                console.log('refreshing under review count');
+                                this.refreshURCount(this.userinfo.id, 'underreview');
+                              }, 5000);
                             this.user_id = this.userinfo.id;
                         } else {
                             this.logout();
