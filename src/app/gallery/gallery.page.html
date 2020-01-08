@@ -16,7 +16,7 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  <ion-button expand="block" (click)="launchCamera()" text="Add Photos"><ion-icon name="add"></ion-icon><ion-text>Add Photos</ion-text></ion-button>
+  <!-- <ion-button expand="block" (click)="launchCamera()" text="Add Photos"><ion-icon name="add"></ion-icon><ion-text>Add Photos</ion-text></ion-button> -->
   <div class="gallery" *ngIf="propertypics?.length > 0">    
     <ion-card class="galleryimage" *ngFor="let image of propertypics" [id]="image">
       <ion-img [src]="image" width="150px"></ion-img>
