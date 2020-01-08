@@ -519,5 +519,9 @@ export class DetailPage implements OnInit {
             });
     }
 
+    goToGallery(serviceid){
+        this.router.navigate([`/services/detail/${serviceid}/gallery`, {servicename: this.serviceName}]);
+    }
+
 
 }

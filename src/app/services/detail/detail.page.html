@@ -5,6 +5,9 @@
         <ion-back-button type="submit" defaultHref="/tabs/services" text="Back" (click)="saveWO(workorderdetail.workorderid)"></ion-back-button>
       </ion-buttons>
     <ion-title>{{serviceName}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button type="button" text="View Photos" (click)="goToGallery(workorderdetail.workorderid)">View Photos</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
