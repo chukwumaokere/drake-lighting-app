@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import { PhotoLibrary } from '@ionic-native/photo-library/ngx';
 import { ActionSheet, ActionSheetOptions } from '@ionic-native/action-sheet/ngx';
-import { AlertController, ToastController } from '@ionic/angular';
+import { AlertController, ToastController, NavController, LoadingController } from '@ionic/angular';
 import * as pi from '../../assets/js/sampledata/properties-images.json';
 import { Storage } from '@ionic/storage';
 import { present } from '@ionic/core/dist/types/utils/overlays';
+import { AppConstants } from '../providers/constant/constant';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-gallery',
@@ -19,12 +21,15 @@ export class GalleryPage implements OnInit {
   propertypics: any;
   current_mode: any = "view";
   userinfo: any;
+  serviceName: any;
+  serviceid: any;
+  apiurl: any;
 
   buttonLabels = ['Take Photo', 'Upload from Library'];
 
   options: CameraOptions = {
-    quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
+    quality: 50,
+    destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     saveToPhotoAlbum: false //true causes crash probably due to permissions to access library.
@@ -32,7 +37,7 @@ export class GalleryPage implements OnInit {
 
   libraryOptions: CameraOptions = {
     quality: 100,
-    destinationType: this.camera.DestinationType.FILE_URI,
+    destinationType: this.camera.DestinationType.DATA_URL,
     encodingType: this.camera.EncodingType.JPEG,
     mediaType: this.camera.MediaType.PICTURE,
     sourceType: this.camera.PictureSourceType.PHOTOLIBRARY
@@ -45,7 +50,37 @@ export class GalleryPage implements OnInit {
     androidTheme: 1 //this.actionSheet.ANDROID_THEMES.THEME_HOLO_DARK,
   }
 
-  constructor(public storage: Storage, public toastController: ToastController, public alertController: AlertController, private activatedRoute: ActivatedRoute, private router: Router, private camera: Camera, private actionSheet: ActionSheet, private photoLibrary: PhotoLibrary) { }
+  constructor(
+    public storage: Storage, 
+    public toastController: ToastController, 
+    public alertController: AlertController, 
+    private activatedRoute: ActivatedRoute, 
+    private router: Router, 
+    private camera: Camera, 
+    private actionSheet: ActionSheet, 
+    private photoLibrary: PhotoLibrary,
+    public navCtrl: NavController,
+    public loadingController: LoadingController,
+    public appConst: AppConstants,
+    private httpClient: HttpClient
+    ) {
+      this.apiurl = this.appConst.getApiUrl();
+     }
+    loading: any;
+    async showLoading() {
+      this.loading = await this.loadingController.create({
+          message: 'Loading ...'
+      });
+      return await this.loading.present();
+  }
+
+  async hideLoading() {
+      setTimeout(() => {
+          if(this.loading != undefined){
+              this.loading.dismiss();
+          }
+      }, 1000);
+  }
   /* Default Auth Guard and Theme Loader */
   logout(){
     console.log('logging out, no user data found');
@@ -82,15 +117,40 @@ export class GalleryPage implements OnInit {
 
   /* Default Auth Guard and Theme Loader */
 
-  loadImages(recordid, room: any){
-    this.propertyimages = pi.propertiesimages;
+  loadImages(recordid){
+    /* this.propertyimages = pi.propertiesimages;
     console.log('loading images for', room, recordid);
     var images = this.propertyimages.filter(object => {
       return object.recordid == recordid;
     });
     console.log(images[0].rooms[room].images);
     var pics = images[0].rooms[room].images;
-    this.propertypics = pics;
+    this.propertypics = pics; */
+    var params = {
+      recordid: recordid
+    }
+    console.log('fetching documents for', params);
+    var headers = new HttpHeaders();
+    headers.append("Accept", 'application/json');
+    headers.append('Content-Type', 'application/x-www-form-urlencoded');
+    headers.append('Access-Control-Allow-Origin', '*');
+    this.showLoading();
+    this.httpClient.post(this.apiurl + "getPhotos.php", params, {headers: headers, observe: 'response'})
+      .subscribe(data => {
+        console.log(data['body']);
+        var success = data['body']['success'];
+        console.log('fetching photos response was', success);
+        if(success == true){
+          this.propertypics = data['body']['data'];
+        }else{
+          console.log('fetch photos failed');
+          this.hideLoading();
+        }
+        this.hideLoading();
+      }, error => {
+        this.hideLoading();
+        console.log('fetch errored out', error);
+      })
   }
 
   launchCamera(){
@@ -200,14 +260,16 @@ export class GalleryPage implements OnInit {
     toast.present();
   }
 
+  goToDetail(serviceid){
+    this.navCtrl.navigateBack(`services/detail/${serviceid}`);
+  }
+
   ngOnInit() {
-    this.activatedRoute.params.subscribe((params)=>{
-      console.log(params);
-      this.roomdata = params;
-      this.loadImages(params.id, params.room.replace(' ', ''));
-    })
     this.activatedRoute.params.subscribe((userData)=>{
+
       if(userData.length !== 0){
+        this.serviceName = userData.servicename;
+        this.serviceid = userData.serviceid;
         this.userinfo = userData;
         console.log('param user data:', userData);
         try{ 
@@ -223,6 +285,7 @@ export class GalleryPage implements OnInit {
               console.log('loading storage data (within param route function)', result);
               this.userinfo = result;
               this.loadTheme(result.theme.toLowerCase());
+              this.loadImages(this.serviceid);
             }else{
               console.log('nothing in storage, going back to login');
               this.logout();
