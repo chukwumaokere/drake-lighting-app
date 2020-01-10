@@ -440,11 +440,14 @@ export class DetailPage implements OnInit {
     saveWO(worecord) {
         var data = this.updatefields;
         var data_stringified = JSON.stringify(data);
+        var logged_in_uid = this.userinfo.id;
         console.log('attempting to submitting data to vtiger', worecord, data);
         var params = {
             recordid: worecord,
-            updates: data_stringified
+            updates: data_stringified,
+            logged_in_user: logged_in_uid
         }
+        console.log("params being sent", params)
         if (Object.keys(data).length > 0) {
             console.log('Some data was changed, pushing ' + Object.keys(data).length + ' changes');
             var headers = new HttpHeaders();
