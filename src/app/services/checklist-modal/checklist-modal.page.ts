@@ -37,6 +37,7 @@ export class ChecklistModalPage implements OnInit {
         this.serviceid = this.navParams.data.serviceid;
         this.modalTitle = this.navParams.data.paramTitle;
         this.user_id = this.navParams.data.user_id;
+        this.updatefields = this.navParams.data.current_updates;
         this.loadChecklist(this.serviceid);
 
     }
