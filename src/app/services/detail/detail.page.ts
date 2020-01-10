@@ -424,6 +424,7 @@ export class DetailPage implements OnInit {
                 "base64Image": base64Image,
                 "paramTitle": "Edit Photo",
                 "serviceid": serviceid,
+                "user_id": this.userinfo.id,
             }
         });
 

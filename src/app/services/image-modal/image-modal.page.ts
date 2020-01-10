@@ -19,6 +19,7 @@ export class ImageModalPage implements OnInit {
     modelId: number;
     serviceid: any;
     apiurl: any;
+    user_id: any;
     photo = {
         title: '',
         primary_title: '',
@@ -49,6 +50,7 @@ export class ImageModalPage implements OnInit {
         this.modelId = this.navParams.data.paramID;
         this.serviceid = this.navParams.data.serviceid;
         this.modalTitle = this.navParams.data.paramTitle;
+        this.user_id = this.navParams.data.user_id;
     }
 
     async closeModal() {
@@ -153,6 +155,7 @@ export class ImageModalPage implements OnInit {
         headers.append('Access-Control-Allow-Origin', '*');
         form.value.base64Image = this.imageData;
         form.value.serviceid = this.serviceid;
+        form.value.logged_in_user = this.user_id;
         console.log('adding photo for', form.value.serviceid);
         this.showLoading();
         this.httpClient.post(this.apiurl + "postPhotos.php", form.value, {headers: headers, observe: 'response'})
