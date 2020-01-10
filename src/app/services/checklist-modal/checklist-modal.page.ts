@@ -16,6 +16,7 @@ export class ChecklistModalPage implements OnInit {
     apiurl: any;
     updatefields: any = {};
     checklistDetail: any = {};
+    user_id: any;
     public workorderdetail: any[] = [];
     public servicedetail: any[] = [];
     constructor(
@@ -35,6 +36,7 @@ export class ChecklistModalPage implements OnInit {
         this.modelId = this.navParams.data.paramID;
         this.serviceid = this.navParams.data.serviceid;
         this.modalTitle = this.navParams.data.paramTitle;
+        this.user_id = this.navParams.data.user_id;
         this.loadChecklist(this.serviceid);
 
     }
@@ -126,10 +128,12 @@ export class ChecklistModalPage implements OnInit {
         this.updatefields['wostatus'] = 'Completed';
         var data = this.updatefields;
         var data_stringified = JSON.stringify(data);
+        var logged_in_uid = this.user_id;
         console.log('attempting to submitting data to vtiger', serviceid, data);
         var params = {
             recordid: serviceid,
-            updates: data_stringified
+            updates: data_stringified,
+            logged_in_user: logged_in_uid
         }
         if (Object.keys(data).length > 0) {
             console.log('Some data was changed, pushing ' + Object.keys(data).length + ' changes');

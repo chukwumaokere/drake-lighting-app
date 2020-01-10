@@ -373,6 +373,8 @@ export class DetailPage implements OnInit {
             componentProps: {
                 "paramTitle": "Complete Work Order",
                 "serviceid": record_id,
+                "current_updates": this.updatefields,
+                "user_id": this.userinfo.id,
             }
         });
 
