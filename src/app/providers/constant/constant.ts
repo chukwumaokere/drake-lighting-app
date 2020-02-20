@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class AppConstants  {
-    apiurl : string = 'https://server.drakelighting.com/phoneapi/';
-    vturl : string = 'https://server.drakelighting.com/';
+    apiurl : string = 'https://www.drakelighting.com/sales/phoneapi/';
+    vturl : string = 'https://www.drakelighting.com/sales/';
     getApiUrl() {
         return this.apiurl;
     }
