@@ -10,7 +10,7 @@
     "logLevel": "debug"
   },
   {
-  "target": "https://www.drakelighting.com/sales",
+  "target": "https://server.drakelighting.com",
   "secure": false,
   "logLevel": "debug"
   }
